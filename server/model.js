@@ -1,10 +1,10 @@
-import { DataTypes, Model } from 'sequelize';
-import util from 'util';
-import url from "url"
+import { DataTypes, Model } from "sequelize";
+import util from "util";
+import url from "url";
 
-import connectToDB from './db.js';
+import connectToDB from "./db.js";
 
-export const db = await connectToDB('postgresql:///boh');
+export const db = await connectToDB("postgresql:///boh");
 
 export class User extends Model {
   [util.inspect.custom]() {
@@ -33,13 +33,32 @@ User.init(
     },
   },
   {
-    modelName: 'user',
+    modelName: "user",
     sequelize: db,
     // timestamps: true,
-    // updatedAt: false,    
-  },
+    // updatedAt: false,
+  }
 );
 
+export class Phase extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Phase.init(
+  {
+    phaseId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    phaseName: DataTypes.STRING,
+  },
+  {
+    modelName: "phase",
+    sequelize: db,
+  }
+);
 
 export class Candidate extends Model {
   [util.inspect.custom]() {
@@ -57,8 +76,6 @@ Candidate.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phase: DataTypes.STRING,
-    phaseIndex: DataTypes.INTEGER,
     currPhaseDate: DataTypes.DATE,
     municipality: DataTypes.STRING,
     state: DataTypes.STRING,
@@ -80,12 +97,11 @@ Candidate.init(
       type: DataTypes.INTEGER,
       default: 30,
     },
-    
   },
   {
-    modelName: 'candidate',
+    modelName: "candidate",
     sequelize: db,
-  },
+  }
 );
 
 export class Person extends Model {
@@ -110,12 +126,13 @@ Person.init(
     },
   },
   {
-    modelName: 'person',
+    modelName: "person",
     sequelize: db,
     // timestamps: true,
     // updatedAt: false,
-  },
+  }
 );
+
 export class Image extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -133,24 +150,24 @@ Image.init(
     primary: {
       type: DataTypes.BOOLEAN,
       default: false,
-    }
-    
+    },
   },
   {
-    modelName: 'image',
+    modelName: "image",
     sequelize: db,
-  },
+  }
 );
 
-Candidate.hasMany(Person, { foreignKey: 'candidateId' });
-Person.belongsTo(Candidate, { foreignKey: 'candidateId' });
+Candidate.hasMany(Person, { foreignKey: "candidateId" });
+Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-Candidate.hasMany(Image, { foreignKey: 'candidateId' });
-Image.belongsTo(Candidate, { foreignKey: 'candidateId' });
+Candidate.hasMany(Image, { foreignKey: "candidateId" });
+Image.belongsTo(Candidate, { foreignKey: "candidateId" });
 
+Candidate.belongsTo(Phase, { foreignKey: "phaseId" });
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
-  console.log("Syncing database...")
-  await db.sync()
-  console.log("Finished syncing database!")
+  console.log("Syncing database...");
+  await db.sync();
+  console.log("Finished syncing database!");
 }

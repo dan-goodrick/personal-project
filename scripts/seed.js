@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Person } from "./../server/model.js";
+import { Candidate, User, Image, Person, Phase } from "./../server/model.js";
 import connectToDB from "./../server/db.js";
 
 const db = await connectToDB("postgresql:///boh");
@@ -38,8 +38,7 @@ const imageData = [
 const candidateData = [
   {
     lastName: "Lopez",
-    phase: "Application Pending",
-    phaseIndex: 1,
+    phaseId: 1,
     currPhaseDate: new Date(Date.parse("2023-09-11")),
     imgUrl: 1,
     address: "22790 Maneadero, Baja California",
@@ -55,8 +54,7 @@ const candidateData = [
   },
   {
     lastName: "Gomez Arenal",
-    phase: "Application Complete",
-    phaseIndex: 2,
+    phaseId: 2,
     currPhaseDate: new Date(Date.parse("2023-08-11")),
     imgUrl: 2,
     address: "",
@@ -71,8 +69,7 @@ const candidateData = [
   },
   {
     lastName: "De La Cruz",
-    phase: "Fundraising",
-    phaseIndex: 3,
+    phaseId: 3,
     currPhaseDate: new Date(Date.parse("2023-07-11")),
     imgUrl: 3,
     address: "22790 Maneadero, Baja California",
@@ -86,8 +83,7 @@ const candidateData = [
   },
   {
     lastName: "Quintana Juarez",
-    phase: "Planning",
-    phaseIndex: 4,
+    phaseId: 4,
     currPhaseDate: new Date(Date.parse("2023-06-11")),
     imgUrl: 4,
     address:
@@ -104,8 +100,7 @@ const candidateData = [
   },
   {
     lastName: "Martina",
-    phase: "Complete",
-    phaseIndex: 5,
+    phaseId: 5,
     currPhaseDate: new Date(Date.parse("2023-05-11")),
     imgUrl: 5,
     municipality: "Maneadero",
@@ -197,8 +192,17 @@ const userData = [
     lastName: "goodrick",
   }
 ]
+
+const phaseData = [
+  {phaseName: "Application Pending"},
+  {phaseName: "Application Complete"},
+  {phaseName: "Fundraising"},
+  {phaseName: "Planning"},
+  {phaseName: "Completed"},
+]
 await db.sync({ force: true }).then(async () => {
   await User.bulkCreate(userData);
+  await Phase.bulkCreate(phaseData);
   await Candidate.bulkCreate(candidateData);
   await Image.bulkCreate(imageData);
   await Person.bulkCreate(personData);
