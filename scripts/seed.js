@@ -8,31 +8,30 @@ const imageData = [
     imageUrl:
       "https://images.theconversation.com/files/227904/original/file-20180716-44094-neg6b1.JPG?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip",
     candidateId: 1,
-    primary:true,
-    
+    primary: true,
   },
   {
     imageUrl:
-    "https://med.stanford.edu/content/dam/sm-news/images/2014/06/mexican-family.jpg",
+      "https://med.stanford.edu/content/dam/sm-news/images/2014/06/mexican-family.jpg",
     candidateId: 2,
-    primary:true,
+    primary: true,
   },
   {
     imageUrl: "https://i.ytimg.com/vi/wS6J8Fz_m-I/maxresdefault.jpg",
     candidateId: 3,
-    primary:true,
+    primary: true,
   },
   {
     imageUrl:
-    "https://cf.ltkcdn.net/family/images/std/280568-800x533-happy-family.webp",
+      "https://cf.ltkcdn.net/family/images/std/280568-800x533-happy-family.webp",
     candidateId: 4,
-    primary:true,
+    primary: true,
   },
   {
     imageUrl:
-    "https://www.familyequality.org/wp-content/uploads/2020/09/My-Post-1.png",
+      "https://www.familyequality.org/wp-content/uploads/2020/09/My-Post-1.png",
     candidateId: 5,
-    primary:true,
+    primary: true,
   },
 ];
 
@@ -190,14 +189,19 @@ const personData = [
   },
 ];
 
+const userData = [
+  {
+    email: "admin@buildersofhope.net",
+    password: "pwd",
+    firstName: "dan",
+    lastName: "goodrick",
+  }
+]
 await db.sync({ force: true }).then(async () => {
-  await User.create({ email: "admin1@buildersofhope.net", password: "pwd"});
-  const newCandidates = await Candidate.bulkCreate(candidateData);
-  console.log(newCandidates);
-  const newImages = await Image.bulkCreate(imageData);
-  console.log(newImages);
-  const newPeople = await Person.bulkCreate(personData);
-  console.log(newPeople);
+  await User.bulkCreate(userData);
+  await Candidate.bulkCreate(candidateData);
+  await Image.bulkCreate(imageData);
+  await Person.bulkCreate(personData);
   console.log("db reset and seeded");
 });
 
