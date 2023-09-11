@@ -21,10 +21,11 @@ const serverFunctions = {
     req.session.destroy();
     res.json({success:true});
   },
-  fundraising: async (req, res) => {
-    res.json(await Candidate.findAll({ where: { phaseIndex: 3 } }))
+  getByPhase: async (req, res) => {
+    console.log(req.params);
+    res.json(await Candidate.findAll({ where: { phaseIndex: req.params.id } }))
   }
-  
+
   // show: async (req, res) => {
   //   res.send(await Movie.findAll());
   // },
