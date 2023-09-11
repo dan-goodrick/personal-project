@@ -23,8 +23,13 @@ const serverFunctions = {
   },
   getByPhase: async (req, res) => {
     console.log(req.params);
-    res.json(await Candidate.findAll({ where: { phaseIndex: req.params.id } }))
-  }
+    res.json(await Candidate.findAll({ where: { phaseId: req.params.id } }))
+  },
+  getByPk: async (req, res) => {
+    console.log(req.params);
+    res.json(await Candidate.findByPk(req.params.id))
+  },
+
 
   // show: async (req, res) => {
   //   res.send(await Movie.findAll());
