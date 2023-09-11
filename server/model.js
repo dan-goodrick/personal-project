@@ -1,8 +1,10 @@
 import { DataTypes, Model } from 'sequelize';
 import util from 'util';
+import url from "url"
+
 import connectToDB from './db.js';
 
-export const db = await connectToDB('postgresql:///ratings');
+export const db = await connectToDB('postgresql:///boh');
 
 export class User extends Model {
   [util.inspect.custom]() {
@@ -17,6 +19,9 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    // firstName: DataTypes.STRING,
+    // lastName: DataTypes.STRING,
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,70 +35,114 @@ User.init(
   {
     modelName: 'user',
     sequelize: db,
+    // timestamps: true,
+    // updatedAt: false,    
   },
 );
 
-export class Movie extends Model {
+
+export class Candidate extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Candidate.init(
+  {
+    candidateId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phase: DataTypes.STRING,
+    phaseIndex: DataTypes.INTEGER,
+    currPhaseDate: DataTypes.DATE,
+    municipality: DataTypes.STRING,
+    state: DataTypes.STRING,
+    country: DataTypes.STRING,
+    lat: DataTypes.FLOAT,
+    lon: DataTypes.FLOAT,
+    googleMaps: DataTypes.STRING,
+    landTitle: DataTypes.STRING,
+    paymentCnt: DataTypes.INTEGER,
+    loanDuration: {
+      type: DataTypes.INTEGER,
+      default: 30,
+    },
+    
+  },
+  {
+    modelName: 'candidate',
+    sequelize: db,
+  },
+);
+
+export class Person extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
 
-Movie.init(
+Person.init(
   {
-    movieId: {
+    personId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    overview: {
-      type: DataTypes.TEXT,
-    },
-    releaseDate: {
-      type: DataTypes.DATE,
-    },
-    posterPath: {
-      type: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    firstName: DataTypes.STRING,
+    dob: DataTypes.DATE,
+    headOfHousehold: {
+      type: DataTypes.BOOLEAN,
+      default: false,
     },
   },
   {
-    modelName: 'movie',
+    modelName: 'person',
     sequelize: db,
+    // timestamps: true,
+    // updatedAt: false,
   },
 );
-
-export class Rating extends Model {
+export class Image extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
 
-Rating.init(
+Image.init(
   {
-    ratingId: {
+    imageId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    imageUrl: DataTypes.STRING(500),
+    primary: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+    }
+    
   },
   {
-    modelName: 'rating',
+    modelName: 'image',
     sequelize: db,
-    timestamps: true,
-    updatedAt: false,
   },
 );
 
-Movie.hasMany(Rating, { foreignKey: 'movieId' });
-Rating.belongsTo(Movie, { foreignKey: 'movieId' });
+Candidate.hasMany(Person, { foreignKey: 'candidateId' });
+Person.belongsTo(Candidate, { foreignKey: 'candidateId' });
 
-User.hasMany(Rating, { foreignKey: 'userId' });
-Rating.belongsTo(User, { foreignKey: 'userId' });
+Candidate.hasMany(Image, { foreignKey: 'candidateId' });
+Image.belongsTo(Candidate, { foreignKey: 'candidateId' });
+
+
+if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
+  console.log("Syncing database...")
+  await db.sync()
+  console.log("Finished syncing database!")
+}
