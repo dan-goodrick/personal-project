@@ -68,6 +68,14 @@ Candidate.init(
     googleMaps: DataTypes.STRING,
     landTitle: DataTypes.STRING,
     paymentCnt: DataTypes.INTEGER,
+    fundsRaised: {
+      type: DataTypes.FLOAT,
+      default: 0,
+    },
+    fundRequirement: {
+      type: DataTypes.FLOAT,
+      default: 10000,
+    },
     loanDuration: {
       type: DataTypes.INTEGER,
       default: 30,
