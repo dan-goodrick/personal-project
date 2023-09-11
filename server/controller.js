@@ -1,12 +1,7 @@
 import { Candidate, Image, User, Person } from "./model.js";
 
 const serverFunctions = {
-  // show: async (req, res) => {
-  //   res.send(await Movie.findAll());
-  // },
-  // getOne: async (req, res) => {
-  //   res.json(await Movie.findByPk(req.params.id));
-  // },
+
   login: async (req, res) => {
     const user = await User.findOne({ where: { email: req.body.email } });
     console.log("user: ", user, "matches? ", req.body.password);
@@ -26,6 +21,16 @@ const serverFunctions = {
     req.session.destroy();
     res.json({success:true});
   },
+  fundraising: async (req, res) => {
+    res.json(await Candidate.findAll({ where: { phaseIndex: 3 } }))
+  }
+  
+  // show: async (req, res) => {
+  //   res.send(await Movie.findAll());
+  // },
+  // getOne: async (req, res) => {
+  //   res.json(await Movie.findByPk(req.params.id));
+  // },
   // ratings: async (req, res) => {
   //   const { userId } = req.session;
   //   const ratings = await User.findByPk(userId).then((user) =>
