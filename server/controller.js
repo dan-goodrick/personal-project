@@ -1,12 +1,12 @@
-import { Movie, User } from "./model.js";
+import { Candidate, Image, User, Person } from "./model.js";
 
 const serverFunctions = {
-  show: async (req, res) => {
-    res.send(await Movie.findAll());
-  },
-  getOne: async (req, res) => {
-    res.json(await Movie.findByPk(req.params.id));
-  },
+  // show: async (req, res) => {
+  //   res.send(await Movie.findAll());
+  // },
+  // getOne: async (req, res) => {
+  //   res.json(await Movie.findByPk(req.params.id));
+  // },
   login: async (req, res) => {
     const user = await User.findOne({ where: { email: req.body.email } });
     console.log("user: ", user, "matches? ", req.body.password);
@@ -26,20 +26,20 @@ const serverFunctions = {
     req.session.destroy();
     res.json({success:true});
   },
-  ratings: async (req, res) => {
-    const { userId } = req.session;
-    const ratings = await User.findByPk(userId).then((user) =>
-      // user.getRatings({ include: Movie })
-      user.getRatings({ include: { model: Movie, attributes: ["title"] } })
-    );// eager loaded with include
-    res.json(ratings);
-  },
-  addRating: async (req, res) => {
-    const { userId } = req.session;
-    const { movieId, score } = req.body;
-    const rating = await User.findByPk(userId).then((user)=>user.createRating({ movieId: movieId, score: score }));
-    res.json(rating);
-  },
+  // ratings: async (req, res) => {
+  //   const { userId } = req.session;
+  //   const ratings = await User.findByPk(userId).then((user) =>
+  //     // user.getRatings({ include: Movie })
+  //     user.getRatings({ include: { model: Movie, attributes: ["title"] } })
+  //   );// eager loaded with include
+  //   res.json(ratings);
+  // },
+  // addRating: async (req, res) => {
+  //   const { userId } = req.session;
+  //   const { movieId, score } = req.body;
+  //   const rating = await User.findByPk(userId).then((user)=>user.createRating({ movieId: movieId, score: score }));
+  //   res.json(rating);
+  // },
 };
 
 export default serverFunctions;

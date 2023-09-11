@@ -11,19 +11,19 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: false }));
-const loginRequired = (req, res, next) => {
-  if (!req.session.userId) {
-    res.status(401).json({ error: "Unauthorized" });
-  } else {
-    next();
-  }
-}
+// const loginRequired = (req, res, next) => {
+//   if (!req.session.userId) {
+//     res.status(401).json({ error: "Unauthorized" });
+//   } else {
+//     next();
+//   }
+// }
 
-app.get('/api/movies', ctrl.show)
-app.get(`/api/movies/:id`, ctrl.getOne)
-app.get('/api/ratings', loginRequired, ctrl.ratings)
+// app.get('/api/candidates', loginRequired, ctrl.showAll)
+// app.get(`/api/candidates/:id`, ctrl.getOne)
+// app.get('/api/ratings', loginRequired, ctrl.ratings)
 app.post(`/api/auth`, ctrl.login)
 app.post(`/api/logout`, ctrl.logout)
-app.post(`/api/ratings`, loginRequired, ctrl.addRating)
+// app.post(`/api/ratings`, loginRequired, ctrl.addRating)
 
 ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
