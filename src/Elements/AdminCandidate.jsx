@@ -24,6 +24,8 @@ export default function CandidateCard( {candidate}) {
           <Typography variant="body2" color="text.secondary">
             Candidate Bio
           </Typography>
+          <Button size="small" color="primary" variant="contained">Edit</Button>
+          <Button size="small" color="primary" variant="outlined">Delete</Button>
         </CardContent>
       </CardActionArea>
     </Card>

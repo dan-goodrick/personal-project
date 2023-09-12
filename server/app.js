@@ -27,7 +27,7 @@ const loginRequired = (req, res, next) => {
 app.delete('/api/candidate/auth/:id', loginRequired, ctrl.delete)
 app.get('/api/candidate/:id', ctrl.getByPk)
 app.get('/api/candidate/auth/:id', loginRequired, ctrl.getByPk)
-app.get('/api/candidates/auth/', ctrl.getAllCandidates)  //loginRequired, 
+app.get('/api/candidates/auth/', loginRequired, ctrl.getAllCandidates)
 app.get('/api/phase/:id', ctrl.getByPhase)
 app.get('/api/phase/auth/:id', loginRequired, ctrl.getByPhase)
 app.post(`/api/auth`, ctrl.login)

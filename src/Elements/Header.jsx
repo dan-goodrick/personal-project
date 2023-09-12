@@ -14,13 +14,14 @@ const Header = () => {
     }
   })
 }
-// TODO Login/Letter SVG with dropdown to logout
+// TODO Login/Letter SVG with dropdown to logout so admin only shows when logged in and login only shows when logged out
   return (
     <div>
         <NavLink to="/">BoH</NavLink>
         <NavLink to="/pastProjects">Previous Builds</NavLink>
         <NavLink to="/plannedBuilds">Upcoming Projects</NavLink>
         <NavLink to="/fundraising">Current Fundraiser</NavLink>
+        <NavLink to="/admin">Admin</NavLink>
         <NavLink to="/login">Log in</NavLink>
         <NavLink>
         <LogoutButton onLogout={handleLogout}/>
