@@ -1,4 +1,4 @@
-import { Candidate, Image, User, Person } from "./model.js";
+import { Candidate, User } from "./model.js";
 
 const serverFunctions = {
 
