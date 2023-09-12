@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "../Elements/LoginForm.jsx";
 import axios from "axios";
 
-export default function LoginPage() {
+export default function Login() {
   const navigate = useNavigate();
   const handleLogin = async (e, formData) => {
     e.preventDefault();

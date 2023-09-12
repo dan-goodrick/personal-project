@@ -1,12 +1,22 @@
-const Column = ({ cards }) => {
-  const candidates = [];
-  for (const candidate of cards) {
-    candidates.push(
-        <li key={candidate.candidateId}>{candidate.lastName}</li>
-    );
-  }
+import Button from "@mui/material/Button";
+import CandidateCard from "./Candidate";
 
-  return <>{candidates}</>
+const Column = ({ cards }) => {
+  return (
+    <>
+      {cards.map((candidate) => (
+        <div key={candidate.candidateId}>
+          <Button size="small" color="primary" variant="contained">
+            Edit
+          </Button>
+          <Button size="small" color="primary" variant="outlined">
+            Delete
+          </Button>
+          <CandidateCard key={candidate.candidateId} candidate={candidate} />
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default Column;

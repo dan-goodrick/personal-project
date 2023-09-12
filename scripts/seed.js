@@ -186,8 +186,8 @@ const personData = [
 
 const userData = [
   {
-    email: "dan",
-    password: "dan",
+    email: "admin@buildersofhope.net",
+    password: "pwd",
     firstName: "dan",
     lastName: "goodrick",
   }

@@ -14,7 +14,7 @@ const Header = () => {
     }
   })
 }
-// TODO how to make logout button visible in place of login link
+// TODO Login/Letter SVG with dropdown to logout
   return (
     <div>
         <NavLink to="/">BoH</NavLink>
