@@ -14,13 +14,17 @@ const Header = () => {
     }
   })
 }
+// TODO how to make logout button visible in place of login link
   return (
     <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/movies">All movies</NavLink>
+        <NavLink to="/">BoH</NavLink>
+        <NavLink to="/pastProjects">Previous Builds</NavLink>
+        <NavLink to="/plannedBuilds">Upcoming Projects</NavLink>
+        <NavLink to="/fundraising">Current Fundraiser</NavLink>
         <NavLink to="/login">Log in</NavLink>
-        <NavLink to="/me">Your ratings</NavLink>
+        <NavLink>
         <LogoutButton onLogout={handleLogout}/>
+        </NavLink>
     </div>
   )
 }

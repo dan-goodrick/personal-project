@@ -35,6 +35,15 @@ const serverFunctions = {
       .catch (error => {
         console.error(`Unable to remove Record ${req.params.id}`, error)})
   },
+//   addCandidate: async (req, res) => {
+//     await Candidate.create({
+//         id: req.body.id,
+//         name: req.body.name,
+//         role: req.body.role,
+//         email: req.body.email
+//     })
+//     res.status(200).send('Added record');
+// },
   // update: async (req, res) => {
   //   const record = await Candidate.findByPk(req.params.id);
   //   record.update({key: req.body.record});

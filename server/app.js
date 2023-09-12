@@ -23,6 +23,7 @@ const loginRequired = (req, res, next) => {
 // app.get(`/api/candidates/:id`, ctrl.getOne)
 // app.get('/api/ratings', loginRequired, ctrl.ratings)
 // app.put('/api/candidate/auth/:id', loginRequired, ctrl.update)
+// app.post('/api/candidate/auth/', loginRequired, ctrl.addCandidate)
 app.delete('/api/candidate/auth/:id', loginRequired, ctrl.delete)
 app.get('/api/candidate/:id', ctrl.getByPk)
 app.get('/api/candidate/auth/:id', loginRequired, ctrl.getByPk)
@@ -30,6 +31,5 @@ app.get('/api/phase/:id', ctrl.getByPhase)
 app.get('/api/phase/auth/:id', loginRequired, ctrl.getByPhase)
 app.post(`/api/auth`, ctrl.login)
 app.post(`/api/logout`, ctrl.logout)
-// app.post(`/api/ratings`, loginRequired, ctrl.addRating)
 
 ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
