@@ -29,8 +29,17 @@ const serverFunctions = {
     console.log(req.params);
     res.json(await Candidate.findByPk(req.params.id))
   },
-
-
+  delete: async (req, res) => {
+     await Candidate.destroy({ where: {id: +req.params.id}})
+      .then(res.send(`Removed ${req.params.id}`))
+      .catch (error => {
+        console.error(`Unable to remove Record ${req.params.id}`, error)})
+  },
+  // update: async (req, res) => {
+  //   const record = await Candidate.findByPk(req.params.id);
+  //   record.update({key: req.body.record});
+  //   res.send(200, {message: 'Candidate updated successfully'});
+  //   },
   // show: async (req, res) => {
   //   res.send(await Movie.findAll());
   // },

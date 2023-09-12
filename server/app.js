@@ -22,6 +22,8 @@ const loginRequired = (req, res, next) => {
 // app.get('/api/candidates', loginRequired, ctrl.showAll)
 // app.get(`/api/candidates/:id`, ctrl.getOne)
 // app.get('/api/ratings', loginRequired, ctrl.ratings)
+// app.put('/api/candidate/auth/:id', loginRequired, ctrl.update)
+app.delete('/api/candidate/auth/:id', loginRequired, ctrl.delete)
 app.get('/api/candidate/:id', ctrl.getByPk)
 app.get('/api/candidate/auth/:id', loginRequired, ctrl.getByPk)
 app.get('/api/phase/:id', ctrl.getByPhase)
