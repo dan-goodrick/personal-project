@@ -44,31 +44,6 @@ const serverFunctions = {
 //     })
 //     res.status(200).send('Added record');
 // },
-  // update: async (req, res) => {
-  //   const record = await Candidate.findByPk(req.params.id);
-  //   record.update({key: req.body.record});
-  //   res.send(200, {message: 'Candidate updated successfully'});
-  //   },
-  // show: async (req, res) => {
-  //   res.send(await Movie.findAll());
-  // },
-  // getOne: async (req, res) => {
-  //   res.json(await Movie.findByPk(req.params.id));
-  // },
-  // ratings: async (req, res) => {
-  //   const { userId } = req.session;
-  //   const ratings = await User.findByPk(userId).then((user) =>
-  //     // user.getRatings({ include: Movie })
-  //     user.getRatings({ include: { model: Movie, attributes: ["title"] } })
-  //   );// eager loaded with include
-  //   res.json(ratings);
-  // },
-  // addRating: async (req, res) => {
-  //   const { userId } = req.session;
-  //   const { movieId, score } = req.body;
-  //   const rating = await User.findByPk(userId).then((user)=>user.createRating({ movieId: movieId, score: score }));
-  //   res.json(rating);
-  // },
 };
 
 export default serverFunctions;
