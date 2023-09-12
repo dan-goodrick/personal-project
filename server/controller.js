@@ -25,6 +25,9 @@ const serverFunctions = {
     console.log(req.params);
     res.json(await Candidate.findAll({ where: { phaseId: req.params.id } }))
   },
+  getAllCandidates: async (req, res) => {
+    res.json(await Candidate.findAll())
+  },
   getByPk: async (req, res) => {
     console.log(req.params);
     res.json(await Candidate.findByPk(req.params.id))

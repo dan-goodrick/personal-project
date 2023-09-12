@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import IndexPage from "./Pages/IndexPage";
 import LoginPage from "./Pages/LoginPage";
-import PastProjects from "./Pages/PastProjects";
+import PastProjectsPage from "./Pages/PastProjects";
 import ErrorPage from "./Pages/ErrorPage";
+import AdminPage from "./Pages/AdminPage";
 import App from "./App";
 import axios from "axios";
 import {
@@ -20,9 +21,18 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route
         path="/pastProjects/"
-        element={<PastProjects />}
+        element={<PastProjectsPage />}
         loader={async () => {
           const res = await axios.get(`/api/phase/3`);
+          console.log("res.data", res.data);
+          return { projects: res.data };
+        }}
+      />
+      <Route
+        path="/admin/"
+        element={<AdminPage />}
+        loader={async () => {
+          const res = await axios.get(`/api/candidates/auth`);
           console.log("res.data", res.data);
           return { projects: res.data };
         }}

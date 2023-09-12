@@ -10,7 +10,7 @@ export default function LoginPage() {
     const {success} = res.data
     console.log("Login: ",res.data);
     if (success) {
-      navigate(`/me`);
+      navigate(`/admin`);
     } else {
       return <p>Try again</p>
     }
