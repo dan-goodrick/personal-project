@@ -26,15 +26,15 @@ export default function PastProjects() {
     <>
       <h1>Admin Page</h1>
       <h2>Incomplete Build Applications</h2>
-      <p>{<Column cards={incompleteApplications} />}</p>
+      <div>{<Column cards={incompleteApplications} />}</div>
       <h2>Completed Build Applications</h2>
-      <p>{<Column cards={acceptedApplications} />}</p>
+      <div>{<Column cards={acceptedApplications} />}</div>
       <h2>Projects in fundraising</h2>
-      <p>{<Column cards={fundraisingProjects} />}</p>
+      <div>{<Column cards={fundraisingProjects} />}</div>
       <h2>Projects in Planning</h2>
-      <p>{<Column cards={plannedProjects} />}</p>
+      <div>{<Column cards={plannedProjects} />}</div>
       <h2>Completed Projects</h2>
-      <p>{<Column cards={completedProjects} />}</p>
+      <div>{<Column cards={completedProjects} />}</div>
     </>
   );
 }

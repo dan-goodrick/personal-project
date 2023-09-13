@@ -143,6 +143,20 @@ const personData = [
     candidateId: 4,
   },
   {
+    lastName: "Quintana",
+    firstName: "Pedro",
+    dob: new Date(Date.parse("2010-06-08")),
+    headOfHousehold: false,
+    candidateId: 4,
+  },
+  {
+    lastName: "Quintana",
+    firstName: "Isa",
+    dob: new Date(Date.parse("2015-06-08")),
+    headOfHousehold: false,
+    candidateId: 4,
+  },
+  {
     lastName: "Lopez",
     firstName: "Jose",
     dob: new Date(Date.parse("1982-06-08")),
@@ -154,6 +168,13 @@ const personData = [
     firstName: "Sambo",
     dob: new Date(Date.parse("1980-06-08")),
     headOfHousehold: true,
+    candidateId: 2,
+  },
+  {
+    lastName: "Gomez Arenal",
+    firstName: "Lizette",
+    dob: new Date(Date.parse("1985-06-08")),
+    headOfHousehold: false,
     candidateId: 2,
   },
   {

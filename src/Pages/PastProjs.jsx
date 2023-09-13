@@ -7,11 +7,9 @@ export default function PastProjects() {
   return (
     <>
       <h1>Completed Projects</h1>
-      <p>
       {projects.map((candidate) => (
         <CandidateCard key={candidate.candidateId} candidate={candidate} />
         ))}
-      </p>
     </>
   );
 }

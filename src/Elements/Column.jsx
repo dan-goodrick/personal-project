@@ -1,4 +1,4 @@
-import CandidateCard from "./AdminCandidate";
+import CandidateCard from "./Candidate";
 
 const Column = ({ cards }) => {
   return (

@@ -8,11 +8,9 @@ export default function PlannedProjects() {
   return (
     <>
       <h1>Upcoming Projects</h1>
-      <p>
       {projects.map((candidate) => (
         <CandidateCard key={candidate.candidateId} candidate={candidate} />
         ))}
-      </p>
     </>
   );
 }
