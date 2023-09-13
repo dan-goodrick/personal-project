@@ -24,7 +24,7 @@ const Header = () => {
         <NavLink to="/admin">Admin</NavLink>
         <NavLink to="/login">Log in</NavLink>
         <NavLink>
-        <LogoutButton onLogout={handleLogout}/>
+        {/* <LogoutButton onLogout={handleLogout}/> */}
         </NavLink>
     </div>
   )

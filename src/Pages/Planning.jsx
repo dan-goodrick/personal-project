@@ -3,12 +3,12 @@ import CandidateCard from "../Elements/Candidate";
 
 
 export default function PlannedProjects() {
-  const { projects } = useLoaderData();
-  console.log("Planned Projects", projects)
+  const { planned } = useLoaderData();
+  console.log("Planned Projects", planned)
   return (
     <>
       <h1>Upcoming Projects</h1>
-      {projects.map((candidate) => (
+      {planned.map((candidate) => (
         <CandidateCard key={candidate.candidateId} candidate={candidate} />
         ))}
     </>

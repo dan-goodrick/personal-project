@@ -51,6 +51,7 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 12,
     loanDuration: 30,
+    currOnLoan:'current'
   },
   {
     lastName: "Gomez Arenal",
@@ -66,6 +67,7 @@ const candidateData = [
     googleMaps: "https://goo.gl/maps/XGYdka1XRZHsocqS6",
     landTitle: "mortgage",
     paymentCnt: 8,
+    currOnLoan:'current'
   },
   {
     lastName: "De La Cruz",
@@ -79,7 +81,7 @@ const candidateData = [
     lat: 31.722634,
     lon: -116.568327,
     googleMaps: "https://goo.gl/maps/smwhf2mt7ZQXXAZK7",
-    landTitle: "owns",
+    landTitle: "Free and Clear",
   },
   {
     lastName: "Quintana Juarez",
@@ -97,6 +99,7 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 4,
     loanDuration: 300,
+    currOnLoan:'current'
   },
   {
     lastName: "Martina",
@@ -112,6 +115,7 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 3,
     loanDuration: 30,
+    currOnLoan:'Behind by 4 months',
   },
 ];
 

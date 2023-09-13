@@ -5,21 +5,21 @@ const accepted = 2;
 const fundraising = 3;
 const planned = 4;
 const completed = 5;
-export default function PastProjects() {
-  const { projects } = useLoaderData();
-  const incompleteApplications = projects.filter(
+export default function Admin() {
+  const { candidates } = useLoaderData();
+  const incompleteApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == incomplete
   );
-  const acceptedApplications = projects.filter(
+  const acceptedApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == accepted
   );
-  const fundraisingProjects = projects.filter(
+  const fundraisingProjects = candidates.filter(
     (candidate) => candidate.phase.phaseId == fundraising
   );
-  const plannedProjects = projects.filter(
+  const plannedProjects = candidates.filter(
     (candidate) => candidate.phase.phaseId == planned
   );
-  const completedProjects = projects.filter(
+  const completedProjects = candidates.filter(
     (candidate) => candidate.phase.phaseId == completed
   );
   return (
