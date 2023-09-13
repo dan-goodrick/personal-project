@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import ViteExpress from 'vite-express';
 import ctrl from './controller.js'
 const app = express();
-const port = '8000';
+const port = 8001;
 ViteExpress.config({ printViteDevServerHost: true });
 
 app.use(morgan('dev'));
@@ -25,6 +25,7 @@ const loginRequired = (req, res, next) => {
 // app.put('/api/candidate/auth/:id', loginRequired, ctrl.update)
 // app.post('/api/candidate/auth/', loginRequired, ctrl.addCandidate)
 app.delete('/api/candidate/auth/:id', loginRequired, ctrl.delete)
+app.post('/api/candidate/auth/:id', loginRequired, ctrl.delete)
 app.get('/api/candidate/:id', ctrl.getByPk)
 app.get('/api/candidate/auth/:id', loginRequired, ctrl.getByPk)
 app.get('/api/candidates/auth/', loginRequired, ctrl.getAllCandidates)

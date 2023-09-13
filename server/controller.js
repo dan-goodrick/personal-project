@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Phase } from "./model.js";
+import { Candidate, User, Image, Phase, Person } from "./model.js";
 
 const serverFunctions = {
   login: async (req, res) => {
@@ -23,21 +23,27 @@ const serverFunctions = {
   getByPhase: async (req, res) => {
     console.log(req.params);
     res.json(await Candidate.findAll({include: [{model: Image, 
-                                                    where: { primary: true },
-                                                    attributes: ["imageUrl"]},
+                                                  where: { primary: true },
+                                                  attributes: ["imageUrl"]},
                                                 {model: Phase,
-                                                    where: { phaseId: req.params.id } },
-                                                ]}));
+                                                  where: { phaseId: req.params.id } },
+                                                {model: Person}]}));
   },
   getAllCandidates: async (req, res) => {
     res.json(await Candidate.findAll({include: [{model: Image, 
-                                                    where: { primary: true },
-                                                    attributes: ["imageUrl"]},
-                                                {model: Phase}],}));
+                                                  where: { primary: true },
+                                                  attributes: ["imageUrl"]},
+                                                {model: Phase},
+                                                {model: Person}]}));
   },
   getByPk: async (req, res) => {
     console.log(req.params);
-    res.json(await Candidate.findByPk(req.params.id));
+    res.json(await Candidate.findByPk(req.params.id, 
+                                      {include: [{model: Image, 
+                                                  where: { primary: true },
+                                                  attributes: ["imageUrl"]},
+                                                {model: Phase},
+                                                {model: Person}]}));
   },
   delete: async (req, res) => {
     await Candidate.destroy({ where: { id: +req.params.id } })
