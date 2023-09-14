@@ -3,7 +3,7 @@ import { Candidate, User, Image, Phase, Person } from "./model.js";
 const serverFunctions = {
   login: async (req, res) => {
     const user = await User.findOne({ where: { email: req.body.email } });
-    console.log("user: ", user, "matches? ", req.body.password);
+    console.log("user: ", user, "matches? ", req.body);
     if (!user || user.password != req.body.password) {
       res.json({ success: false });
       return;

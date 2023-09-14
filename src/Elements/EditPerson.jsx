@@ -11,7 +11,7 @@ import Checkbox from './Checkbox';
 const EditPerson = ({person}) => {
   console.log("Edit Person:", person);
   return (
-    <>
+    <>Edit Candidate
       <Formik
         initialValues={{
           firstName: person.firstName,
@@ -20,7 +20,7 @@ const EditPerson = ({person}) => {
           email: person.email,
           gender: person.gender, // added for our select
           headOfHousehold: person.headOfHousehold, // added for our checkbox
-          dob: person.headOfHousehold, 
+          dob: new Date(person.dob).toLocaleDateString('es-pa'), 
         }}
         validationSchema={Yup.object({
           firstName: Yup.string().max(15, 'Must be 15 characters or less'),
@@ -39,38 +39,37 @@ const EditPerson = ({person}) => {
       >
         <Form>
           <Text
-            label="First Name"
             name="firstName"
             type="text"
-            placeholder="bring in person"
+            placeholder="First Name"
           />
-
           <Text
-            label="Last Name"
             name="lastName"
             type="text"
-            placeholder="bring in person"
-          />
+            placeholder="Last Name"
+            /><br/>
 
           <Text
-            label="Phone (WhatsApp)"
+            label="Phone (WhatsApp): "
             name="whatsApp"
             type="text"
-            placeholder="Two letter country code"
-          />
+            placeholder="WhatsApp"
+            /><br/>
+
 
           <Text
-            label="Email Address"
+            label="Email Address: "
             name="email"
             type="email"
-            placeholder="bring in person"
-          />
+            placeholder="Email Address"
+            /><br/>
+
 
           <Text
-            label="Date of Birth"
+            label="Date of Birth: "
             name="dob"
             type="text"
-            placeholder="bring in person"
+            placeholder="Date of Birth"
           />
 
           <Select label="Gender" name="gender">
@@ -84,7 +83,7 @@ const EditPerson = ({person}) => {
             Head of Household
           </Checkbox>
 
-          <button type="submit">Submit</button>
+          {/* <button type="submit">Submit</button> */}
         </Form>
       </Formik>
     </>

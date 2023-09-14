@@ -77,9 +77,12 @@ Candidate.init(
       allowNull: false,
     },
     currPhaseDate: DataTypes.DATE,
+    address: DataTypes.STRING,
     municipality: DataTypes.STRING,
+    region: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
+    zip: DataTypes.INTEGER,
     lat: DataTypes.FLOAT,
     lon: DataTypes.FLOAT,
     googleMaps: DataTypes.STRING,
@@ -88,11 +91,11 @@ Candidate.init(
     currOnLoan: DataTypes.STRING,
     videoUrl: DataTypes.STRING,
     fundsRaised: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(13,2),
       default: 0,
     },
     fundRequirement: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(13,2),
       default: 10000,
     },
     loanDuration: {

@@ -16,27 +16,22 @@ export default function DisplayCandidate({ candidate, setEditing}) {
         Application Data
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        Municipality: {candidate.municipality}, {candidate.country}
+        Address: {candidate.address} <br/>{candidate.municipality}, {candidate.region}, {candidate.country}, {candidate.zip}
       </Typography>
-      <Typography variant="body2" color="text.secondary">
-        Title: {candidate.landTitle}
-      </Typography>
-      {candidate.landTitle === "mortgage" ? (
-        <>
-          <Typography variant="body2" color="text.secondary">
-            Payment: {candidate.paymentCnt}/{candidate.loanDuration}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Loan Status: {candidate.currOnLoan}
-          </Typography>
-        </>
-      ) : null}
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:
         <Link href={candidate.googleMaps}>
           {candidate.lat.toFixed(5)}, {candidate.lon.toFixed(5)}
         </Link>
       </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Title: {candidate.landTitle}
+      </Typography>
+      {candidate.landTitle === "mortgage" ? (
+          <Typography variant="body2" color="text.secondary">
+            Loan Status: {candidate.currOnLoan}
+          </Typography>
+      ) : null}
       <Typography variant="body1" color="text.primary">
         Admin Data
       </Typography>
