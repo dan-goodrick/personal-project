@@ -86,6 +86,7 @@ Candidate.init(
     landTitle: DataTypes.STRING,
     paymentCnt: DataTypes.INTEGER,
     currOnLoan: DataTypes.STRING,
+    videoUrl: DataTypes.STRING,
     fundsRaised: {
       type: DataTypes.FLOAT,
       default: 0,
@@ -121,6 +122,9 @@ Person.init(
     lastName: DataTypes.STRING,
     firstName: DataTypes.STRING,
     dob: DataTypes.DATE,
+    gender: DataTypes.STRING,
+    email: DataTypes.STRING,
+    whatsApp: DataTypes.STRING,
     headOfHousehold: {
       type: DataTypes.BOOLEAN,
       default: false,

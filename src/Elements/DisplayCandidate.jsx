@@ -1,9 +1,11 @@
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
 import Family from "./Family";
-import Button from "@mui/material/Button";
+import destroyCandidate from "../functions/deleteCandidate";
 
-export default function EditData({ candidate, setEditing, destroyCandidate }) {
+
+export default function DisplayCandidate({ candidate, setEditing}) {
+
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
@@ -28,7 +30,7 @@ export default function EditData({ candidate, setEditing, destroyCandidate }) {
             Loan Status: {candidate.currOnLoan}
           </Typography>
         </>
-      ) : null}{" "}
+      ) : null}
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:
         <Link href={candidate.googleMaps}>
@@ -44,17 +46,9 @@ export default function EditData({ candidate, setEditing, destroyCandidate }) {
       <Typography variant="body2" color="text.secondary">
         Funding: {candidate.fundsRaised}/{candidate.fundingRequirement}
       </Typography>
-      <input type="button" value="Save" onClick={() => setEditing(false)}/>
-      <input type="button" value="Delete" onClick={destroyCandidate(candidate.candidateId)}/>
+      <input type="button" value="Edit" onClick={() => setEditing(true)}/>
+      {/* <input type="button" value="Delete" onClick={() => destroyCandidate(candidate.candidateId)}/> */}
 
     </>
   );
 }
-
-{/* <Button
-    size="small"
-    color="primary"
-    variant="contained"
-    onclick={() => setEditing(false)}
-  >Save</Button>
-  <Button size="small" color="primary" variant="outlined">Delete</Button> */}

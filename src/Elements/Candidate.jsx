@@ -2,29 +2,26 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
-import { useState } from "react";
-import DisplayData from "./DisplayData";
-import EditData from "./EditData";
+import { useEffect, useState } from "react";
+import DisplayCandidate from "./DisplayCandidate";
+import EditCandidate from "./EditCandidate";
 import axios from "axios";
+
+
 
 export default function CandidateCard({ candidate }) {
   const [editing, setEditing] = useState(false);
-  const [candidates, setCandidates] = useState(false);
 
-  const destroyCandidate = async (id) => { 
-    const { data } = await axios.delete(`/api/candidate/auth/${id}`);
-    // if (!data.error) {
-    //   setCandidates(candidates.filter((el) => el.id !== id));
-    // }
-    console.log(`deleted %{id}`, data);
-  }
-  const updateCandidate = async (candidate) => { 
-    const { data } = await axios.put(`/api/candidate/auth/${id}`);
-    // if (!data.error) {
-    //   setCandidates(candidates.filter((el) => el.id !== id));
-    // }
-    console.log(`deleted %{id}`, data);
-  }
+  useEffect (() => { 
+    const i = candidate.people.findIndex(member => member.headOfHousehold == true);
+    const headOfHousehold = candidate.people.splice(i,1)[0]
+    candidate.people.sort((a, b) => a.dob.localeCompare(b.dob));
+    candidate.people.unshift(headOfHousehold)
+   }, [candidate])
+
+
+  
+
   return (
     <Card sx={{ maxWidth: 345 }} >
       <CardActionArea >
@@ -36,8 +33,8 @@ export default function CandidateCard({ candidate }) {
         />
         <CardContent>
         { editing ? 
-          <EditData candidate={candidate} setEditing={setEditing} destroyCandidate={destroyCandidate}/> : 
-          <DisplayData candidate={candidate} setEditing={setEditing} destroyCandidate={destroyCandidate}/>
+          <EditCandidate candidate={candidate} setEditing={setEditing} /> : 
+          <DisplayCandidate candidate={candidate} setEditing={setEditing} />
         }
         </CardContent>
       </CardActionArea>
