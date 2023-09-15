@@ -79,7 +79,7 @@ Candidate.init(
     currPhaseDate: DataTypes.DATE,
     address: DataTypes.STRING,
     municipality: DataTypes.STRING,
-    region: DataTypes.STRING,
+    city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
     zip: DataTypes.INTEGER,
@@ -92,15 +92,15 @@ Candidate.init(
     videoUrl: DataTypes.STRING,
     fundsRaised: {
       type: DataTypes.DECIMAL(13,2),
-      default: 0,
+      defaultValue: 0,
     },
     fundRequirement: {
       type: DataTypes.DECIMAL(13,2),
-      default: 10000,
+      defaultValue: 10000,
     },
     loanDuration: {
       type: DataTypes.INTEGER,
-      default: 30,
+      defaultValue: 30,
     },
   },
   {
@@ -130,7 +130,7 @@ Person.init(
     whatsApp: DataTypes.STRING,
     headOfHousehold: {
       type: DataTypes.BOOLEAN,
-      default: false,
+      defaultValue: false,
     },
   },
   {
@@ -157,7 +157,7 @@ Image.init(
     imageUrl: DataTypes.STRING(500),
     primary: {
       type: DataTypes.BOOLEAN,
-      default: false,
+      defaultValue: false,
     },
   },
   {

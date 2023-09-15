@@ -1,6 +1,6 @@
-import CandidateCard from "./Candidate";
+import CandidateCard from "./CandidateCard";
 
-const Column = ({ cards }) => {
+const AdminCards = ({ cards }) => {
   return (
     <>
       {cards.map((candidate) => (
@@ -12,4 +12,4 @@ const Column = ({ cards }) => {
   );
 };
 
-export default Column;
+export default AdminCards;

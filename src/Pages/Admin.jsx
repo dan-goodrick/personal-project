@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import Column from "../Elements/Column";
+import AdminCards from "../Elements/AdminCards";
 const incomplete = 1;
 const accepted = 2;
 const fundraising = 3;
@@ -26,15 +26,15 @@ export default function Admin() {
     <>
       <h1>Admin Page</h1>
       <h2>Incomplete Build Applications</h2>
-      <div>{<Column cards={incompleteApplications} />}</div>
+      <div>{<AdminCards cards={incompleteApplications} />}</div>
       <h2>Completed Build Applications</h2>
-      <div>{<Column cards={acceptedApplications} />}</div>
+      <div>{<AdminCards cards={acceptedApplications} />}</div>
       <h2>Projects in fundraising</h2>
-      <div>{<Column cards={fundraisingProjects} />}</div>
+      <div>{<AdminCards cards={fundraisingProjects} />}</div>
       <h2>Projects in Planning</h2>
-      <div>{<Column cards={plannedProjects} />}</div>
+      <div>{<AdminCards cards={plannedProjects} />}</div>
       <h2>Completed Projects</h2>
-      <div>{<Column cards={completedProjects} />}</div>
+      <div>{<AdminCards cards={completedProjects} />}</div>
     </>
   );
 }

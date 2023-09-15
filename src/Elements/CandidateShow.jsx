@@ -1,10 +1,9 @@
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
 import Family from "./Family";
-import destroyCandidate from "../functions/deleteCandidate";
 
 
-export default function DisplayCandidate({ candidate, setEditing}) {
+export default function CandidateShow({ candidate, setEditing}) {
 
   return (
     <>
@@ -12,11 +11,8 @@ export default function DisplayCandidate({ candidate, setEditing}) {
         {candidate.lastName}
       </Typography>
       <Family members={candidate.people} />
-      <Typography variant="body1" color="text.primary">
-        Application Data
-      </Typography>
       <Typography variant="body2" color="text.secondary">
-        Address: {candidate.address} <br/>{candidate.municipality}, {candidate.region}, {candidate.country}, {candidate.zip}
+        Address: {candidate.address} <br/>{candidate.municipality}, {candidate.city}, {candidate.country}, {candidate.zip}
       </Typography>
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:

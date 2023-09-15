@@ -1,7 +1,12 @@
 import { Candidate, User, Image, Phase, Person } from "./model.js";
 
+const sortFamily = (family) => {
+  return family.sort((a, b) => a.headOfHousehold ? -1 : b.headOfHousehold ? 1 : new Date(a.dob) - new Date(b.dob));
+};
+
 const serverFunctions = {
   login: async (req, res) => {
+    console.log("login with session", req.session);
     const user = await User.findOne({ where: { email: req.body.email } });
     console.log("user: ", user, "matches? ", req.body);
     if (!user || user.password != req.body.password) {
@@ -12,6 +17,7 @@ const serverFunctions = {
     res.json({ success: true });
   },
   logout: async (req, res) => {
+    console.log("logout with session", req.session);
     if (!req.session.userId) {
       res.status(401).json({ error: `no user is logged in` });
       return;
@@ -22,28 +28,39 @@ const serverFunctions = {
   },
   getByPhase: async (req, res) => {
     console.log(req.params);
-    res.json(await Candidate.findAll({include: [{model: Image, 
-                                                  where: { primary: true },
-                                                  attributes: ["imageUrl"]},
-                                                {model: Phase,
-                                                  where: { phaseId: req.params.id } },
-                                                {model: Person}]}));
+    const candidates = await Candidate.findAll({
+      include: [
+        { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
+        { model: Phase, where: { phaseId: req.params.id } },
+        { model: Person },
+      ],
+    });
+    candidates.forEach(candidate => candidate.people = sortFamily(candidate.people));
+    res.json(candidates);
   },
   getAllCandidates: async (req, res) => {
-    res.json(await Candidate.findAll({include: [{model: Image, 
-                                                  where: { primary: true },
-                                                  attributes: ["imageUrl"]},
-                                                {model: Phase},
-                                                {model: Person}]}));
+    console.log(req.params);
+    const candidates = await Candidate.findAll({
+        include: [
+          { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
+          { model: Phase },
+          { model: Person },
+        ],
+      });
+      candidates.forEach(candidate => candidate.people = sortFamily(candidate.people));
+      res.json(candidates);
   },
   getByPk: async (req, res) => {
     console.log(req.params);
-    res.json(await Candidate.findByPk(req.params.id, 
-                                      {include: [{model: Image, 
-                                                  where: { primary: true },
-                                                  attributes: ["imageUrl"]},
-                                                {model: Phase},
-                                                {model: Person}]}));
+    const candidate = await Candidate.findByPk(req.params.id, {
+      include: [
+        { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
+        { model: Phase },
+        { model: Person },
+      ],
+    });
+    candidate.people = sortFamily(candidate.people)
+    res.json(candidate);
   },
   delete: async (req, res) => {
     await Candidate.destroy({ where: { id: +req.params.id } })
@@ -64,3 +81,5 @@ const serverFunctions = {
 };
 
 export default serverFunctions;
+
+// order: [["headOfHousehold", 'ASC'], ["dob", 'ASC']]

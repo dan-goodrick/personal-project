@@ -3,9 +3,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { useEffect, useState } from "react";
-import DisplayCandidate from "./DisplayCandidate";
-import EditCandidate from "./EditCandidate";
-import axios from "axios";
+import CandidateEdit from "./CandidateEdit";
+import CandidateShow from "./CandidateShow";
 
 
 
@@ -20,7 +19,7 @@ export default function CandidateCard({ candidate }) {
    }, [candidate])
 
 
-  
+  // todo: get the primary image from images
 
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -33,8 +32,8 @@ export default function CandidateCard({ candidate }) {
         />
         <CardContent>
         { editing ? 
-          <EditCandidate candidate={candidate} setEditing={setEditing} /> : 
-          <DisplayCandidate candidate={candidate} setEditing={setEditing} />
+          <CandidateEdit candidate={candidate} setEditing={setEditing} /> : 
+          <CandidateShow candidate={candidate} setEditing={setEditing} />
         }
         </CardContent>
       </CardActionArea>

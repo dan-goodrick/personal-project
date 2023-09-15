@@ -56,14 +56,12 @@ const EditPerson = ({person}) => {
             placeholder="WhatsApp"
             /><br/>
 
-
           <Text
             label="Email Address: "
             name="email"
             type="email"
             placeholder="Email Address"
             /><br/>
-
 
           <Text
             label="Date of Birth: "

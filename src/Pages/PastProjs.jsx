@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import CandidateCard from "../Elements/Candidate";
+import CandidateView from "../Elements/CandidateView";
 
 export default function PastProjects() {
   const { projects } = useLoaderData();
@@ -8,7 +8,7 @@ export default function PastProjects() {
     <>
       <h1>Completed Projects</h1>
       {projects.map((candidate) => (
-        <CandidateCard key={candidate.candidateId} candidate={candidate} />
+        <CandidateView key={candidate.candidateId} candidate={candidate} />
         ))}
     </>
   );
