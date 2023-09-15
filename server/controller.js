@@ -56,10 +56,11 @@ const serverFunctions = {
       include: [
         { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
         { model: Phase },
-        { model: Person },
+        { model: Person,
+          order: [["headOfHousehold", 'ASC'], ["dob", 'ASC']] },
       ],
     });
-    candidate.people = sortFamily(candidate.people)
+    // candidate.people = sortFamily(candidate.people)
     res.json(candidate);
   },
   delete: async (req, res) => {

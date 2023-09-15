@@ -154,6 +154,14 @@ const personData = [
     candidateId: 5,
   },
   {
+    lastName: "Quintana",
+    firstName: "Pedro",
+    gender: "male",
+    dob: new Date(Date.parse("2010-06-08")),
+    headOfHousehold: false,
+    candidateId: 4,
+  },
+  {
     lastName: "Juarez",
     firstName: "Sylvia",
     dob: new Date(Date.parse("1978-06-08")),
@@ -171,14 +179,6 @@ const personData = [
     email: "gen@email.com",
     whatsApp: "+1123456789",
     gender: "male",
-    candidateId: 4,
-  },
-  {
-    lastName: "Quintana",
-    firstName: "Pedro",
-    gender: "male",
-    dob: new Date(Date.parse("2010-06-08")),
-    headOfHousehold: false,
     candidateId: 4,
   },
   {
