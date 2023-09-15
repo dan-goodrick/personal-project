@@ -1,9 +1,5 @@
 import { Candidate, User, Image, Phase, Person } from "./model.js";
 
-const sortFamily = (family) => {
-  return family.sort((a, b) => a.headOfHousehold ? -1 : b.headOfHousehold ? 1 : new Date(a.dob) - new Date(b.dob));
-};
-
 const serverFunctions = {
   login: async (req, res) => {
     console.log("login with session", req.session);
@@ -34,8 +30,8 @@ const serverFunctions = {
         { model: Phase, where: { phaseId: req.params.id } },
         { model: Person },
       ],
+      order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
     });
-    candidates.forEach(candidate => candidate.people = sortFamily(candidate.people));
     res.json(candidates);
   },
   getAllCandidates: async (req, res) => {
@@ -46,8 +42,8 @@ const serverFunctions = {
           { model: Phase },
           { model: Person },
         ],
+        order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
       });
-      candidates.forEach(candidate => candidate.people = sortFamily(candidate.people));
       res.json(candidates);
   },
   getByPk: async (req, res) => {
@@ -56,11 +52,10 @@ const serverFunctions = {
       include: [
         { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
         { model: Phase },
-        { model: Person,
-          order: [["headOfHousehold", 'ASC'], ["dob", 'ASC']] },
+        { model: Person},
       ],
+      order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
     });
-    // candidate.people = sortFamily(candidate.people)
     res.json(candidate);
   },
   delete: async (req, res) => {
