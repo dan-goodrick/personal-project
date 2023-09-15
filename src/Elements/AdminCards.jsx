@@ -8,6 +8,7 @@ const AdminCards = ({ cards }) => {
           <CandidateCard key={candidate.candidateId} candidate={candidate} />
         </div>
       ))}
+      
     </>
   );
 };

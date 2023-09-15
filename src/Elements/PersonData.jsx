@@ -8,7 +8,7 @@ import Checkbox from './Checkbox';
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const EditPerson = ({person}) => {
+const PersonData = ({person}) => {
   console.log("Edit Person:", person);
   return (
     <>Edit Candidate
@@ -30,12 +30,6 @@ const EditPerson = ({person}) => {
           dob: Yup.date("Use 1/1 for unknown day/month"),
           headOfHousehold: Yup.boolean(),
           gender: Yup.string().oneOf(['male', 'female', 'other']),})}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
       >
         <Form>
           <Text
@@ -88,4 +82,4 @@ const EditPerson = ({person}) => {
   );
 };
 
-export default EditPerson
+export default PersonData

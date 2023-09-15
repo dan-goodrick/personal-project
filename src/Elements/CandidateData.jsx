@@ -9,7 +9,7 @@ import Checkbox from './Checkbox';
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const CandidateForm = ({candidate}) => {
+const CandidateData = ({candidate}) => {
   console.log("Edit candidate:", candidate);
   return (
     <>Edit Candidate
@@ -101,4 +101,4 @@ const CandidateForm = ({candidate}) => {
   );
 };
 
-export default CandidateForm
+export default CandidateData
