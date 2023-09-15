@@ -25,6 +25,9 @@ export default function Admin() {
   return (
     <>
       <h1>Admin Page</h1>
+      <input type="button" value="Add Candidate" onClick={() => "Add candidate function"} />
+      <input type="button" value="Move Candidates"
+        onClick={() => "Move candidate with card action area wrap"} />
       <h2>Incomplete Build Applications</h2>
       <div>{<AdminCards cards={incompleteApplications} />}</div>
       <h2>Completed Build Applications</h2>

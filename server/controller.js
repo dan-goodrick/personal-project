@@ -59,12 +59,47 @@ const serverFunctions = {
     res.json(candidate);
   },
   delete: async (req, res) => {
-    await Candidate.destroy({ where: { id: +req.params.id } })
+    await Candidate.destroy({ where: { candidateId: +req.params.id } })
       .then(res.send(`Removed ${req.params.id}`))
       .catch((error) => {
         console.error(`Unable to remove Record ${req.params.id}`, error);
       });
   },
+  putPerson: async (req, res) => {
+    console.log("put Person", req.body);
+    const person = await Person.findByPk(req.params.id)
+    await person.set(req.body)
+    await person.save()
+    res.send(`Updated record ${req.body.personId} for ${req.body.lastName}`)
+  },
+  putCandidate: async (req, res) => {
+    console.log("put candidate", req.body);
+    const candidate = await Candidate.findByPk(req.params.id)
+    await candidate.set(req.body)
+    await candidate.save()
+    res.send(`Updated record ${req.body.candidateId} for ${req.body.lastName}`)
+  },
+  putPhase: async (req, res) => {
+    console.log("put phase", req.body);
+    const phase = await Phase.findByPk(req.params.id)
+    await phase.set(req.body)
+    await phase.save()
+    res.send(`Updated phase of ID: ${req.body.phaseId} for ${req.body.phaseName}`)
+  },
+  addPerson: async (req, res) => {
+    console.log("add person", req.body);
+    const person = await Person.create(req.body)
+    await person.save()
+    res.send(`Added record  ${person.lastName}`)
+  },
+  addCandidate: async (req, res) => {
+    console.log("add person", req.body);
+    const candidate = await Candidate.create(req.body)
+    await candidate.save()
+    res.send(`Added record  ${candidate.lastName}`)
+  },
+  // INSERT to add a record
+
   //   addCandidate: async (req, res) => {
   //     await Candidate.create({
   //         id: req.body.id,

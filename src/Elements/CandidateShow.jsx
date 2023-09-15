@@ -1,9 +1,13 @@
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
 import Family from "./Family";
+import Button from "@mui/material/Button";
+import DeleteCandidate from "./DeleteCandidate";
+import { useState } from "react";
 
 
 export default function CandidateShow({ candidate, setEditing}) {
+  const [deleting, setDeleting] = useState(false);
 
   return (
     <>
@@ -37,8 +41,9 @@ export default function CandidateShow({ candidate, setEditing}) {
       <Typography variant="body2" color="text.secondary">
         Funding: {candidate.fundsRaised}/{candidate.fundingRequirement}
       </Typography>
-      <input type="button" value="Edit" onClick={() => setEditing(true)}/>
-      {/* <input type="button" value="Delete" onClick={() => destroyCandidate(candidate.candidateId)}/> */}
+      <Button size="small" color="primary" variant="contained" onClick={() => setEditing(true)}>Edit</Button>
+      <Button size="small" color="primary" variant="outlined" onClick={() => setDeleting(true)}>Delete</Button>
+      {deleting && <DeleteCandidate candidate={candidate} setDeleting={setDeleting}/>}
 
     </>
   );

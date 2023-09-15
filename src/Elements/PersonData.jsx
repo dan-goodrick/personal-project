@@ -4,7 +4,7 @@ import "yup-phone-lite";
 import Text from './Text';
 import Select from './Select';
 import Checkbox from './Checkbox';
-
+import axios from 'axios'
 
 //https://formik.org/docs/tutorial
 // And now we can use these
@@ -25,11 +25,16 @@ const PersonData = ({person}) => {
         validationSchema={Yup.object({
           firstName: Yup.string().max(15, 'Must be 15 characters or less'),
           lastName: Yup.string().max(20, 'Must be 20 characters or less'),
-          whatsApp: Yup.string().phone("MX", "Please enter a valid phone number"),
+          // whatsApp: Yup.string().phone("MX", "Please enter a valid phone number"),
           email:Yup.string().email('Invalid email address'),
           dob: Yup.date("Use 1/1 for unknown day/month"),
           headOfHousehold: Yup.boolean(),
           gender: Yup.string().oneOf(['male', 'female', 'other']),})}
+        onSubmit={ async (values) => {
+          console.log("values", values)
+          await axios.put(`/api/person/auth/${person.personId}`, values)
+          window.location.reload();
+        }}
       >
         <Form>
           <Text
@@ -75,7 +80,7 @@ const PersonData = ({person}) => {
             Head of Household
           </Checkbox>
 
-          {/* <button type="submit">Submit</button> */}
+          <button type="submit">Submit</button>
         </Form>
       </Formik>
     </>

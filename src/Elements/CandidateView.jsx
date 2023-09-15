@@ -31,7 +31,6 @@ export default function CandidateView({ candidate }) {
         <Typography gutterBottom variant="h5" component="div">
           {candidate.lastName}
         </Typography>
-        {/* <Family members={candidate.people} /> */}
         {candidate.people.map((person, i) => (
           <div key={person.personId} >
             <Typography variant={i ? "body2" : "body1"} color="text.secondary" >

@@ -1,6 +1,6 @@
-import destroyCandidate from "../functions/deleteCandidate";
 import CandidateData from "./CandidateData";
 import PersonData from "./PersonData";
+import Button from "@mui/material/Button";
 
 export default function CandidateEdit({ candidate, setEditing }) {
   console.log("EditCandidate", candidate);
@@ -10,12 +10,7 @@ export default function CandidateEdit({ candidate, setEditing }) {
         <PersonData key={person.personId} person={person} />
       ))}
       <CandidateData candidate={candidate} />
-      <input type="button" value="Save" onClick={() => setEditing(false)} />
-      <input
-        type="button"
-        value="Delete"
-        onClick={() => destroyCandidate(candidate.candidateId)}
-      />
+      <Button size="small" color="primary" variant="contained" onClick={() => setEditing(false)}>Save</Button>
     </>
   );
 }

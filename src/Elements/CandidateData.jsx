@@ -4,6 +4,7 @@ import "yup-phone-lite";
 import Text from './Text';
 import Select from './Select';
 import Checkbox from './Checkbox';
+import axios from 'axios';
 
 //todo: title should be a select box
 
@@ -37,11 +38,10 @@ const CandidateData = ({candidate}) => {
           current: Yup.string().max(20, 'Must be 20 characters or less'),
           videoUrl: Yup.string().max(20, 'Must be 20 characters or less'),
           })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          onSubmit={ async (values) => {
+          console.log("values", values)
+          await axios.put(`/api/candidate/auth/${candidate.candidateId}`, values)
+          window.location.reload();
         }}
       >
         <Form>
@@ -94,7 +94,7 @@ const CandidateData = ({candidate}) => {
             type="text"
             placeholder="Url of Promo Video"
             />
-
+          <button type="submit">Submit</button>
         </Form>
       </Formik>
     </>
