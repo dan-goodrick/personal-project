@@ -46,7 +46,7 @@ const serverFunctions = {
       });
       res.json(candidates);
   },
-  getByPk: async (req, res) => {
+  getCandidate: async (req, res) => {
     console.log(req.params);
     const candidate = await Candidate.findByPk(req.params.id, {
       include: [
@@ -58,9 +58,21 @@ const serverFunctions = {
     });
     res.json(candidate);
   },
-  delete: async (req, res) => {
+  getPerson: async (req, res) => {
+    console.log(req.params);
+    const person = await Person.findByPk(req.params.id);
+    res.json(person);
+  },
+  deleteCandidate: async (req, res) => {
     await Candidate.destroy({ where: { candidateId: +req.params.id } })
-      .then(res.send(`Removed ${req.params.id}`))
+      .then(res.send(`Removed Candidate ${req.params.id}`))
+      .catch((error) => {
+        console.error(`Unable to remove Record ${req.params.id}`, error);
+      });
+  },
+  deletePerson: async (req, res) => {
+    await Person.destroy({ where: { personId: +req.params.id } })
+      .then(res.send(`Removed Person ${req.params.id}`))
       .catch((error) => {
         console.error(`Unable to remove Record ${req.params.id}`, error);
       });

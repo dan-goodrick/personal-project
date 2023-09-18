@@ -12,22 +12,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteCandidate({candidate, setDeleting}) {
-  const [open, setOpen] = React.useState(false);
+export default function DeleteCandidate({candidate}) {
+  const [open, setOpen] = React.useState(true);
 
   console.log("Removing candidate", candidate)
 
-  const handleApprove = async () => {
-
+  const handleDelete = async () => {
     const { data } = await axios.delete(`/api/candidate/auth/${candidate.candidateId}`);
     console.log(`deleted %{id}`, data);
     window.location.reload();
-    setDeleting(false)
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-
   };
 
   const handleClose = () => {
@@ -50,8 +43,8 @@ export default function DeleteCandidate({candidate, setDeleting}) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleApprove}>Delete</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleDelete}>Delete</Button>
         </DialogActions>
       </Dialog>
     </div>

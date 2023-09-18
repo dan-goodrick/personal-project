@@ -4,6 +4,7 @@ import "yup-phone-lite";
 import Text from './Text';
 import Select from './Select';
 import Checkbox from './Checkbox';
+import axios from 'axios';
 
 
 //https://formik.org/docs/tutorial
@@ -29,11 +30,10 @@ const AddPerson = () => {
           dob: Yup.date("Use 1/1 for unknown day/month"),
           headOfHousehold: Yup.boolean(),
           gender: Yup.string().oneOf(['male', 'female', 'other']),})}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={ async (values) => {
+          console.log("values", values)
+          await axios.post(`/api/person/auth/`, values)
+          window.location.reload();
         }}
       >
         <Form>

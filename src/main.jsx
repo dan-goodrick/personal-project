@@ -54,6 +54,15 @@ const router = createBrowserRouter(
           return { fundraising: res.data };
         }}
       />
+      {/* <Route
+        path="/addRecord/"
+        element={<NewRecord />}
+        loader={async () => {
+          const res = await axios.get(`/api/candidate/auth/`);
+          console.log("res.data", res.data);
+          return { newRecord: res.data };
+        }}
+      /> */}
       <Route
         path="/admin/"
         element={<Admin />}

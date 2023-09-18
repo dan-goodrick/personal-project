@@ -80,7 +80,8 @@ const PersonData = ({person}) => {
             Head of Household
           </Checkbox>
 
-          <button type="submit">Submit</button>
+          <button type="submit">Accept</button>
+          {/* <button type="submit">Delete</button> */}
         </Form>
       </Formik>
     </>

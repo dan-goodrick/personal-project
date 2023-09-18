@@ -5,8 +5,7 @@ import Button from "@mui/material/Button";
 import DeleteCandidate from "./DeleteCandidate";
 import { useState } from "react";
 
-
-export default function CandidateShow({ candidate, setEditing}) {
+export default function CandidateShow({ candidate, setEditing }) {
   const [deleting, setDeleting] = useState(false);
 
   return (
@@ -16,7 +15,9 @@ export default function CandidateShow({ candidate, setEditing}) {
       </Typography>
       <Family members={candidate.people} />
       <Typography variant="body2" color="text.secondary">
-        Address: {candidate.address} <br/>{candidate.municipality}, {candidate.city}, {candidate.country}, {candidate.zip}
+        Address: {candidate.address} <br />
+        {candidate.municipality}, {candidate.city}, {candidate.country},{" "}
+        {candidate.zip}
       </Typography>
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:
@@ -28,9 +29,9 @@ export default function CandidateShow({ candidate, setEditing}) {
         Title: {candidate.landTitle}
       </Typography>
       {candidate.landTitle === "mortgage" ? (
-          <Typography variant="body2" color="text.secondary">
-            Loan Status: {candidate.currOnLoan}
-          </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Loan Status: {candidate.currOnLoan}
+        </Typography>
       ) : null}
       <Typography variant="body1" color="text.primary">
         Admin Data
@@ -41,10 +42,24 @@ export default function CandidateShow({ candidate, setEditing}) {
       <Typography variant="body2" color="text.secondary">
         Funding: {candidate.fundsRaised}/{candidate.fundingRequirement}
       </Typography>
-      <Button size="small" color="primary" variant="contained" onClick={() => setEditing(true)}>Edit</Button>
-      <Button size="small" color="primary" variant="outlined" onClick={() => setDeleting(true)}>Delete</Button>
-      {deleting && <DeleteCandidate candidate={candidate} setDeleting={setDeleting}/>}
+      <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        onClick={() => setEditing(true)}
+      >
+        Edit
+      </Button>
+      <Button
+        size="small"
+        color="primary"
+        variant="outlined"
+        onClick={() => setDeleting(true)}
 
+      >
+        Delete
+      </Button>
+      {deleting && (<DeleteCandidate candidate={candidate}/>) }
     </>
   );
 }
