@@ -1,20 +1,17 @@
 import { useLoaderData } from "react-router-dom";
-import AdminCards from "../Elements/AdminCards";
+import IterateCandidates from "../Elements/IterateCandidates";
 import { useState } from "react";
-import emptyObject from "../functions/emptyObject";
 import Button from "@mui/material/Button";
-import AddButton from "../Elements/AddButton";
 
-
-const incomplete = 1;
-const accepted = 2;
-const fundraising = 3;
-const planned = 4;
-const completed = 5;
 export default function Admin() {
   const { candidates } = useLoaderData();
   const [moving, setMoving] = useState(false);
-
+  
+  const incomplete = 1;
+  const accepted = 2;
+  const fundraising = 3;
+  const planned = 4;
+  const completed = 5;
 
   const incompleteApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == incomplete
@@ -39,8 +36,8 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        visible={moving?"true":"false"}
-        onClick={() => setMoving(false)}
+        style={{ display: moving ? "none" : "block" }}
+        onClick={() => setMoving(true)}
       >
         Move
       </Button>
@@ -48,21 +45,21 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        visible={moving?"true":"false"}
-        onClick={() => setMoving(true)}
+        style={{ display: moving ? "block" : "none" }}
+        onClick={() => setMoving(false)}
       >
         Done
       </Button>
       <h2>Incomplete Build Applications</h2>
-      <div>{<AdminCards cards={incompleteApplications} moving={moving} addButton={true}/>}</div>
+      <div>{<IterateCandidates cards={incompleteApplications} moving={moving} addButton={!moving}/>}</div>
       <h2>Completed Build Applications</h2>
-      <div>{<AdminCards cards={acceptedApplications} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={acceptedApplications} moving={moving} addButton={false}/>}</div>
       <h2>Projects in fundraising</h2>
-      <div>{<AdminCards cards={fundraisingProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={fundraisingProjects} moving={moving} addButton={false}/>}</div>
       <h2>Projects in Planning</h2>
-      <div>{<AdminCards cards={plannedProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={plannedProjects} moving={moving} addButton={false}/>}</div>
       <h2>Completed Projects</h2>
-      <div>{<AdminCards cards={completedProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={completedProjects} moving={moving} addButton={false}/>}</div>
     </>
   );
 }

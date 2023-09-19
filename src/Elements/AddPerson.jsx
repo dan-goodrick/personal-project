@@ -1,9 +1,9 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "yup-phone-lite";
-import Text from "./Text";
-import Select from "./Select";
-import Checkbox from "./Checkbox";
+import Text from "./../Widgets/Text";
+import Select from "./../WidgetsSelect";
+import Checkbox from "./../WidgetsCheckbox";
 import axios from "axios";
 
 //https://formik.org/docs/tutorial

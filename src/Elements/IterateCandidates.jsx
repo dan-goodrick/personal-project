@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
 import CandidateCard from "./CandidateCard";
 import SelectCard from "./SelectCard";
-import AddButton from "./AddButton";
+import AddButton from "../Widgets/AddButton";
 
-const AdminCards = ({ cards, moving, addButton }) => {
+const IterateCandidates = ({ cards, moving, addButton }) => {
+  console.log("IterateCandidates", cards);
   return (
     <Grid
       container
@@ -24,4 +25,4 @@ const AdminCards = ({ cards, moving, addButton }) => {
   );
 };
 
-export default AdminCards;
+export default IterateCandidates;

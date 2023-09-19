@@ -3,19 +3,17 @@ import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
 import DeleteCandidate from "./DeleteCandidate";
 import { useState } from "react";
-import ShowPerson from "./ShowPerson";
+import IteratePeople from "./IteratePeople";
 
-export default function ShowCandidate({ candidate, setEditing }) {
+export default function ShowCandidate({ candidate, setEditCandidate }) {
   const [deleteCandidate, setDeleteCandidate] = useState(false);
-
+  console.log("ShowCandidate", candidate, "deleteCandidate", deleteCandidate);
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
         {candidate.lastName}
       </Typography>
-      {candidate.people.map((person, i) => (
-        <ShowPerson key={person.personId} person={person} setEditing = {setEditing} variant={i?"body2":"body1"} />
-      ))}
+      <IteratePeople people={candidate.people} />
       <Typography variant="body2" color="text.secondary">
         Address: {candidate.address} <br />
         {candidate.municipality}, {candidate.city}, {candidate.country},{" "}
@@ -48,7 +46,7 @@ export default function ShowCandidate({ candidate, setEditing }) {
         size="small"
         color="primary"
         variant="contained"
-        onClick={() => setEditing(true)}
+        onClick={() => setEditCandidate(true)}
       >
         Edit
       </Button>
@@ -56,11 +54,16 @@ export default function ShowCandidate({ candidate, setEditing }) {
         size="small"
         color="primary"
         variant="outlined"
-        onClick={()=>setDeleteCandidate(true)}
+        onClick={() => setDeleteCandidate(true)}
       >
         Delete
       </Button>
-      {deleteCandidate && (<DeleteCandidate candidate={candidate} setDeleteCandidate={setDeleteCandidate}/>) }
+      {deleteCandidate && (
+        <DeleteCandidate
+          candidate={candidate}
+          setDeleteCandidate={setDeleteCandidate}
+        />
+      )}
     </>
   );
 }

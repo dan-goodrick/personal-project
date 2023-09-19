@@ -4,13 +4,14 @@ import { useState } from "react";
 import getAge from "../functions/getAge";
 import DeletePerson from "./DeletePerson";
 
-export default function ShowPerson({ person, setEditing, variant }) {
+export default function ShowPerson({ person, setEditPerson, i }) {
   const [deletePerson, setDeletePerson] = useState(false);
+  // console.log("ShowPerson", person);
 
   return (
     <>
       <div key={person.personId}>
-        <Typography variant={variant} color="text.secondary">
+        <Typography variant={i?"body2":"body1"} color="text.secondary">
           {person.firstName} {person.lastName}: {getAge(person.dob)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -27,7 +28,7 @@ export default function ShowPerson({ person, setEditing, variant }) {
         size="small"
         color="primary"
         variant="contained"
-        onClick={() => setEditing(true)}
+        onClick={() => setEditPerson(true)}
       >
         Edit
       </Button>

@@ -1,22 +1,23 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "yup-phone-lite";
-import Text from "./Text";
-import Select from "./Select";
-import Checkbox from "./Checkbox";
+import Text from "../Widgets/Text";
+import Select from "../Widgets/Select";
+import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const PersonData = ({ person, setEditing }) => {
+const PersonData = ({ person, setEditPerson }) => {
   console.log("Edit Person:", person);
 
   return (
     <>
-      Edit Candidate
+      Edit Person
       <Formik
         initialValues={{
+          personId: person.personId,
           firstName: person.firstName,
           lastName: person.lastName,
           whatsApp: person.whatsApp,
@@ -42,7 +43,7 @@ const PersonData = ({ person, setEditing }) => {
           );
           const { success } = res.data;
           if (success) {
-            setEditing(false);
+            setEditPerson(false);
           } else {
             console.log("Error in put request");
           }
@@ -89,8 +90,8 @@ const PersonData = ({ person, setEditing }) => {
         <Button
           size="small"
           color="primary"
-          variant="contained"
-          onClick={() => setEditing(false)}
+          variant="outlined"
+          onClick={() => setEditPerson(false)}
         >
           Cancel
         </Button>

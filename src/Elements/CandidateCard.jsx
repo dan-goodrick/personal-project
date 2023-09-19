@@ -3,19 +3,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useState } from "react";
 
-import DeleteCandidate from "./DeleteCandidate";
 import EditCandidate from "./EditCandidate";
 import ShowCandidate from "./ShowCandidate";
 
 
 
 export default function CandidateCard({ candidate }) {
-  const [editing, setEditing] = useState(false);
-  const [del, setDelete] = useState(false);
-
-
-
-
+  const [editCandidate, setEditCandidate] = useState(false);
+  console.log("CandidateCard:", candidate, "editCandidate", editCandidate);
   // todo: get the primary image from images
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -26,13 +21,11 @@ export default function CandidateCard({ candidate }) {
           alt={candidate.lastName}
         />
         <CardContent>
-        { editing ? 
-          <EditCandidate candidate={candidate} setEditing={setEditing} /> : 
-          <ShowCandidate candidate={candidate} setEditing={setEditing} setDelete={setDelete}/>
+        { editCandidate ? 
+          <EditCandidate candidate={candidate} setEditCandidate={setEditCandidate} /> : 
+          <ShowCandidate candidate={candidate} setEditCandidate={setEditCandidate} />
         }
-        {del && <DeleteCandidate candidate={candidate} setDelete={setDelete}/> }
         </CardContent>
     </Card>
   );
 }
-//TODO: turn off buttons if not on the admin page

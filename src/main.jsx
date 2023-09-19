@@ -20,8 +20,10 @@ import NewRecord from "./Pages/NewRecord";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-      <Route index element={<Home />} 
-                loader={async () => {
+      <Route
+        index
+        element={<Home />}
+        loader={async () => {
           const res = await axios.get(`/api/phase/3`);
           console.log("res.data", res.data);
           return { projects: res.data };
@@ -55,17 +57,14 @@ const router = createBrowserRouter(
           return { fundraising: res.data };
         }}
       />
-      <Route
-        path="/newRecord/"
-        element={<NewRecord/>}
-      />
+      <Route path="/newRecord/" element={<NewRecord />} />
       <Route
         path="/admin/"
         element={<Admin />}
         loader={async () => {
           const res = await axios.get(`/api/candidates/auth`);
           console.log("res.data", res.data);
-          return { candidates: res.data };
+              return { candidates: res.data };
         }}
       />
     </Route>

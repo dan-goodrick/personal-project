@@ -22,108 +22,182 @@ const serverFunctions = {
     req.session.destroy();
     res.json({ success: true });
   },
-  getByPhase: async (req, res) => {
+  getByPhase: (req, res) => {
     console.log(req.params);
-    const candidates = await Candidate.findAll({
+    Candidate.findAll({
       include: [
         { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
         { model: Phase, where: { phaseId: req.params.id } },
         { model: Person },
       ],
-      order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
+      order: [
+        [Person, "headOfHousehold", "DESC"],
+        [Person, "dob", "ASC"],
+      ],
+    })
+    .then((candidates) => {
+      if (candidates) {
+        console.log("Found candidates:", candidates);
+        res.json(candidates);
+      } else {
+        console.log(`candidates ${req.params} not found.`);
+      }
+    })
+    .catch((error) => {
+      console.error("Error finding candidates:", error);
     });
-    res.json(candidates);
   },
-  getAllCandidates: async (req, res) => {
+
+  getAllCandidates: (req, res) => {
     console.log(req.params);
-    const candidates = await Candidate.findAll({
-        include: [
-          { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
-          { model: Phase },
-          { model: Person },
-        ],
-        order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
-      });
-      res.json(candidates);
-  },
-  getCandidate: async (req, res) => {
-    console.log(req.params);
-    const candidate = await Candidate.findByPk(req.params.id, {
+    Candidate.findAll({
       include: [
         { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
         { model: Phase },
-        { model: Person},
+        { model: Person },
       ],
-      order: [[Person, "headOfHousehold", 'DESC'], [Person, "dob", 'ASC']] 
-    });
-    res.json(candidate);
-  },
-  getPerson: async (req, res) => {
-    console.log(req.params);
-    const person = await Person.findByPk(req.params.id);
-    res.json(person);
-  },
-  deleteCandidate: async (req, res) => {
-    await Candidate.destroy({ where: { candidateId: +req.params.id } })
-      .then(res.send(`Removed Candidate ${req.params.id}`))
+      order: [
+        [Person, "headOfHousehold", "DESC"],
+        [Person, "dob", "ASC"],
+      ],
+    })
+      .then((candidates) => {
+        if (candidates) {
+          console.log("Found candidates:", candidates);
+          res.json(candidates);
+        } else {
+          console.log(`candidates ${req.params} not found.`);
+        }
+      })
       .catch((error) => {
-        console.error(`Unable to remove Record ${req.params.id}`, error);
+        console.error("Error finding candidates:", error);
       });
   },
-  deletePerson: async (req, res) => {
-    await Person.destroy({ where: { personId: +req.params.id } })
-      .then(res.send(`Removed Person ${req.params.id}`))
-      .catch((error) => {
-        console.error(`Unable to remove Record ${req.params.id}`, error);
-      });
-  },
-  putPerson: async (req, res) => {
-    console.log("put Person", req.body);
-    await Person.update( {...req.body}, {where: {personId: req.params.id}})
-    // grab the person by id
-    // send the user info to the front end
-    res.send(`Updated record ${req.body.personId} for ${req.body.lastName}`)
-  },
-  putCandidate: async (req, res) => {
-    console.log("put candidate", req.body);
-    const candidate = await Candidate.findByPk(req.params.id)
-    await candidate.set(req.body)
-    await candidate.save()
-    res.send(`Updated record ${req.body.candidateId} for ${req.body.lastName}`)
-  },
-  putPhase: async (req, res) => {
-    console.log("put phase", req.body);
-    const phase = await Phase.findByPk(req.params.id)
-    await phase.set(req.body)
-    await phase.save()
-    res.send(`Updated phase of ID: ${req.body.phaseId} for ${req.body.phaseName}`)
-  },
-  addPerson: async (req, res) => {
-    console.log("add person", req.body);
-    const person = await Person.create(req.body)
-    await person.save()
-    res.send(`Added record  ${person.lastName}`)
-  },
-  addCandidate: async (req, res) => {
-    console.log("add person", req.body);
-    // map through people and create those too
-    const candidate = await Candidate.create(req.body)
-    await candidate.save()
-    res.send(`Added record  ${candidate.lastName}`)
-  },
-  // INSERT to add a record
 
-  //   addCandidate: async (req, res) => {
-  //     await Candidate.create({
-  //         id: req.body.id,
-  //         name: req.body.name,
-  //         role: req.body.role,
-  //         email: req.body.email
-  //     })
-  //     res.status(200).send('Added record');
-  // },
+  getCandidate: (req, res) => {
+    console.log(req.params);
+    Candidate.findByPk(req.params.id, {
+      include: [
+        { model: Image, where: { primary: true }, attributes: ["imageUrl"] },
+        { model: Phase },
+        { model: Person },
+      ],
+      order: [
+        [Person, "headOfHousehold", "DESC"],
+        [Person, "dob", "ASC"],
+      ],
+    })
+      .then((candidate) => {
+        if (candidate) {
+          console.log("Found candidate:", candidate);
+          res.json(candidate);
+        } else {
+          console.log(`candidate ${req.params} not found.`);
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding candidate:", error);
+      });
+  },
+
+  getPerson: (req, res) => {
+    console.log(req.params);
+    Person.findByPk(req.params.id)
+      .then((person) => {
+        if (person) {
+          console.log("Found person:", person);
+          res.json(person);
+        } else {
+          console.log(`person ${req.params} not found.`);
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding candidate:", error);
+      });
+  },
+
+  deleteCandidate: (req, res) => {
+    Candidate.destroy({ where: { candidateId: +req.params.id } })
+      .then((val) => {
+        console.log("deleted candidate:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to remove Record ${req.params.id}`, error);
+      });
+  },
+
+  deletePerson: (req, res) => {
+    Person.destroy({ where: { personId: req.params.id } })
+      .then((val) => {
+        console.log("deleted person:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to remove Record ${req.params.id}`, error);
+      });
+  },
+
+  putPerson: (req, res) => {
+    console.log("put Person", req.body);
+    Person.update(req.body, { where: { personId: req.params.id } })
+      .then((val) => {
+        console.log("updated person:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to Add Candidate ${req.body}`, error);
+      });
+  },
+
+  putCandidate: (req, res) => {
+    console.log("put candidate", req.body);
+    Candidate.update(req.body, { where: { candidateId: req.params.id } })
+      .then((val) => {
+        console.log("updated candidate:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to Add Candidate ${req.body}`, error);
+      });
+  },
+
+  putPhase: (req, res) => {
+    console.log("put phase", req.body);
+    Phase.update(req.body, { where: { phaseId: req.params.id } })
+      .then((val) => {
+        console.log("updated phase:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to Add phase ${req.body}`, error);
+      });
+  },
+
+  addPerson: (req, res) => {
+    console.log("add person", req.body);
+    Person.create(req.body)
+      .then((val) => {
+        console.log("New person created:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to Add Person ${req.body}`, error);
+      });
+  },
+
+  addCandidate: (req, res) => {
+    // map through people and create those too
+    Candidate.create(req.body)
+      .then((val) => {
+        console.log("New candidate created:", val);
+      })
+      .then(res.json({ success: true }))
+      .catch((error) => {
+        console.error(`Unable to Add Candidate ${req.body}`, error);
+      });
+  },
 };
 
 export default serverFunctions;
 
-// order: [["headOfHousehold", 'ASC'], ["dob", 'ASC']]
