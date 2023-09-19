@@ -4,23 +4,22 @@ import { useState } from "react";
 import getAge from "../functions/getAge";
 import DeletePerson from "./DeletePerson";
 
-
-export default function ShowPerson({ person, setEditing, variant}) {
+export default function ShowPerson({ person, setEditing, variant }) {
   const [deletePerson, setDeletePerson] = useState(false);
-  
+
   return (
     <>
-          <div key={person.personId} >
-        <Typography variant={variant} color="text.secondary" >
-          {person.firstName} {person.lastName}: {getAge(person.dob)} 
+      <div key={person.personId}>
+        <Typography variant={variant} color="text.secondary">
+          {person.firstName} {person.lastName}: {getAge(person.dob)}
         </Typography>
-        <Typography variant="body2" color="text.secondary" >
-          Gender: {person.gender} 
+        <Typography variant="body2" color="text.secondary">
+          Gender: {person.gender}
         </Typography>
-        <Typography variant="body2" color="text.secondary" >
+        <Typography variant="body2" color="text.secondary">
           WhatsApp: {person.whatsApp}
         </Typography>
-        <Typography variant="body2" color="text.secondary" >
+        <Typography variant="body2" color="text.secondary">
           Email: {person.email}
         </Typography>
       </div>
@@ -36,12 +35,13 @@ export default function ShowPerson({ person, setEditing, variant}) {
         size="small"
         color="primary"
         variant="outlined"
-        onClick={()=>setDeletePerson(true)}
+        onClick={() => setDeletePerson(true)}
       >
         Delete
       </Button>
-      {deletePerson && <DeletePerson person={person} setDeletePerson={setDeletePerson}/> }
-
+      {deletePerson && (
+        <DeletePerson person={person} setDeletePerson={setDeletePerson} />
+      )}
     </>
   );
 }

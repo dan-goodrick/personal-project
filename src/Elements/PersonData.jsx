@@ -84,7 +84,8 @@ const PersonData = ({ person, setEditing }) => {
           </Select>
 
           <Checkbox name="headOfHousehold">Head of Household</Checkbox>
-        </Form>
+          <div>
+
         <Button
           size="small"
           color="primary"
@@ -96,6 +97,8 @@ const PersonData = ({ person, setEditing }) => {
         <Button size="small" color="primary" variant="contained" type="submit">
           Save
         </Button>
+          </div>
+        </Form>
       </Formik>
     </>
   );

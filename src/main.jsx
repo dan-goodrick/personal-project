@@ -57,7 +57,7 @@ const router = createBrowserRouter(
       />
       <Route
         path="/newRecord/"
-        element={<NewRecord candidate/>}
+        element={<NewRecord/>}
       />
       <Route
         path="/admin/"

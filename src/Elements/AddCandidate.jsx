@@ -11,11 +11,8 @@ import { useNavigate } from "react-router-dom";
 //todo: title should be a select box
 
 //https://formik.org/docs/tutorial
-// And now we can use these
-export default function AddCandidate({ candidate }) {
+export default function AddCandidate() {
   const navigate = useNavigate();
-
-  console.log("newcandidate", candidate);
 
   return (
     <>
@@ -70,18 +67,25 @@ export default function AddCandidate({ candidate }) {
           <Checkbox name="current">Current on Payments</Checkbox>
 
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
+          <div>
+            <Button
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={() => navigate("/admin")}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
+              Save
+            </Button>
+          </div>
         </Form>
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          onClick={navigate("/admin")}
-        >
-          Cancel
-        </Button>
-        <Button size="small" color="primary" variant="contained" type="submit">
-          Save
-        </Button>
       </Formik>
     </>
   );
