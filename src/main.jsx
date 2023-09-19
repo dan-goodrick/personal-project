@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import PastProjects from "./Pages/PastProjs";
+import PastProjects from "./Pages/PastProjects";
 import ErrorPage from "./Pages/Error";
 import Admin from "./Pages/Admin";
 import Fundraising from "./Pages/Fundraising";
@@ -14,7 +14,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import PlannedProjects from "./Pages/Planning";
+import PlannedProjects from "./Pages/PlannedProjects";
+import NewRecord from "./Pages/NewRecord";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -54,15 +55,10 @@ const router = createBrowserRouter(
           return { fundraising: res.data };
         }}
       />
-      {/* <Route
-        path="/addRecord/"
-        element={<NewRecord />}
-        loader={async () => {
-          const res = await axios.get(`/api/candidate/auth/`);
-          console.log("res.data", res.data);
-          return { newRecord: res.data };
-        }}
-      /> */}
+      <Route
+        path="/newRecord/"
+        element={<NewRecord candidate/>}
+      />
       <Route
         path="/admin/"
         element={<Admin />}

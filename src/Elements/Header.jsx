@@ -1,10 +1,10 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-import LogoutButton from './LogoutButton.jsx';
 
 const Header = () => {
   const navigate = useNavigate();
+
   const handleLogout = (e) => {
     e.preventDefault()
     axios.post('/api/logout').then((res) => {

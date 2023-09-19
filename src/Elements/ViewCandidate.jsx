@@ -3,10 +3,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import Family from "./Family";
 import getAge from "../functions/getAge";
 
-export default function CandidateView({ candidate }) {
+export default function ViewCandidate({ candidate }) {
   //todo replace this with filter on the back end
   useEffect(() => {
     const i = candidate.people.findIndex(

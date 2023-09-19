@@ -10,7 +10,7 @@ ViteExpress.config({ printViteDevServerHost: true });
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: false }));
+app.use(session({ secret: 'secret', saveUninitialized: true, resave: false }));
 const loginRequired = (req, res, next) => {
   if (!req.session.userId) {
     res.status(401).json({ error: "Unauthorized" });

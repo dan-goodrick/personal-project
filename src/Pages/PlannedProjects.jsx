@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import CandidateView from "../Elements/CandidateView";
+import ViewCandidate from "../Elements/ViewCandidate";
 
 
 export default function PlannedProjects() {
@@ -9,7 +9,7 @@ export default function PlannedProjects() {
     <>
       <h1>Upcoming Projects</h1>
       {planned.map((candidate) => (
-        <CandidateView key={candidate.candidateId} candidate={candidate} />
+        <ViewCandidate key={candidate.candidateId} candidate={candidate} />
         ))}
     </>
   );

@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function CandidateEdit({ candidate, setEditing }) {
+export default function EditCandidate({ candidate, setEditing }) {
   const navigate = useNavigate();
 
   const handleSave = async (candidate) => {
@@ -20,8 +20,8 @@ export default function CandidateEdit({ candidate, setEditing }) {
     } else {
       console.log("Error in put request");
     }
-  }
-  
+  };
+
   console.log("EditCandidate", candidate);
   return (
     <>

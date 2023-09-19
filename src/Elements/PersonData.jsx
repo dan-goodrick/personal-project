@@ -1,17 +1,20 @@
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import "yup-phone-lite";
-import Text from './Text';
-import Select from './Select';
-import Checkbox from './Checkbox';
-import axios from 'axios'
+import Text from "./Text";
+import Select from "./Select";
+import Checkbox from "./Checkbox";
+import axios from "axios";
+import Button from "@mui/material/Button";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const PersonData = ({person}) => {
+const PersonData = ({ person, setEditing }) => {
   console.log("Edit Person:", person);
+
   return (
-    <>Edit Candidate
+    <>
+      Edit Candidate
       <Formik
         initialValues={{
           firstName: person.firstName,
@@ -20,47 +23,51 @@ const PersonData = ({person}) => {
           email: person.email,
           gender: person.gender, // added for our select
           headOfHousehold: person.headOfHousehold, // added for our checkbox
-          dob: new Date(person.dob).toLocaleDateString('es-pa'), 
+          dob: new Date(person.dob).toLocaleDateString("es-pa"),
         }}
         validationSchema={Yup.object({
-          firstName: Yup.string().max(15, 'Must be 15 characters or less'),
-          lastName: Yup.string().max(20, 'Must be 20 characters or less'),
+          firstName: Yup.string().max(15, "Must be 15 characters or less"),
+          lastName: Yup.string().max(20, "Must be 20 characters or less"),
           // whatsApp: Yup.string().phone("MX", "Please enter a valid phone number"),
-          email:Yup.string().email('Invalid email address'),
+          email: Yup.string().email("Invalid email address"),
           dob: Yup.date("Use 1/1 for unknown day/month"),
           headOfHousehold: Yup.boolean(),
-          gender: Yup.string().oneOf(['male', 'female', 'other']),})}
-        onSubmit={ async (values) => {
-          console.log("values", values)
-          await axios.put(`/api/person/auth/${person.personId}`, values)
-          window.location.reload();
+          gender: Yup.string().oneOf(["male", "female", "other"]),
+        })}
+        onSubmit={async (values) => {
+          console.log("Person values", values);
+          const res = await axios.put(
+            `/api/person/auth/${values.personId}`,
+            values
+          );
+          const { success } = res.data;
+          if (success) {
+            setEditing(false);
+          } else {
+            console.log("Error in put request");
+          }
         }}
       >
         <Form>
-          <Text
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-          />
-          <Text
-            name="lastName"
-            type="text"
-            placeholder="Last Name"
-            /><br/>
+          <Text name="firstName" type="text" placeholder="First Name" />
+          <Text name="lastName" type="text" placeholder="Last Name" />
+          <br />
 
           <Text
             label="Phone (WhatsApp): "
             name="whatsApp"
             type="text"
             placeholder="WhatsApp"
-            /><br/>
+          />
+          <br />
 
           <Text
             label="Email Address: "
             name="email"
             type="email"
             placeholder="Email Address"
-            /><br/>
+          />
+          <br />
 
           <Text
             label="Date of Birth: "
@@ -76,16 +83,22 @@ const PersonData = ({person}) => {
             <option value="other">Other</option>
           </Select>
 
-          <Checkbox name="headOfHousehold">
-            Head of Household
-          </Checkbox>
-
-          <button type="submit">Accept</button>
-          {/* <button type="submit">Delete</button> */}
+          <Checkbox name="headOfHousehold">Head of Household</Checkbox>
         </Form>
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          onClick={() => setEditing(false)}
+        >
+          Cancel
+        </Button>
+        <Button size="small" color="primary" variant="contained" type="submit">
+          Save
+        </Button>
       </Formik>
     </>
   );
 };
 
-export default PersonData
+export default PersonData;

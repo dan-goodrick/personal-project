@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import CandidateView from "../Elements/CandidateView";
+import ViewCandidate from "../Elements/ViewCandidate";
 
 //TODO: add top card for each category past, current fundraising
 
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <h1>Builders of Hope</h1>
       {projects.map((candidate) => (
-        <CandidateView key={candidate.candidateId} candidate={candidate} />
+        <ViewCandidate key={candidate.candidateId} candidate={candidate} />
         ))}
     </>
   );

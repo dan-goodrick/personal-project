@@ -12,17 +12,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteCandidate({ candidate, setDeleteCandidate }) {
+export default function DeletePerson({ person, setDeletePerson }) {
   const [open, setOpen] = React.useState(true);
 
-  console.log("Removing candidate", candidate);
+  console.log("Removing Person", person);
 
   const handleDelete = async () => {
     const { data } = await axios.delete(
-      `/api/candidate/auth/${candidate.candidateId}`
+      `/api/candidate/auth/${person.personId}`
     );
     console.log(`deleted %{id}`, data);
-    setDeleteCandidate(false);
+    setDeletePerson(false);
     window.location.reload(); // todo: find another way to update just the component
   };
 
@@ -39,11 +39,11 @@ export default function DeleteCandidate({ candidate, setDeleteCandidate }) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{`Delete the ${candidate.lastName} family`}</DialogTitle>
+        <DialogTitle>{`Delete ${person.firstName} ${person.lastName}?`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Do you want to delete the {`${candidate.lastName}`} family from our
-            records? This step is irreversible.
+            Deleting {`${person.firstName} ${person.lastName}`}. Cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

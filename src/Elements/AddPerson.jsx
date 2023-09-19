@@ -1,11 +1,10 @@
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import "yup-phone-lite";
-import Text from './Text';
-import Select from './Select';
-import Checkbox from './Checkbox';
-import axios from 'axios';
-
+import Text from "./Text";
+import Select from "./Select";
+import Checkbox from "./Checkbox";
+import axios from "axios";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
@@ -14,29 +13,34 @@ const AddPerson = () => {
     <>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
-          whatsApp: '',
-          email: '',
-          gender: '', // added for our select
+          firstName: "",
+          lastName: "",
+          whatsApp: "",
+          email: "",
+          gender: "", // added for our select
           headOfHousehold: false, // added for our checkbox
-          dob: '', 
+          dob: "",
         }}
         validationSchema={Yup.object({
-          firstName: Yup.string().max(15, 'Must be 15 characters or less'),
-          lastName: Yup.string().max(20, 'Must be 20 characters or less'),
-          whatsApp: Yup.string().phone("MX", "Please enter a valid phone number"),
-          email:Yup.string().email('Invalid email address'),
+          firstName: Yup.string().max(15, "Must be 15 characters or less"),
+          lastName: Yup.string().max(20, "Must be 20 characters or less"),
+          whatsApp: Yup.string().phone(
+            "MX",
+            "Please enter a valid phone number"
+          ),
+          email: Yup.string().email("Invalid email address"),
           dob: Yup.date("Use 1/1 for unknown day/month"),
           headOfHousehold: Yup.boolean(),
-          gender: Yup.string().oneOf(['male', 'female', 'other']),})}
-        onSubmit={ async (values) => {
-          console.log("values", values)
-          await axios.post(`/api/person/auth/`, values)
+          gender: Yup.string().oneOf(["male", "female", "other"]),
+        })}
+        onSubmit={async (values) => {
+          console.log("values", values);
+          await axios.post(`/api/person/auth/`, values);
           window.location.reload();
         }}
       >
         <Form>
+          <h3>Individual Data</h3>
           <Text
             label="First Name"
             name="firstName"
@@ -79,10 +83,9 @@ const AddPerson = () => {
             <option value="other">Other</option>
           </Select>
 
-          <Checkbox name="headOfHousehold">
-            Head of Household
-          </Checkbox>
+          <Checkbox name="headOfHousehold">Head of Household</Checkbox>
 
+          <button type="submit">Add Person</button>
           <button type="submit">Submit</button>
         </Form>
       </Formik>
@@ -90,4 +93,4 @@ const AddPerson = () => {
   );
 };
 
-export default AddPerson
+export default AddPerson;

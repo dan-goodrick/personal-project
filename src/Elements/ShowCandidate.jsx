@@ -1,19 +1,21 @@
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
-import Family from "./Family";
 import Button from "@mui/material/Button";
 import DeleteCandidate from "./DeleteCandidate";
 import { useState } from "react";
+import ShowPerson from "./ShowPerson";
 
-export default function CandidateShow({ candidate, setEditing }) {
-  const [deleting, setDeleting] = useState(false);
+export default function ShowCandidate({ candidate, setEditing }) {
+  const [deleteCandidate, setDeleteCandidate] = useState(false);
 
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
         {candidate.lastName}
       </Typography>
-      <Family members={candidate.people} />
+      {candidate.people.map((person, i) => (
+        <ShowPerson key={person.personId} person={person} setEditing = {setEditing} variant={i?"body2":"body1"} />
+      ))}
       <Typography variant="body2" color="text.secondary">
         Address: {candidate.address} <br />
         {candidate.municipality}, {candidate.city}, {candidate.country},{" "}
@@ -54,11 +56,11 @@ export default function CandidateShow({ candidate, setEditing }) {
         size="small"
         color="primary"
         variant="outlined"
-        onClick={handleDelete}
+        onClick={()=>setDeleteCandidate(true)}
       >
         Delete
       </Button>
-      {deleting && (<DeleteCandidate candidate={candidate}/>) }
+      {deleteCandidate && (<DeleteCandidate candidate={candidate} setDeleteCandidate={setDeleteCandidate}/>) }
     </>
   );
 }

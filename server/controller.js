@@ -79,9 +79,9 @@ const serverFunctions = {
   },
   putPerson: async (req, res) => {
     console.log("put Person", req.body);
-    const person = await Person.findByPk(req.params.id)
-    await person.set(req.body)
-    await person.save()
+    await Person.update( {...req.body}, {where: {personId: req.params.id}})
+    // grab the person by id
+    // send the user info to the front end
     res.send(`Updated record ${req.body.personId} for ${req.body.lastName}`)
   },
   putCandidate: async (req, res) => {
@@ -106,6 +106,7 @@ const serverFunctions = {
   },
   addCandidate: async (req, res) => {
     console.log("add person", req.body);
+    // map through people and create those too
     const candidate = await Candidate.create(req.body)
     await candidate.save()
     res.send(`Added record  ${candidate.lastName}`)
