@@ -22,6 +22,11 @@ const imageData = [
     primary: true,
   },
   {
+    imageUrl: "https://www.brattonlawgroup.com/wp-content/uploads/2020/02/big-family.jpg",
+    candidateId: 3,
+    primary: false,
+  },
+  {
     imageUrl:
       "https://cf.ltkcdn.net/family/images/std/280568-800x533-happy-family.webp",
     candidateId: 4,
@@ -53,8 +58,28 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 12,
     loanDuration: 30,
-    currOnLoan:'current',
+    currOnLoan:true,
     videoUrl: '/Users/dan/Movies/2019-11-04_15-02-00.mp4'
+  },
+  {
+    lastName: "Gonzalez",
+    phaseId: 1,
+    currPhaseDate: new Date(Date.parse("2022-09-11")),
+    imgUrl: 1,
+    address: "",
+    municipality: "Maneadero",
+    city: "Ensenada",
+    state: "Baja California",
+    country: "Mexico",
+    zip: 22790,
+    lat: 31.75053632757354,
+    lon: -116.55977961304036,
+    googleMaps: "https://goo.gl/maps/smwhf2mt7ZQXXAZK7",
+    landTitle: "mortgage",
+    paymentCnt: 2,
+    loanDuration: 30,
+    currOnLoan:true,
+    videoUrl: ''
   },
   {
     lastName: "Gomez Arenal",
@@ -73,7 +98,7 @@ const candidateData = [
     googleMaps: "https://goo.gl/maps/XGYdka1XRZHsocqS6",
     landTitle: "mortgage",
     paymentCnt: 8,
-    currOnLoan:'current'
+    currOnLoan:true
   },
   {
     lastName: "De La Cruz",
@@ -90,7 +115,8 @@ const candidateData = [
     lat: 31.722634,
     lon: -116.568327,
     googleMaps: "https://goo.gl/maps/smwhf2mt7ZQXXAZK7",
-    landTitle: "Free and Clear",
+    landTitle: "in Hand",
+
   },
   {
     lastName: "Quintana Juarez",
@@ -111,7 +137,7 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 4,
     loanDuration: 300,
-    currOnLoan:'current'
+    currOnLoan:true
   },
   {
     lastName: "Martina",
@@ -130,7 +156,26 @@ const candidateData = [
     landTitle: "mortgage",
     paymentCnt: 3,
     loanDuration: 30,
-    currOnLoan:'Behind by 4 months',
+    currOnLoan:false
+  },
+  {
+    lastName: "Mcbride",
+    phaseId: 5,
+    currPhaseDate: new Date(Date.parse("2023-05-11")),
+    imgUrl: 5,
+    municipality: "Maneadero",
+    city: "Ensenada",
+    state: "Baja California",
+    country: "Mexico",
+    zip: 22790,
+    lat: 31.714556,
+    lon: -116.557437,
+    fundsRaised:10000,
+    googleMaps: "https://goo.gl/maps/hAMZX3RjMdZRbyYg6",
+    landTitle: "mortgage",
+    paymentCnt: 23,
+    loanDuration: 30,
+    currOnLoan:true
   },
 ];
 

@@ -20,16 +20,22 @@ export default function AddCandidate() {
       <Formik
         initialValues={{
           lastName: "",
+          phaseId: 1,
+          currPhaseDate: new Date(),
           address: "",
-          city: "",
           municipality: "",
+          city: "",
           state: "",
           country: "",
           zip: "",
-          title: "",
-          current: "",
+          lat: "",
+          lon: "",
+          googleMaps: "",
+          landTitle: "",
+          paymentCnt: "",
+          loanDuration: "",
+          currOnLoan:false,
           videoUrl: "",
-          imageUrl: "",
         }}
         validationSchema={Yup.object({
           address: Yup.string().max(150, "Must be 150 characters or less"),
@@ -38,14 +44,20 @@ export default function AddCandidate() {
           state: Yup.string().max(20, "Must be 20 characters or less"),
           country: Yup.string().max(20, "Must be 20 characters or less"),
           zip: Yup.string().max(20, "Must be 20 characters or less"),
-          title: Yup.string().max(20, "Must be 20 characters or less"),
-          current: Yup.string().max(20, "Must be 20 characters or less"),
-          videoUrl: Yup.string().max(20, "Must be 20 characters or less"),
+          landTitle: Yup.string().max(20, "Must be 20 characters or less"),
+          currOnLoan: Yup.bool(),
+          videoUrl: Yup.string().max(200, "Must be 20 characters or less"),
         })}
-        onSubmit={async (values) => {
+        onSubmit={ (values) => {
           console.log("values", values);
-          await axios.post(`/api/candidate/auth/`, values);
-          navigate("/admin");
+          axios.post(`/api/candidate/auth`, values)
+            .then((res) => {
+              navigate("/admin");
+              console.log("added candidate:", res);
+            })
+            .catch((error) => {
+              console.error(`Unable to add Candidate ${values}`, error);
+            });
           // window.location.reload();
         }}
       >

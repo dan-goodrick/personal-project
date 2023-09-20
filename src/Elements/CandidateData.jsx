@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import "yup-phone-lite";
 import Text from "../Widgets/Text";
 import Select from "../Widgets/Select";
-import Checkbox from "../Widgets/Checkbox";
+import Checkbox from "../Widgets/Select";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const CandidateData = ({ candidate, setEditing }) => {
+const CandidateData = ({ candidate, setEditCandidate, setNewCandidate }) => {
   console.log("Edit candidate:", candidate);
 
   return (
@@ -19,17 +19,22 @@ const CandidateData = ({ candidate, setEditing }) => {
       Edit Candidate
       <Formik
         initialValues={{
+          candidateId: candidate.candidateId,
           lastName: candidate.lastName,
           address: candidate.address,
-          city: candidate.city,
           municipality: candidate.municipality,
+          city: candidate.city,
           state: candidate.state,
           country: candidate.country,
+          lat: candidate.lat,
+          lon: candidate.lon,
           zip: candidate.zip,
-          title: candidate.title,
-          current: candidate.currOnLoan,
+          googleMaps: candidate.googleMaps,
+          landTitle: candidate.landTitle,
+          currOnLoan: candidate.currOnLoan,
+          paymentCnt: candidate.paymentCnt,
+          loanDuration: candidate.loanDuration,
           videoUrl: candidate.videoUrl,
-          imageUrl: candidate.images[0].imageUrl,
         }}
         validationSchema={Yup.object({
           address: Yup.string().max(150, "Must be 150 characters or less"),
@@ -39,21 +44,20 @@ const CandidateData = ({ candidate, setEditing }) => {
           country: Yup.string().max(20, "Must be 20 characters or less"),
           zip: Yup.string().max(20, "Must be 20 characters or less"),
           title: Yup.string().max(20, "Must be 20 characters or less"),
-          current: Yup.string().max(20, "Must be 20 characters or less"),
-          videoUrl: Yup.string().max(20, "Must be 20 characters or less"),
+          videoUrl: Yup.string().max(200, "Must be 200 characters or less"),
         })}
-        onSubmit={async (values) => {
+        onSubmit={(values) => {
           console.log("Candidate values", values);
-          const res = await axios.put(
-            `/api/candidate/auth/${values.personId}`,
-            values
-          );
-          const { success } = res.data;
-          if (success) {
-            setEditing(false);
-          } else {
-            console.log("Error in put request");
-          }
+          const candidateValues = {...candidate, values}
+          axios.put(`/api/candidate/auth/${values.candidateId}`, candidateValues)
+            .then((res) => {
+              setNewCandidate(candidateValues)
+              setEditCandidate(false)
+              console.log("updated candidate:", res);
+            })
+            .catch((error) => {
+              console.error(`Unable to update Candidate ${values}`, error);
+            });
         }}
       >
         <Form>
@@ -67,18 +71,23 @@ const CandidateData = ({ candidate, setEditing }) => {
           <Text name="state" type="text" placeholder="State" />
           <Text name="country" type="text" placeholder="Country" />
           <Text name="zip" type="text" placeholder="ZIP" />
-          <Select label="Title" name="title">
+          <Text name="lat" type="text" placeholder="Latitude" />
+          <Text name="lon" type="text" placeholder="Longitude" />
+          <Text name="googleMaps" type="text" placeholder="Google Maps URL" />
+          <Select label="Title" name="landTitle">
             <option value="mortgage">Mortgage</option>
-            <option value="own">Title in Hand</option>
+            <option value="in Hand">Title in Hand</option>
           </Select>
-          <Checkbox name="current">Current on Payments</Checkbox>
+          <Text name="paymentCnt" type="text" placeholder="Current Payment #" /> of 
+          <Text name="loanDuration" type="text" placeholder="Total Loan Installments" />
+          <Checkbox name="currOnLoan">Current on Payments</Checkbox>
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
           <div>
             <Button
               size="small"
               color="primary"
               variant="outlined"
-              onClick={() => setEditing(false)}
+              onClick={() => setEditCandidate(false)}
             >
               Cancel
             </Button>

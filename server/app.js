@@ -26,14 +26,15 @@ const loginRequired = (req, res, next) => {
 app.put('/api/person/auth/:id', loginRequired, ctrl.putPerson)
 app.put('/api/candidate/auth/:id', loginRequired, ctrl.putCandidate)
 app.put('/api/phase/auth/:id', loginRequired, ctrl.putPhase)
-app.post('/api/person/auth/', loginRequired, ctrl.addPerson)
-app.post('/api/candidate/auth/', loginRequired, ctrl.addCandidate)
+app.post('/api/image/auth/', ctrl.addImage)
+app.post('/api/person/auth/', ctrl.addPerson)
+app.post('/api/candidate/auth/', ctrl.addCandidate)
 app.delete('/api/candidate/auth/:id', loginRequired, ctrl.deleteCandidate)
 app.delete('/api/person/auth/:id', loginRequired, ctrl.deletePerson)
 app.get('/api/person/auth/:id', loginRequired, ctrl.getPerson)
 app.get('/api/candidate/:id', ctrl.getCandidate)
 app.get('/api/candidate/auth/:id', loginRequired, ctrl.getCandidate)
-app.get('/api/candidates/auth/',  loginRequired, ctrl.getAllCandidates) // ,
+app.get('/api/candidates/auth/',  ctrl.getAllCandidates) // ,
 app.get('/api/phase/:id', ctrl.getByPhase)
 app.get('/api/phase/auth/:id', loginRequired, ctrl.getByPhase)
 app.post(`/api/auth`, ctrl.login)

@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const PersonData = ({ person, setEditPerson }) => {
+const PersonData = ({ person, setEditPerson, setNewPerson }) => {
   console.log("Edit Person:", person);
 
   return (
@@ -35,18 +35,16 @@ const PersonData = ({ person, setEditPerson }) => {
           headOfHousehold: Yup.boolean(),
           gender: Yup.string().oneOf(["male", "female", "other"]),
         })}
-        onSubmit={async (values) => {
+        onSubmit={ (values) => {
           console.log("Person values", values);
-          const res = await axios.put(
-            `/api/person/auth/${values.personId}`,
-            values
-          );
-          const { success } = res.data;
-          if (success) {
-            setEditPerson(false);
-          } else {
-            console.log("Error in put request");
-          }
+          axios.put(`/api/person/auth/${values.personId}`,values)
+            .then((candidate) => {
+              setNewPerson(values)
+              console.log("updated candidate:", candidate);
+            })
+            .catch((error) => {
+              console.error(`Unable to update Candidate ${values}`, error);
+            });
         }}
       >
         <Form>
@@ -78,7 +76,6 @@ const PersonData = ({ person, setEditPerson }) => {
           />
 
           <Select label="Gender" name="gender">
-            <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>

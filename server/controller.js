@@ -1,5 +1,16 @@
 import { Candidate, User, Image, Phase, Person } from "./model.js";
 
+import {v2 as cloudinary} from 'cloudinary';
+          
+// cloudinary.config({ 
+//   cloud_name: 'dyozbgxgo', 
+//   api_key: '344111862392384', 
+//   api_secret: 'SGjvV5AbnS83AcV-rD1TBUHby4I' 
+// });
+// cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+//   { public_id: "olympic_flag" }, 
+//   function(error, result) {console.log(result); });
+
 const serverFunctions = {
   login: async (req, res) => {
     console.log("login with session", req.session);
@@ -143,8 +154,8 @@ const serverFunctions = {
     Person.update(req.body, { where: { personId: req.params.id } })
       .then((val) => {
         console.log("updated person:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);
       });
@@ -155,8 +166,8 @@ const serverFunctions = {
     Candidate.update(req.body, { where: { candidateId: req.params.id } })
       .then((val) => {
         console.log("updated candidate:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);
       });
@@ -167,8 +178,8 @@ const serverFunctions = {
     Phase.update(req.body, { where: { phaseId: req.params.id } })
       .then((val) => {
         console.log("updated phase:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to Add phase ${req.body}`, error);
       });
@@ -179,10 +190,22 @@ const serverFunctions = {
     Person.create(req.body)
       .then((val) => {
         console.log("New person created:", val);
+        res.json({ success: true })
+      })
+      .catch((error) => {
+        console.error(`Unable to Add Person ${req.body}`, error);
+      });
+  },
+
+  addImage: (req, res) => {
+    console.log("add photo", req.body);
+    Image.create(req.body)
+      .then((val) => {
+        console.log("New image URL added:", val);
       })
       .then(res.json({ success: true }))
       .catch((error) => {
-        console.error(`Unable to Add Person ${req.body}`, error);
+        console.error(`Unable to add image ${req.body}`, error);
       });
   },
 

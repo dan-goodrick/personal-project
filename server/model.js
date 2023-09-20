@@ -88,7 +88,10 @@ Candidate.init(
     googleMaps: DataTypes.STRING,
     landTitle: DataTypes.STRING,
     paymentCnt: DataTypes.INTEGER,
-    currOnLoan: DataTypes.STRING,
+    currOnLoan: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     videoUrl: DataTypes.STRING,
     fundsRaised: {
       type: DataTypes.DECIMAL(13,2),
@@ -166,12 +169,13 @@ Image.init(
   }
 );
 
-Candidate.hasMany(Person, { foreignKey: "candidateId" });
+Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete:"CASCADE"});
 Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-Candidate.hasMany(Image, { foreignKey: "candidateId" });
+Candidate.hasMany(Image, { foreignKey: "candidateId", onDelete:"CASCADE" });
 Image.belongsTo(Candidate, { foreignKey: "candidateId" });
 
+Phase.hasMany(Candidate, { foreignKey: "phaseId" , onDelete:"RESTRICT"});
 Candidate.belongsTo(Phase, { foreignKey: "phaseId" });
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {

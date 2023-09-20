@@ -39,7 +39,7 @@ export default function Admin() {
         style={{ display: moving ? "none" : "block" }}
         onClick={() => setMoving(true)}
       >
-        Move
+        Done with edits
       </Button>
       <Button
         size="small"
@@ -48,7 +48,7 @@ export default function Admin() {
         style={{ display: moving ? "block" : "none" }}
         onClick={() => setMoving(false)}
       >
-        Done
+        Edit with doubleclick with an add button
       </Button>
       <h2>Incomplete Build Applications</h2>
       <div>{<IterateCandidates cards={incompleteApplications} moving={moving} addButton={!moving}/>}</div>
