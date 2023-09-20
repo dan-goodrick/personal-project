@@ -1,5 +1,5 @@
 import CandidateData from "./CandidateData";
-import IteratePeople from "./IteratePeople";
+import ShowPeople from "./ShowPeople";
 
 
 
@@ -8,7 +8,7 @@ export default function EditCandidate({ candidate, setEditCandidate, setNewCandi
   console.log("EditCandidate", candidate);
   return (
     <>
-      <IteratePeople people={candidate.people} />
+      <ShowPeople people={candidate.people} />
       <CandidateData candidate={candidate} setEditCandidate={setEditCandidate} setNewCandidate={setNewCandidate} />
     </>
   );

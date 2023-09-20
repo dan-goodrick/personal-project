@@ -7,9 +7,9 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 
 
-//https://formik.org/docs/tutorial
-// And now we can use these
-const AddImage = ({ setAddImage, setImgArr, imgArr}) => {
+// setAddImage and updateDB are required props.  
+// setImgArr and imgArr are needed if updateDb=false
+const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
   return (
     <>
       <Formik
@@ -22,8 +22,16 @@ const AddImage = ({ setAddImage, setImgArr, imgArr}) => {
           primary: Yup.bool()
         })}
         onSubmit={ (values) => {
-          console.log("values to write", values)
-          setImgArr([...imgArr, values])
+          
+          if (updateDb){
+            console.log("values sent to db", values)
+            axios.post(`/api/image/auth/`, values)
+            .then((res) => {console.log("added Image:", res)})
+            .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
+          } else {
+            console.log("update imgArr", [...imgArr, values])
+            setImgArr([...imgArr, values])
+          }
           setAddImage(false)
         }}
       >

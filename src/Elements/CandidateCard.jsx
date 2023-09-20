@@ -26,7 +26,7 @@ export default function CandidateCard({ candidate }) {
         />
         <CardContent>
         {addPerson ? 
-        <AddPerson setAddPerson={setAddPerson}/> :
+        <AddPerson setAddPerson={setAddPerson} updateDb={true}/> :
         <Button
               size="small"
               color="primary"

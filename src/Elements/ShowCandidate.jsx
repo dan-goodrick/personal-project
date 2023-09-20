@@ -3,7 +3,7 @@ import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
 import DeleteCandidate from "./DeleteCandidate";
 import { useState } from "react";
-import IteratePeople from "./IteratePeople";
+import ShowPeople from "./ShowPeople";
 
 export default function ShowCandidate({ candidate, setEditCandidate }) {
   const [deleteCandidate, setDeleteCandidate] = useState(false);
@@ -13,7 +13,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Typography gutterBottom variant="h5" component="div">
         {candidate.lastName}
       </Typography>
-      <IteratePeople people={candidate.people} />
+      <ShowPeople people={candidate.people} />
       <Typography variant="body2" color="text.secondary">
         Address: {candidate.address} <br />
         {candidate.municipality}, {candidate.city}, {candidate.country},{" "}

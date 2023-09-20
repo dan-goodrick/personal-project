@@ -1,11 +1,13 @@
 import AddCandidate from "../Elements/AddCandidate";
 import AddPerson from "../Elements/AddPerson";
 import AddImage from "../Elements/AddImage";
+import ShowImages from "../Elements/ShowImages";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { Formik, Form } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ShowPeople from "../Elements/ShowPeople";
 
 
 export default function NewRecord() {
@@ -14,6 +16,7 @@ export default function NewRecord() {
   const [addPerson, setAddPerson] = useState(false);
   const [addImage, setAddImage] = useState(false);
   const [imgArr, setImgArr] = useState([]);
+  const [peopleArr, setPeopleArr] = useState([]);
 
 
 
@@ -36,21 +39,17 @@ export default function NewRecord() {
     <>
 
       <h1>Images</h1>
-      {addImage ? <AddImage setAddImage={setAddImage} setImgArr={setImgArr}  imgArr={imgArr} /> :
-      (
-        <div>
-
-        <ShowImages imgArr={imgArr}/>
-        <Button
-              size="small"
-              color="primary"
-              variant="contained"
-              onClick={() => setAddImage(true)}
-            >
-              Add Image
-      </Button>
-        </div>
-      )}
+      <ShowImages imgArr={imgArr} setImgArr={setImgArr} />
+      {addImage ? 
+        <AddImage setAddImage={setAddImage} setImgArr={setImgArr}  imgArr={imgArr} updateDb={false} /> :
+        <Button size="small" color="primary" variant="contained" onClick={() => setAddImage(true)} >Add Image</Button>
+      }
+      <h1>People</h1>
+      <ShowPeople people={peopleArr} setPeopleArr={setPeopleArr} />
+      {addPerson ? 
+        <AddPerson setAddPerson={setAddPerson} setPeopleArr={setPeopleArr}  peopleArr={peopleArr} updateDb={false} /> :
+        <Button size="small" color="primary" variant="contained" onClick={() => setAddPerson(true)} >Add Person</Button>
+      }
       <form onSubmit={()=>handleNewCandidate({})}>
             <Button
               size="small"

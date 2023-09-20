@@ -1,7 +1,6 @@
 import { Candidate, User, Image, Phase, Person } from "./model.js";
 
-import {v2 as cloudinary} from 'cloudinary';
-          
+// import {v2 as cloudinary} from 'cloudinary';
 // cloudinary.config({ 
 //   cloud_name: 'dyozbgxgo', 
 //   api_key: '344111862392384', 

@@ -7,10 +7,9 @@ import Checkbox from "./../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-
-//https://formik.org/docs/tutorial
-// And now we can use these
-const AddPerson = ( {setAddPerson } ) => {
+// setAddPerson and updateDB are required props.  
+// setPeopleArr and peopleArr are needed if updateDb=false
+const AddPerson = ( {setAddPerson, setPeopleArr, peopleArr, updateDb} ) => {
   return (
     <>
       <Formik
@@ -35,20 +34,20 @@ const AddPerson = ( {setAddPerson } ) => {
           headOfHousehold: Yup.boolean(),
           gender: Yup.string().oneOf(["male", "female", "other"]),
         })}
-        onSubmit={async (values) => {
-          console.log("values to write", values)
-          axios.post(`/api/person/auth/`, values)
-            .then((res) => {
-              console.log("added person:", res);
-              setAddPerson(false)
-            })
-            .catch((error) => {
-              console.error(`Unable to add ${values.lastName}`, error);
-            });
+        onSubmit={async (values) => {        
+          if (updateDb){
+            console.log("values to write", values)
+            axios.post(`/api/person/auth/`, values)
+            .then((res) => {console.log("added person:", res)})
+            .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
+          } else {
+            console.log("update peopleArr", [...peopleArr, values])
+          setPeopleArr([...peopleArr, values])
+          }
+          setAddPerson(false)
         }}
       >
         <Form>
-          <h3>Individual Data</h3>
           <Text
             label="First Name"
             name="firstName"
