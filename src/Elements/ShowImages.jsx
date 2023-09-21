@@ -7,18 +7,18 @@ import Checkbox from "../Widgets/Checkbox";
 const ShowImages = ({ imgArr, setImgArr}) => {
   const makePrimary = (i) => {
     let thisArr = [...imgArr]
-    console.log("imgArrbefore", thisArr);
+    // console.log("imgArrbefore", thisArr);
     thisArr[0].primary=false
     thisArr.unshift(thisArr.splice(i,1)[0])
     thisArr[0].primary=true
-    console.log("imgArrAfter", thisArr);
+    // console.log("imgArrAfter", thisArr);
     setImgArr(thisArr)
    }
   const handleDelete = (i) => {
     let thisArr = [...imgArr]
-    console.log("imgArrbefore", thisArr);
+    // console.log("imgArrbefore", thisArr);
     thisArr.splice(i,1)
-    console.log("imgArrAfter", thisArr);
+    // console.log("imgArrAfter", thisArr);
     setImgArr(thisArr)
    }
 

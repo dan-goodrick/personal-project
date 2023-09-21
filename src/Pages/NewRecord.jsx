@@ -17,17 +17,17 @@ export default function NewRecord() {
   const [peopleArr, setPeopleArr] = useState([]);
 
   const handleAddPerson = (values) => { 
-    console.log("person added", values)
+    // console.log("person added", values)
     setPeopleArr([...peopleArr, values])
     setAddPerson(false)
 }
 
   const handleNewCandidate = (candidate) => { 
     const payload = {candidate, peopleArr, imgArr}
-    console.log(payload);
+    // console.log(payload);
     axios.post(`/api/candidate/auth/`, payload) // arrays of objects for for images and people
       .then((res) => {
-        console.log("added candidate:", res);
+        // console.log("added candidate:", res);
         navigate("/admin");
       })
       .catch((error) => {

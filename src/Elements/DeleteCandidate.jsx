@@ -15,13 +15,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function DeleteCandidate({ candidate, setDeleteCandidate }) {
   const [open, setOpen] = React.useState(true);
 
-  console.log("Removing candidate", candidate);
+  // console.log("Removing candidate", candidate);
 
   const handleDelete = async () => {
     const { data } = await axios.delete(
       `/api/candidate/auth/${candidate.candidateId}`
     );
-    console.log(`deleted %{id}`, data);
+    // console.log(`deleted %{id}`, data);
     setDeleteCandidate(false);
     window.location.reload(); // todo: find another way to update just the component
   };

@@ -24,12 +24,12 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
         onSubmit={ (values) => {
           
           if (updateDb){
-            console.log("values sent to db", values)
+            // console.log("values sent to db", values)
             axios.post(`/api/image/auth/`, values)
             .then((res) => {console.log("added Image:", res)})
             .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
           } else {
-            console.log("update imgArr", [...imgArr, values])
+            // console.log("update imgArr", [...imgArr, values])
             setImgArr([...imgArr, values])
           }
           setAddImage(false)

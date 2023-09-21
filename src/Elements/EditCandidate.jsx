@@ -5,7 +5,7 @@ import ShowPeople from "./ShowPeople";
 
 export default function EditCandidate({ candidate, setEditCandidate, handleEditCandidate }) {
   
-  console.log("EditCandidate", candidate);
+  // console.log("EditCandidate", candidate);
   return (
     <>
       <ShowPeople people={candidate.people} />

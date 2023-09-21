@@ -8,7 +8,7 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault()
     axios.post('/api/logout').then((res) => {
-      console.log("logout", res.data);
+      // console.log("logout", res.data);
     if (res.data.success){
       navigate('/')
     }

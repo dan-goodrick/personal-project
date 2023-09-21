@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 //https://formik.org/docs/tutorial
 // And now we can use these
 const PersonData = ({ person, setEditPerson, setNewPerson }) => {
-  console.log("Edit Person:", person);
+  // console.log("Edit Person:", person);
 
   return (
     <>
@@ -36,11 +36,11 @@ const PersonData = ({ person, setEditPerson, setNewPerson }) => {
           gender: Yup.string().oneOf(["male", "female", "other"]),
         })}
         onSubmit={ (values) => {
-          console.log("Person values", values);
+          // console.log("Person values", values);
           axios.put(`/api/person/auth/${values.personId}`,values)
             .then((candidate) => {
               setNewPerson(values)
-              console.log("updated candidate:", candidate);
+              // console.log("updated candidate:", candidate);
             })
             .catch((error) => {
               console.error(`Unable to update Candidate ${values}`, error);

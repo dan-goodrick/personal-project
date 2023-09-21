@@ -4,7 +4,7 @@ import SelectCard from "./SelectCard";
 import AddButton from "../Widgets/AddButton";
 
 const IterateCandidates = ({ cards, moving, addButton }) => {
-  console.log("IterateCandidates", cards);
+  // console.log("IterateCandidates", cards);
   return (
     <Grid
       container

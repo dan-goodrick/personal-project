@@ -15,13 +15,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function DeletePerson({ person, setDeletePerson }) {
   const [open, setOpen] = React.useState(true);
 
-  console.log("Removing Person", person);
+  // console.log("Removing Person", person);
 
   const handleDelete = async () => {
     const { data } = await axios.delete(
       `/api/person/auth/${person.personId}`
     );
-    console.log(`deleted %{id}`, data);
+    // console.log(`deleted %{id}`, data);
     setDeletePerson(false);
     window.location.reload(); // todo: find another way to update just the component
   };

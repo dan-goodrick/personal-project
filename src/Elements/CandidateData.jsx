@@ -4,7 +4,6 @@ import "yup-phone-lite";
 import Text from "../Widgets/Text";
 import Select from "../Widgets/Select";
 import Checkbox from "../Widgets/Select";
-import axios from "axios";
 import Button from "@mui/material/Button";
 
 //todo: title should be a select box
@@ -12,7 +11,7 @@ import Button from "@mui/material/Button";
 //https://formik.org/docs/tutorial
 // And now we can use these
 const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => {
-  console.log("Edit candidate:", candidate);
+  // console.log("Edit candidate:", candidate);
 
   return (
     <>

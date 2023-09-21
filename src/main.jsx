@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         element={<Home />}
         loader={async () => {
           const res = await axios.get(`/api/phase/3`);
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
           return { projects: res.data };
         }}
       />
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
         element={<PastProjects />}
         loader={async () => {
           const res = await axios.get(`/api/phase/5`);
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
           return { projects: res.data };
         }}
       />
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
         element={<PlannedProjects />}
         loader={async () => {
           const res = await axios.get(`/api/phase/4`);
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
           return { planned: res.data };
         }}
       />
@@ -53,7 +53,7 @@ const router = createBrowserRouter(
         element={<Fundraising />}
         loader={async () => {
           const res = await axios.get(`/api/phase/3`);
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
           return { fundraising: res.data };
         }}
       />
@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         element={<Admin />}
         loader={async () => {
           const res = await axios.get(`/api/candidates/auth`);
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
               return { candidates: res.data };
         }}
       />

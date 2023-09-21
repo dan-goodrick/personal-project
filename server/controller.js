@@ -193,7 +193,7 @@ const serverFunctions = {
     Person.create(req.body)
       .then((val) => {
         console.log("New person created:", val);
-        res.json({ success: true })
+        res.json(val)
       })
       .catch((error) => {
         console.error(`Unable to Add Person ${req.body}`, error);
@@ -205,7 +205,7 @@ const serverFunctions = {
     Image.create(req.body)
       .then((val) => {
         console.log("New image URL added:", val);
-        res.json({ success: true })
+        res.json(val)
       })
       .catch((error) => {
         console.error(`Unable to add image ${req.body}`, error);
@@ -228,7 +228,7 @@ const serverFunctions = {
             console.log("New Image created:", val);
            })
          })
-         res.json({ success: true })
+         res.json(val)
       })
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);

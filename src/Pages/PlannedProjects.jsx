@@ -4,7 +4,7 @@ import ViewCandidate from "../Elements/ViewCandidate";
 
 export default function PlannedProjects() {
   const { planned } = useLoaderData();
-  console.log("Planned Projects", planned)
+  // console.log("Planned Projects", planned)
   return (
     <>
       <h1>Upcoming Projects</h1>

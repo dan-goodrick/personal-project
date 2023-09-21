@@ -5,7 +5,7 @@ import ViewCandidate from "../Elements/ViewCandidate";
 
 export default function Home() {
   const { projects } = useLoaderData();
-  console.log("fundraising", projects);
+  // console.log("fundraising", projects);
   return (
     <>
       <h1>Builders of Hope</h1>
