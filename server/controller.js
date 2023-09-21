@@ -51,6 +51,7 @@ const serverFunctions = {
         res.json(candidates);
       } else {
         console.log(`candidates ${req.params} not found.`);
+        res.json({ success: false })
       }
     })
     .catch((error) => {
@@ -77,6 +78,7 @@ const serverFunctions = {
           res.json(candidates);
         } else {
           console.log(`candidates ${req.params} not found.`);
+          res.json({ success: false })
         }
       })
       .catch((error) => {
@@ -103,6 +105,7 @@ const serverFunctions = {
           res.json(candidate);
         } else {
           console.log(`candidate ${req.params} not found.`);
+          res.json({ success: false })
         }
       })
       .catch((error) => {
@@ -119,7 +122,8 @@ const serverFunctions = {
           res.json(person);
         } else {
           console.log(`person ${req.params} not found.`);
-        }
+          res.json({ success: false })
+        }  
       })
       .catch((error) => {
         console.error("Error finding candidate:", error);
@@ -130,8 +134,8 @@ const serverFunctions = {
     Candidate.destroy({ where: { candidateId: +req.params.id } })
       .then((val) => {
         console.log("deleted candidate:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to remove Record ${req.params.id}`, error);
       });
@@ -141,8 +145,8 @@ const serverFunctions = {
     Person.destroy({ where: { personId: req.params.id } })
       .then((val) => {
         console.log("deleted person:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to remove Record ${req.params.id}`, error);
       });
@@ -161,7 +165,7 @@ const serverFunctions = {
   },
 
   putCandidate: (req, res) => {
-    console.log("put candidate", req.body);
+    console.log("put candidate", req.body, "candidateId", req.params.id );
     Candidate.update(req.body, { where: { candidateId: req.params.id } })
       .then((val) => {
         console.log("updated candidate:", val);
@@ -201,20 +205,31 @@ const serverFunctions = {
     Image.create(req.body)
       .then((val) => {
         console.log("New image URL added:", val);
+        res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to add image ${req.body}`, error);
       });
   },
 
   addCandidate: (req, res) => {
-    // map through people and create those too
-    Candidate.create(req.body)
+    const {candidate, peopleArr, imgArr} = req.body
+    Candidate.create(candidate)
       .then((val) => {
         console.log("New candidate created:", val);
+        peopleArr.map((person) => { 
+          person.candidateId = val.candidateId
+          Person.create(person).then((val) => { 
+            console.log("New Person created with candidate:", val)})
+         })
+        imgArr.map((image) => { 
+          image.candidateId = val.candidateId
+          Image.create(image).then((val) => { 
+            console.log("New Image created:", val);
+           })
+         })
+         res.json({ success: true })
       })
-      .then(res.json({ success: true }))
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);
       });

@@ -1,6 +1,6 @@
 import PersonCard from "./PersonCard";
 
-const ShowPeople = ({ people, setPeopleArr }) => {
+const ShowPeople = ({ people }) => {
   console.log("People", people);
   return (
     <div>

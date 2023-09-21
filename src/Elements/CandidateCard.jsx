@@ -6,14 +6,43 @@ import Button from "@mui/material/Button";
 import EditCandidate from "./EditCandidate";
 import ShowCandidate from "./ShowCandidate";
 import AddPerson from "./AddPerson";
+import axios from "axios";
 
 
 
 export default function CandidateCard({ candidate }) {
   const [addPerson, setAddPerson] = useState(false);
   const [editCandidate, setEditCandidate] = useState(false);
-  const [newCandidate, setNewCandidate] = useState(candidate);
+  const [candidateCopy, setCandidateCopy] = useState(candidate);
+  const [peopleArr, setPeopleArr] = useState([]);
 
+  const handleAddPerson = (values) => { 
+      const payload = {...values}
+      payload.candidateId=candidate.candidateId
+      console.log("values to write", payload)
+      axios.post(`/api/person/auth/`, payload)
+      .then((res) => {console.log("added person:", res)})
+      .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
+    setPeopleArr([...peopleArr, payload])
+    console.log("peopleArr", peopleArr)
+    setPeopleArr(payload)
+    setAddPerson(false)
+  }
+
+  const handleEditCandidate = (values) => { 
+    console.log("Candidate values", values);
+    const candidateValues = {...candidate, values}
+    axios.put(`/api/candidate/auth/${values.candidateId}`, candidateValues)
+      .then((res) => {
+        setCandidateCopy(candidateValues)
+        setEditCandidate(false)
+        console.log("updated candidate:", res);
+      })
+      .catch((error) => {
+        console.error(`Unable to update Candidate ${values}`, error);
+      });
+      setEditCandidate(false)
+}
   // console.log("CandidateCard:", candidate, "editCandidate", editCandidate);
   // todo: get the primary image from images
   return (
@@ -26,7 +55,7 @@ export default function CandidateCard({ candidate }) {
         />
         <CardContent>
         {addPerson ? 
-        <AddPerson setAddPerson={setAddPerson} updateDb={true}/> :
+        <AddPerson handleAddPerson={handleAddPerson} setAddPerson={setAddPerson} /> :
         <Button
               size="small"
               color="primary"
@@ -36,8 +65,8 @@ export default function CandidateCard({ candidate }) {
         </Button>
         }
         { editCandidate ? 
-          <EditCandidate candidate={newCandidate} setEditCandidate={setEditCandidate} setNewCandidate={setNewCandidate} /> : 
-          <ShowCandidate candidate={newCandidate} setEditCandidate={setEditCandidate} />
+          <EditCandidate candidate={candidateCopy} setEditCandidate={setEditCandidate} handleEditCandidate={handleEditCandidate} /> : 
+          <ShowCandidate candidate={candidateCopy} setEditCandidate={setEditCandidate} />
         }
         </CardContent>
     </Card>

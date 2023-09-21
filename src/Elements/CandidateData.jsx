@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 
 //https://formik.org/docs/tutorial
 // And now we can use these
-const CandidateData = ({ candidate, setEditCandidate, setNewCandidate }) => {
+const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => {
   console.log("Edit candidate:", candidate);
 
   return (
@@ -46,19 +46,7 @@ const CandidateData = ({ candidate, setEditCandidate, setNewCandidate }) => {
           title: Yup.string().max(20, "Must be 20 characters or less"),
           videoUrl: Yup.string().max(200, "Must be 200 characters or less"),
         })}
-        onSubmit={(values) => {
-          console.log("Candidate values", values);
-          const candidateValues = {...candidate, values}
-          axios.put(`/api/candidate/auth/${values.candidateId}`, candidateValues)
-            .then((res) => {
-              setNewCandidate(candidateValues)
-              setEditCandidate(false)
-              console.log("updated candidate:", res);
-            })
-            .catch((error) => {
-              console.error(`Unable to update Candidate ${values}`, error);
-            });
-        }}
+        onSubmit={(values) => {handleEditCandidate(values)}}
       >
         <Form>
           <Text name="lastName" type="text" placeholder="Last Name" />

@@ -4,14 +4,13 @@ import "yup-phone-lite";
 import Text from "./../Widgets/Text";
 import Select from "./../Widgets/Select";
 import Checkbox from "./../Widgets/Checkbox";
-import axios from "axios";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+
 
 //todo: title should be a select box
 
-//https://formik.org/docs/tutorial
-export default function AddCandidate() {
+export default function AddCandidate( {handleNewCandidate}) {
   const navigate = useNavigate();
 
   return (
@@ -19,23 +18,11 @@ export default function AddCandidate() {
       <h3>Family Data</h3>
       <Formik
         initialValues={{
-          lastName: "",
           phaseId: 1,
           currPhaseDate: new Date(),
-          address: "",
-          municipality: "",
-          city: "",
-          state: "",
-          country: "",
-          zip: "",
-          lat: "",
-          lon: "",
-          googleMaps: "",
-          landTitle: "",
-          paymentCnt: "",
-          loanDuration: "",
+          paymentCnt: 1,
+          loanDuration: 30,
           currOnLoan:false,
-          videoUrl: "",
         }}
         validationSchema={Yup.object({
           address: Yup.string().max(150, "Must be 150 characters or less"),
@@ -49,16 +36,7 @@ export default function AddCandidate() {
           videoUrl: Yup.string().max(200, "Must be 20 characters or less"),
         })}
         onSubmit={ (values) => {
-          console.log("values", values);
-          axios.post(`/api/candidate/auth`, values)
-            .then((res) => {
-              navigate("/admin");
-              console.log("added candidate:", res);
-            })
-            .catch((error) => {
-              console.error(`Unable to add Candidate ${values}`, error);
-            });
-          // window.location.reload();
+          handleNewCandidate(values)
         }}
       >
         <Form>
@@ -80,22 +58,18 @@ export default function AddCandidate() {
 
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
           <div>
-            <Button
+          <Button
               size="small"
               color="primary"
-              variant="contained"
+              variant="outlined"
               onClick={() => navigate("/admin")}
-            >
-              Cancel
-            </Button>
+            >Cancel</Button>
             <Button
               size="small"
               color="primary"
               variant="contained"
               type="submit"
-            >
-              Save
-            </Button>
+            >Save Candidate</Button>
           </div>
         </Form>
       </Formik>

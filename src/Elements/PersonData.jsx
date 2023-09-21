@@ -45,6 +45,7 @@ const PersonData = ({ person, setEditPerson, setNewPerson }) => {
             .catch((error) => {
               console.error(`Unable to update Candidate ${values}`, error);
             });
+          setEditPerson(false)
         }}
       >
         <Form>

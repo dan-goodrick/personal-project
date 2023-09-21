@@ -7,14 +7,14 @@ import getAge from "../functions/getAge";
 
 export default function ViewCandidate({ candidate }) {
   //todo replace this with filter on the back end
-  useEffect(() => {
-    const i = candidate.people.findIndex(
-      (member) => member.headOfHousehold == true
-    );
-    const headOfHousehold = candidate.people.splice(i, 1)[0];
-    candidate.people.sort((a, b) => a.dob.localeCompare(b.dob));
-    candidate.people.unshift(headOfHousehold);
-  }, [candidate]);
+  // useEffect(() => {
+  //   const i = candidate.people.findIndex(
+  //     (member) => member.headOfHousehold == true
+  //   );
+  //   const headOfHousehold = candidate.people.splice(i, 1)[0];
+  //   candidate.people.sort((a, b) => a.dob.localeCompare(b.dob));
+  //   candidate.people.unshift(headOfHousehold);
+  // }, [candidate]);
 
   // todo: get the primary image from images
 
