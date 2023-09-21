@@ -2,10 +2,13 @@ import { useLoaderData } from "react-router-dom";
 import IterateCandidates from "../Elements/IterateCandidates";
 import { useState } from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const { candidates } = useLoaderData();
   const [moving, setMoving] = useState(false);
+  const navigate = useNavigate();
+
   
   const incomplete = 1;
   const accepted = 2;
@@ -39,7 +42,7 @@ export default function Admin() {
         style={{ display: moving ? "none" : "block" }}
         onClick={() => setMoving(true)}
       >
-        Done with edits
+        Move Candidates
       </Button>
       <Button
         size="small"
@@ -48,18 +51,27 @@ export default function Admin() {
         style={{ display: moving ? "block" : "none" }}
         onClick={() => setMoving(false)}
       >
-        Edit with doubleclick with an add button
+        Edit Candidates
+      </Button>
+      <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        style={{ display: moving ? "none" : "block" }}
+        onClick={() => navigate("/newRecord")}
+      >
+        Add Candidate
       </Button>
       <h2>Incomplete Build Applications</h2>
-      <div>{<IterateCandidates cards={incompleteApplications} moving={moving} addButton={!moving}/>}</div>
+      <div>{<IterateCandidates cards={incompleteApplications} moving={moving} />}</div>
       <h2>Completed Build Applications</h2>
-      <div>{<IterateCandidates cards={acceptedApplications} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={acceptedApplications} moving={moving} />}</div>
       <h2>Projects in fundraising</h2>
-      <div>{<IterateCandidates cards={fundraisingProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={fundraisingProjects} moving={moving} />}</div>
       <h2>Projects in Planning</h2>
-      <div>{<IterateCandidates cards={plannedProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={plannedProjects} moving={moving} />}</div>
       <h2>Completed Projects</h2>
-      <div>{<IterateCandidates cards={completedProjects} moving={moving} addButton={false}/>}</div>
+      <div>{<IterateCandidates cards={completedProjects} moving={moving} />}</div>
     </>
   );
 }

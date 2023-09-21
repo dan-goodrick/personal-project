@@ -1,10 +1,9 @@
 import { Grid } from "@mui/material";
 import CandidateCard from "./CandidateCard";
 import SelectCard from "./SelectCard";
-import AddButton from "../Widgets/AddButton";
 
-const IterateCandidates = ({ cards, moving, addButton }) => {
-  // console.log("IterateCandidates", cards);
+const IterateCandidates = ({ cards, moving }) => {
+  console.log("IterateCandidates", cards);
   return (
     <Grid
       container
@@ -13,7 +12,6 @@ const IterateCandidates = ({ cards, moving, addButton }) => {
       justify="flex-start"
       alignItems="flex-start"
     >
-      {addButton ? <AddButton /> : null}
       {cards.map((candidate) =>
         moving ? (
           <SelectCard key={candidate.candidateId} candidate={candidate} />
