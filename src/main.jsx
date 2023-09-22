@@ -60,14 +60,12 @@ const router = createBrowserRouter(
           return { fundraising: res.data };
         }}
       />
-      <Route path="/newRecord/" element={store.getState().userId ? <NewRecord /> : <Login />} />
-      {console.log("store", store.getState().userId)}
+      <Route path="/newRecord/" element={<NewRecord />} />
       <Route
         path="/admin/"
-        element={store.getState().userId ? <Admin /> : <Navigate to="/" />}
+        element={<Admin />}
         loader={async () => {
-          const res = await axios.get(`/api/candidates/auth`);
-          // console.log("res.data", res.data);
+          const res = await axios.get(`/api/candidates`);
           return { candidates: res.data };
         }}
       />

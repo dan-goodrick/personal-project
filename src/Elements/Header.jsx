@@ -1,23 +1,23 @@
-import { useEffect } from "react"
+// import { useEffect } from "react"
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { useEffect } from 'react';
 
 
 const Header = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const dispatch = useDispatch()
   const userId = useSelector(state => state.userId)  
-
+  console.log("User: ", userId);
   useEffect(() => {
     axios
         .get("/api/user")
         .then(res => {
+          console.log("User: ", res);
           dispatch({ type: "LOGIN", payload: res.data.userId})
-          navigate('/admin')
         })
         .catch(err => console.log(err))
 }, [])

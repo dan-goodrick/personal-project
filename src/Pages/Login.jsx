@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -45,7 +45,7 @@ export default function Login() {
       .then((res) => {
         console.log("!!!!!!!!Response: ", res.data);
         dispatch({ type: "LOGIN", payload: res.data.userId });
-        // navigate("/admin");
+        navigate("/admin");
       })
       .catch((err) => console.log(err));
   };

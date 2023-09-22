@@ -19,7 +19,7 @@ export default function DeleteCandidate({ candidate, setDeleteCandidate }) {
 
   const handleDelete = async () => {
     const { data } = await axios.delete(
-      `/api/candidate/auth/${candidate.candidateId}`
+      `/api/candidate/${candidate.candidateId}`
     );
     // console.log(`deleted %{id}`, data);
     setDeleteCandidate(false);

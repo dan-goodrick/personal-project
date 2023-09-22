@@ -37,7 +37,7 @@ const PersonData = ({ person, setEditPerson, setNewPerson }) => {
         })}
         onSubmit={ (values) => {
           // console.log("Person values", values);
-          axios.put(`/api/person/auth/${values.personId}`,values)
+          axios.put(`/api/person/${values.personId}`,values)
             .then((candidate) => {
               setNewPerson(values)
               // console.log("updated candidate:", candidate);
