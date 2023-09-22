@@ -16,6 +16,8 @@ export default function Admin() {
   const planned = 4;
   const completed = 5;
 
+
+  console.log("candidates", candidates);
   const incompleteApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == incomplete
   );
@@ -57,7 +59,6 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        style={{ display: moving ? "none" : "block" }}
         onClick={() => navigate("/newRecord")}
       >
         Add Candidate

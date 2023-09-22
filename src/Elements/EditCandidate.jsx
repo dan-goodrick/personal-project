@@ -3,12 +3,12 @@ import ShowPeople from "./ShowPeople";
 
 
 
-export default function EditCandidate({ candidate, setEditCandidate, handleEditCandidate }) {
+export default function EditCandidate({ candidate, setEditCandidate, handleEditCandidate, updateDb }) {
   
   // console.log("EditCandidate", candidate);
   return (
     <>
-      <ShowPeople people={candidate.people} />
+      <ShowPeople people={candidate.people} updateDb={updateDb} />
       <CandidateData candidate={candidate} setEditCandidate={setEditCandidate} handleEditCandidate={handleEditCandidate} />
     </>
   );

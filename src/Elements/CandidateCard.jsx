@@ -50,6 +50,7 @@ export default function CandidateCard({ candidate }) {
         console.error(`Unable to update Candidate ${values}`, error);
       });
   };
+
   console.log("CandidateCard:", candidate, "editCandidate", editCandidate);
   // todo: get the primary image from images
   return (
@@ -82,11 +83,13 @@ export default function CandidateCard({ candidate }) {
             candidate={candidateCopy}
             setEditCandidate={setEditCandidate}
             handleEditCandidate={handleEditCandidate}
+            updateDb={true}
           />
         ) : (
           <ShowCandidate
             candidate={candidateCopy}
             setEditCandidate={setEditCandidate}
+            updateDb={true}
           />
         )}
       </CardContent>

@@ -5,28 +5,18 @@ import DeleteCandidate from "./DeleteCandidate";
 import { useState } from "react";
 import ShowPeople from "./ShowPeople";
 
-export default function ShowCandidate({ candidate, setEditCandidate }) {
+export default function ShowCandidate({ candidate, setEditCandidate, handleEditPerson}) {
   const [deleteCandidate, setDeleteCandidate] = useState(false);
   console.log("ShowCandidate", candidate, "deleteCandidate", deleteCandidate);
 
-//   const handleDeletePerson = (values) => { 
-//     const payload = {...values}
-//     payload.candidateId=candidate.candidateId
-//     console.log("values to write", payload)
-//     axios.post(`/api/person/auth/`, payload)
-//     .then((res) => {console.log("added person:", res)})
-//     .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
-//   setPeopleArr([...peopleArr, payload])
-//   console.log("peopleArr", peopleArr)
-//   setAddPerson(false)
-// }
+
 
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
         {candidate.lastName}
       </Typography>
-      <ShowPeople people={candidate.people} />
+      <ShowPeople people={candidate.people} handleEditPerson={handleEditPerson}/>
       <Typography variant="body2" color="text.secondary">
         Address: {candidate.address} <br />
         {candidate.municipality}, {candidate.city}, {candidate.country},{" "}

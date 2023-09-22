@@ -12,6 +12,7 @@ import ShowPeople from "../Elements/ShowPeople";
 export default function NewRecord() {
   const navigate = useNavigate();
   const [addPerson, setAddPerson] = useState(false);
+  const [editPerson, setEditPerson] = useState(false);
   const [addImage, setAddImage] = useState(false);
   const [imgArr, setImgArr] = useState([]);
   const [peopleArr, setPeopleArr] = useState([]);
@@ -22,12 +23,13 @@ export default function NewRecord() {
     setAddPerson(false)
 }
 
+
   const handleNewCandidate = (candidate) => { 
     const payload = {candidate, peopleArr, imgArr}
     // console.log(payload);
     axios.post(`/api/candidate/auth/`, payload) // arrays of objects for for images and people
       .then((res) => {
-        // console.log("added candidate:", res);
+        console.log("added candidate:", res);
         navigate("/admin");
       })
       .catch((error) => {
@@ -45,7 +47,7 @@ export default function NewRecord() {
         <Button size="small" color="primary" variant="contained" onClick={() => setAddImage(true)} >Add Image</Button>
       }
       <h1>People</h1>
-      <ShowPeople people={peopleArr} setPeopleArr={setPeopleArr} />
+      <ShowPeople people={peopleArr} updateDb={false} />
       {addPerson ? 
         <AddPerson handleAddPerson={handleAddPerson} setAddPerson={setAddPerson} /> :
         <Button size="small" color="primary" variant="contained" onClick={() => setAddPerson(true)} >Add Person</Button>
