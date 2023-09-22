@@ -28,8 +28,8 @@ User.init(
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING(500),
+      allowNull: false
     },
   },
   {

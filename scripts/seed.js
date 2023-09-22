@@ -1,7 +1,9 @@
 import { Candidate, User, Image, Person, Phase } from "./../server/model.js";
 import connectToDB from "./../server/db.js";
+import bcrypt from 'bcryptjs'
 
 const db = await connectToDB("postgresql:///boh");
+const salt = bcrypt.genSaltSync(10)
 
 const imageData = [
   {
@@ -307,7 +309,7 @@ const personData = [
 const userData = [
   {
     email: "admin@buildersofhope.net",
-    password: "pwd",
+    password: bcrypt.hashSync('pwd', salt),
     firstName: "dan",
     lastName: "goodrick",
   }
@@ -326,7 +328,7 @@ await db.sync({ force: true }).then(async () => {
   await Candidate.bulkCreate(candidateData);
   await Image.bulkCreate(imageData);
   await Person.bulkCreate(personData);
-  console.log("db reset and seeded");
-});
+  console.log('db reset and seeded')
+})
 
 await db.close();

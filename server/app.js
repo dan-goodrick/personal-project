@@ -3,41 +3,46 @@ import session from 'express-session';
 import morgan from 'morgan';
 import ViteExpress from 'vite-express';
 import ctrl from './controller.js'
+import auth from './authController.js'
 const app = express();
 const port = 8000;
+const mSecPerDay = 1000 * 60 * 60 * 24
 ViteExpress.config({ printViteDevServerHost: true });
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(session({ secret: 'secret', saveUninitialized: true, resave: false }));
-const loginRequired = (req, res, next) => {
-  if (!req.session.userId) {
-    res.status(401).render('/').json({ error: "Unauthorized" }); // TODO why doesn't .render work
-  } else {
-    console.log("LoginSuccessful:", res.data);
-    next();
+app.use(session({
+  saveUninitialized: true,
+  resave: false,
+  secret: 'secret',
+  cookie: {
+      maxAge: mSecPerDay * 4 // days before expiration
   }
-}
+}))
 
 // app.get('/api/candidates', loginRequired, ctrl.showAll)
 // app.get(`/api/candidates/:id`, ctrl.getOne)
 // app.get('/api/ratings', loginRequired, ctrl.ratings)
-app.put('/api/person/auth/:id', loginRequired, ctrl.putPerson)
-app.put('/api/candidate/auth/:id', loginRequired, ctrl.putCandidate)
-app.put('/api/phase/auth/:id', loginRequired, ctrl.putPhase)
-app.post('/api/image/auth/', ctrl.addImage)
-app.post('/api/person/auth/', ctrl.addPerson)
-app.post('/api/candidate/auth/', ctrl.addCandidate)
-app.delete('/api/candidate/auth/:id', loginRequired, ctrl.deleteCandidate)
-app.delete('/api/person/auth/:id', loginRequired, ctrl.deletePerson)
-app.get('/api/person/auth/:id', loginRequired, ctrl.getPerson)
+app.put('/api/person/:id', ctrl.putPerson)
+app.put('/api/candidate/:id', ctrl.putCandidate)
+app.put('/api/phase/:id', ctrl.putPhase)
+app.post('/api/image/', ctrl.addImage)
+app.post('/api/person/', ctrl.addPerson)
+app.post('/api/candidate/', ctrl.addCandidate)
+app.delete('/api/candidate/:id', ctrl.deleteCandidate)
+app.delete('/api/person/:id', ctrl.deletePerson)
+app.get('/api/person/:id', ctrl.getPerson)
 app.get('/api/candidate/:id', ctrl.getCandidate)
-app.get('/api/candidate/auth/:id', loginRequired, ctrl.getCandidate)
-app.get('/api/candidates/auth/',  ctrl.getAllCandidates) // ,
+app.get('/api/candidate/:id', ctrl.getCandidate)
+app.get('/api/candidates/',  ctrl.getAllCandidates) // ,
 app.get('/api/phase/:id', ctrl.getByPhase)
-app.get('/api/phase/auth/:id', loginRequired, ctrl.getByPhase)
-app.post(`/api/auth`, ctrl.login)
-app.post(`/api/logout`, ctrl.logout)
+app.get('/api/phase/:id', ctrl.getByPhase)
+
+//authentication routes
+app.delete('/api/logout', auth.logout)
+app.post('/api/register', auth.register)
+app.post('/api/login', auth.login)
+app.get('/api/user', auth.checkUser)
 
 ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));

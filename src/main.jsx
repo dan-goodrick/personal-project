@@ -13,9 +13,12 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import PlannedProjects from "./Pages/PlannedProjects";
 import NewRecord from "./Pages/NewRecord";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,14 +60,15 @@ const router = createBrowserRouter(
           return { fundraising: res.data };
         }}
       />
-      <Route path="/newRecord/" element={<NewRecord />} />
+      <Route path="/newRecord/" element={store.getState().userId ? <NewRecord /> : <Login />} />
+      {console.log("store", store.getState().userId)}
       <Route
         path="/admin/"
-        element={<Admin />}
+        element={store.getState().userId ? <Admin /> : <Navigate to="/" />}
         loader={async () => {
           const res = await axios.get(`/api/candidates/auth`);
           // console.log("res.data", res.data);
-              return { candidates: res.data };
+          return { candidates: res.data };
         }}
       />
     </Route>
@@ -73,6 +77,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

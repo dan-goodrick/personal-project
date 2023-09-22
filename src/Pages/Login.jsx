@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -20,35 +19,35 @@ import { useState } from "react";
 import Copyright from "../Widgets/Copyright";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const defaultTheme = createTheme();
 
 export default function Login() {
+  // const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+  const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    const res = await axios.post("/api/auth", formData);
-    console.log("Response: ", res.data);
-    const { success } = res.data;
-    if (success) {
-      navigate(`/admin`);
-    } else {
-      // how to alert when authentication fails?
-      return <p>Try again</p>;
-    }
+    axios
+      .post("/api/login", {
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+      .then((res) => {
+        console.log("!!!!!!!!Response: ", res.data);
+        dispatch({ type: "LOGIN", payload: res.data.userId });
+        // navigate("/admin");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
