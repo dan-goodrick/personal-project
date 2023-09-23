@@ -13,7 +13,6 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-  Navigate,
 } from "react-router-dom";
 import PlannedProjects from "./Pages/PlannedProjects";
 import NewRecord from "./Pages/NewRecord";
