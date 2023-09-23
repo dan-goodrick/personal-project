@@ -19,7 +19,7 @@ export default function DeletePerson({ person, setDeletePerson }) {
 
   const handleDelete = async () => {
     const { data } = await axios.delete(
-      `/api/person/auth/${person.personId}`
+      `/api/person/${person.personId}`
     );
     // console.log(`deleted %{id}`, data);
     setDeletePerson(false);

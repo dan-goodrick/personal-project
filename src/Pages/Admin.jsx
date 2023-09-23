@@ -1,15 +1,16 @@
 import { useLoaderData } from "react-router-dom";
 import IterateCandidates from "../Elements/IterateCandidates";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"
 
 export default function Admin() {
+  
   const { candidates } = useLoaderData();
   const [moving, setMoving] = useState(false);
   const navigate = useNavigate();
-
-  
+    
   const incomplete = 1;
   const accepted = 2;
   const fundraising = 3;
@@ -32,6 +33,9 @@ export default function Admin() {
   const completedProjects = candidates.filter(
     (candidate) => candidate.phase.phaseId == completed
   );
+
+  // if there isn't a user in the store, navigate to login screen
+
   return (
     <>
       <h1>Admin Page</h1>

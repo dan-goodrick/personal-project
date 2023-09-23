@@ -20,7 +20,7 @@ export default function CandidateCard({ candidate }) {
     payload.candidateId = candidate.candidateId;
     // console.log("values to write", payload);
     axios
-      .post(`/api/person/auth/`, payload)
+      .post(`/api/person/`, payload)
       .then((res) => {
         let newPeople = [...peopleArr]
         newPeople.push(res.data)
@@ -42,7 +42,7 @@ export default function CandidateCard({ candidate }) {
     setCandidateCopy(updatedCandidate);
     setEditCandidate(false);
     axios
-      .put(`/api/candidate/auth/${candidate.candidateId}`, updatedCandidate)
+      .put(`/api/candidate/${candidate.candidateId}`, updatedCandidate)
       .then((res) => {
         console.log("updated candidate:", res.data);
       })

@@ -9,18 +9,6 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
   const [deleteCandidate, setDeleteCandidate] = useState(false);
   console.log("ShowCandidate", candidate, "deleteCandidate", deleteCandidate);
 
-//   const handleDeletePerson = (values) => { 
-//     const payload = {...values}
-//     payload.candidateId=candidate.candidateId
-//     console.log("values to write", payload)
-//     axios.post(`/api/person/auth/`, payload)
-//     .then((res) => {console.log("added person:", res)})
-//     .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
-//   setPeopleArr([...peopleArr, payload])
-//   console.log("peopleArr", peopleArr)
-//   setAddPerson(false)
-// }
-
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
@@ -58,19 +46,20 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Button
         size="small"
         color="primary"
-        variant="contained"
-        onClick={() => setEditCandidate(true)}
+        variant="outlined"
+        onClick={() => setDeleteCandidate(true)}
       >
-        Edit
+        Delete Candidate
       </Button>
       <Button
         size="small"
         color="primary"
-        variant="outlined"
-        onClick={() => setDeleteCandidate(true)}
+        variant="contained"
+        onClick={() => setEditCandidate(true)}
       >
-        Delete
+        Edit Candidate Data
       </Button>
+
       {deleteCandidate && (
         <DeleteCandidate
           candidate={candidate}
