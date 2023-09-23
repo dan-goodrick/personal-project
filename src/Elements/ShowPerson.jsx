@@ -2,11 +2,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import getAge from "../functions/getAge";
-import DeletePerson from "./DeletePerson";
+import Delete from "./Delete";
 
 export default function ShowPerson({ person, setEditPerson, i }) {
-  const [deletePerson, setDeletePerson] = useState(false);
-  // console.log("ShowPerson", person);
+  const [del, setDelete] = useState(false);
 
   return (
     <>
@@ -36,12 +35,17 @@ export default function ShowPerson({ person, setEditPerson, i }) {
         size="small"
         color="primary"
         variant="outlined"
-        onClick={() => setDeletePerson(true)}
+        onClick={() => setDelete(true)}
       >
         Delete
       </Button>
-      {deletePerson && (
-        <DeletePerson person={person} setDeletePerson={setDeletePerson} />
+      {del && (
+        <Delete
+        uri={'/api/person/'} 
+        id={person.personId} 
+        name={`${person.firstName} ${person.lastName}`} 
+        setDelete = {setDelete}
+        />
       )}
     </>
   );
