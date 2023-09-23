@@ -40,6 +40,18 @@ const imageData = [
     candidateId: 5,
     primary: true,
   },
+  {
+    imageUrl:
+      "https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/3419/2018/07/11155222/family-ideal.jpg",
+    candidateId: 6,
+    primary: true,
+  },
+  {
+    imageUrl:
+      "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-07/family-quotes-2x1-bn-220712-8a4afd.jpg",
+    candidateId: 7,
+    primary: true,
+  }
 ];
 
 const candidateData = [
@@ -47,7 +59,7 @@ const candidateData = [
     lastName: "Lopez",
     phaseId: 1,
     currPhaseDate: new Date(Date.parse("2023-09-11")),
-    imgUrl: 1,
+    imgUrl: 7,
     address: "22790 Maneadero, Baja California",
     municipality: "Maneadero",
     city: "Ensenada",
@@ -164,7 +176,7 @@ const candidateData = [
     lastName: "Mcbride",
     phaseId: 5,
     currPhaseDate: new Date(Date.parse("2023-05-11")),
-    imgUrl: 5,
+    imgUrl: 6,
     municipality: "Maneadero",
     city: "Ensenada",
     state: "Baja California",
@@ -178,7 +190,7 @@ const candidateData = [
     paymentCnt: 23,
     loanDuration: 30,
     currOnLoan:true
-  },
+  }
 ];
 
 const personData = [
@@ -226,7 +238,7 @@ const personData = [
     email: "gen@email.com",
     whatsApp: "+1123456789",
     gender: "male",
-    candidateId: 4,
+    candidateId: 7,
   },
   {
     lastName: "Quintana",
@@ -273,7 +285,7 @@ const personData = [
     dob: new Date(Date.parse("2018-06-08")),
     email: "gen@email.com",
     whatsApp: "+1123456789",
-    candidateId: 4,
+    candidateId: 6,
   },
   {
     lastName: "Gonzalez",
