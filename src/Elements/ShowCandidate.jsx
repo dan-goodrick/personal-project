@@ -1,13 +1,12 @@
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
-import DeleteCandidate from "./DeleteCandidate";
+import Delete from "./Delete";
 import { useState } from "react";
 import ShowPeople from "./ShowPeople";
 
 export default function ShowCandidate({ candidate, setEditCandidate }) {
-  const [deleteCandidate, setDeleteCandidate] = useState(false);
-  console.log("ShowCandidate", candidate, "deleteCandidate", deleteCandidate);
+  const [del, setDelete] = useState(false);
 
   return (
     <>
@@ -47,7 +46,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
         size="small"
         color="primary"
         variant="outlined"
-        onClick={() => setDeleteCandidate(true)}
+        onClick={() => setDelete(true)}
       >
         Delete Candidate
       </Button>
@@ -60,10 +59,12 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
         Edit Candidate Data
       </Button>
 
-      {deleteCandidate && (
-        <DeleteCandidate
-          candidate={candidate}
-          setDeleteCandidate={setDeleteCandidate}
+      {del && (
+        <Delete
+        uri={'/api/candidate/'} 
+        id={candidate.candidateId} 
+        name={candidate.lastName} 
+        setDelete = {setDelete}
         />
       )}
     </>

@@ -12,17 +12,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeletePerson({ person, setDeletePerson }) {
+export default function Delete({ uri, id, name, setDelete }) {
   const [open, setOpen] = React.useState(true);
 
-  // console.log("Removing Person", person);
-
   const handleDelete = async () => {
-    const { data } = await axios.delete(
-      `/api/person/${person.personId}`
-    );
-    // console.log(`deleted %{id}`, data);
-    setDeletePerson(false);
+    await axios.delete(uri + id);
+    setDelete(false);
     window.location.reload(); // todo: find another way to update just the component
   };
 
@@ -39,11 +34,10 @@ export default function DeletePerson({ person, setDeletePerson }) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{`Delete ${person.firstName} ${person.lastName}?`}</DialogTitle>
+        <DialogTitle>{`Delete ${name}?`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Deleting {`${person.firstName} ${person.lastName}`}. Cannot be
-            undone.
+            Deleting {`${name}`}. Cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
