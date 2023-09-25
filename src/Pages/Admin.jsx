@@ -1,9 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import IterateCandidates from "../Elements/IterateCandidates";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux"
 
 export default function Admin() {
   

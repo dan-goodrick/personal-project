@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -14,11 +15,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Delete({ uri, id, name, setDelete }) {
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
     await axios.delete(uri + id);
     setDelete(false);
-    window.location.reload(); // todo: find another way to update just the component
+    navigate("/admin")
   };
 
   const handleClose = () => {
