@@ -139,8 +139,6 @@ Person.init(
   {
     modelName: "person",
     sequelize: db,
-    // timestamps: true,
-    // updatedAt: false,
   }
 );
 

@@ -33,7 +33,7 @@ function App() {
             return { projects: res.data };
           }}
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={userId? <Navigate to='/admin'/> : <Login />} />
         <Route
           path="/pastProjects/"
           element={<PastProjects />}
@@ -61,7 +61,7 @@ function App() {
             return { fundraising: res.data };
           }}
         />
-        <Route path="/newRecord/" element={<NewRecord />} />
+        <Route path="/newRecord/" element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
         <Route
           path="/admin/"
           element={userId? <Admin /> : <Navigate to='/login'/>}

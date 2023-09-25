@@ -213,7 +213,8 @@ const serverFunctions = {
   },
 
   addCandidate: (req, res) => {
-    const {candidate, peopleArr, imgArr} = req.body
+    const {candidate, peopleArr, imgArrVar} = req.body
+    console.log("req.body", req.body);
     Candidate.create(candidate)
       .then((val) => {
         console.log("New candidate created:", val);
@@ -221,12 +222,19 @@ const serverFunctions = {
           person.candidateId = val.candidateId
           Person.create(person).then((val) => { 
             console.log("New Person created with candidate:", val)})
+            .catch((error) => {
+              console.error(`Unable to Add Person ${val}`, error);
+            })
          })
-        imgArr.map((image) => { 
+        console.log("imgArr", imgArrVar);
+        imgArrVar.map((image) => { 
           image.candidateId = val.candidateId
-          Image.create(image).then((val) => { 
-            console.log("New Image created:", val);
+          Image.create(image).then((res) => { 
+            console.log("New Image:", res, " created from:", image);
            })
+           .catch((error) => {
+            console.log(`Unable to Add Image ${val}`, error);
+          })
          })
          res.json(val)
       })

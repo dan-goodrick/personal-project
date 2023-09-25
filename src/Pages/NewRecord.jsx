@@ -2,13 +2,11 @@ import AddCandidate from "../Elements/AddCandidate";
 import AddPerson from "../Elements/AddPerson";
 import AddImage from "../Elements/AddImage";
 import ShowImages from "../Elements/ShowImages";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ShowPeople from "../Elements/ShowPeople";
-import { useSelector } from "react-redux"
-
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -17,23 +15,22 @@ export default function NewRecord() {
   const [imgArr, setImgArr] = useState([]);
   const [peopleArr, setPeopleArr] = useState([]);
 
-  const userId = useSelector(state => state.userId)
-  console.log("userId", userId);
+  const handleAddPerson = (values) => {
+    setPeopleArr([...peopleArr, values]);
+    setAddPerson(false);
+  };
 
-  useEffect(() => {
-    if (!userId) navigate('/login');
-}, [])
+  const handleNewCandidate = (candidate) => {
 
-  const handleAddPerson = (values) => { 
-    // console.log("person added", values)
-    setPeopleArr([...peopleArr, values])
-    setAddPerson(false)
-}
-
-  const handleNewCandidate = (candidate) => { 
-    const payload = {candidate, peopleArr, imgArr}
-    // console.log(payload);
-    axios.post(`/api/candidate/`, payload) // arrays of objects for for images and people
+    const imgArrVar = !imgArr.length? [{
+      imageUrl: "/noImage.jpeg",
+      primary: true,
+    }] : imgArr
+    
+    const payload = { candidate, peopleArr, imgArrVar };
+    console.log("payload", payload);
+    axios
+      .post(`/api/candidate/`, payload) // arrays of objects for for images and people
       .then((res) => {
         // console.log("added candidate:", res);
         navigate("/admin");
@@ -41,11 +38,9 @@ export default function NewRecord() {
       .catch((error) => {
         console.error(`Unable to add ${candidate.lastName}`, error);
       });
-      
-   }
+  };
   return (
     <>
-
       <h1>Images</h1>
       <ShowImages imgArr={imgArr} setImgArr={setImgArr} />
       {addImage ? 

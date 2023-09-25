@@ -7,9 +7,8 @@ import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-//https://formik.org/docs/tutorial
-// And now we can use these
-const EditPerson = ({ person, setEditPerson, setNewPerson, updateDb }) => {
+
+const EditPerson = ({ person, setEditPerson, setNewPerson }) => {
   // console.log("Edit Person:", person);
 
   return (
@@ -36,18 +35,19 @@ const EditPerson = ({ person, setEditPerson, setNewPerson, updateDb }) => {
           gender: Yup.string().oneOf(["male", "female", "other"]),
         })}
         onSubmit={(values) => {
-          if (updateDb) {
+          // don't update a record that hasn't been created yet.
+          if (values.personId) {
             axios
               .put(`/api/person/${values.personId}`, values)
               .then((candidate) => {
-                setNewPerson(values);
-                // console.log("updated candidate:", candidate);
+                console.log("updated candidate:", candidate);
               })
               .catch((error) => {
                 console.error(`Unable to update Candidate ${values}`, error);
               });
           }
           setEditPerson(false);
+          setNewPerson(values)
         }}
       >
         <Form>
