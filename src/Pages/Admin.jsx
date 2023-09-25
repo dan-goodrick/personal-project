@@ -1,14 +1,25 @@
 import { useLoaderData } from "react-router-dom";
 import IterateCandidates from "../Elements/IterateCandidates";
+import Map from "../Elements/Map";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux"
+import { Grid } from "@mui/material";
+import CandidateCard from "../Elements/CandidateCard";
+import ShowCandidate from "../Elements/ShowCandidate";
 
 export default function Admin() {
   
   const { candidates } = useLoaderData();
   const [moving, setMoving] = useState(false);
+  const [component, setComponent] = useState("show") ;
+
+    useEffect (() => {
+      moving?
+      setComponent("show"):
+      setComponent("edit")
+    }, [])
+
   const navigate = useNavigate();
     
   const incomplete = 1;
@@ -20,7 +31,6 @@ export default function Admin() {
   const incompleteApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == incomplete
   );
-  // needs at least one record in incomplete applications
   const acceptedApplications = candidates.filter(
     (candidate) => candidate.phase.phaseId == accepted
   );
@@ -34,7 +44,8 @@ export default function Admin() {
     (candidate) => candidate.phase.phaseId == completed
   );
 
-  // if there isn't a user in the store, navigate to login screen
+  const map = { show: ShowCandidate, edit: CandidateCard}
+  
 
   return (
     <>
@@ -66,16 +77,24 @@ export default function Admin() {
       >
         Add Candidate
       </Button>
-      <h2>Incomplete Build Applications</h2>
-      <div>{<IterateCandidates cards={incompleteApplications} moving={moving} />}</div>
-      <h2>Completed Build Applications</h2>
-      <div>{<IterateCandidates cards={acceptedApplications} moving={moving} />}</div>
-      <h2>Projects in fundraising</h2>
-      <div>{<IterateCandidates cards={fundraisingProjects} moving={moving} />}</div>
-      <h2>Projects in Planning</h2>
-      <div>{<IterateCandidates cards={plannedProjects} moving={moving} />}</div>
-      <h2>Completed Projects</h2>
-      <div>{<IterateCandidates cards={completedProjects} moving={moving} />}</div>
+      <Grid
+      container
+      spacing={2}
+      direction="column"
+      justify="flex-start"
+      alignItems="flex-start"
+      >
+        <h2>Incomplete Build Applications</h2>
+        <div>{<Map data={incompleteApplications} component={map[component]} />}</div>
+        <h2>Completed Build Applications</h2>
+        <div>{<IterateCandidates cards={acceptedApplications} moving={moving} />}</div>
+        <h2>Projects in fundraising</h2>
+        <div>{<IterateCandidates cards={fundraisingProjects} moving={moving} />}</div>
+        <h2>Projects in Planning</h2>
+        <div>{<IterateCandidates cards={plannedProjects} moving={moving} />}</div>
+        <h2>Completed Projects</h2>
+        <div>{<IterateCandidates cards={completedProjects} moving={moving} />}</div>
+      </Grid>
     </>
   );
 }
