@@ -28,6 +28,7 @@ const defaultTheme = createTheme();
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [badLogin, setBadLogin] = useState(false);
   const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -48,7 +49,7 @@ export default function Login() {
         navigate("/admin");
       })
       .catch((error) => {
-        // ALERT BASED ON THE ERROR
+        setBadLogin(true)
         console.error(`ERROR WITH LOGIN:`, error);
       });
   };
@@ -90,6 +91,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            {badLogin && <Typography variant='body2' color='red'>{'\u26A0'} Sorry, the password you entered doesn't match what we have on file.</Typography>}
             <Box
               component="form"
               noValidate
