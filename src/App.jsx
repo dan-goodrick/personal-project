@@ -17,6 +17,7 @@ import ErrorPage from "./Pages/Error";
 import Admin from "./Pages/Admin";
 import Fundraising from "./Pages/Fundraising";
 import Layout from "./Elements/Layout";
+import SignUp from "./Pages/SignUp";
 
 function App() {
   const userId = useSelector(state => state.userId)
@@ -61,6 +62,7 @@ function App() {
             return { fundraising: res.data };
           }}
         />
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="/newRecord/" element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
         <Route
           path="/admin/"

@@ -47,7 +47,10 @@ export default function Login() {
         dispatch({ type: "LOGIN", payload: res.data.userId });
         navigate("/admin");
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        // ALERT BASED ON THE ERROR
+        console.error(`ERROR WITH LOGIN:`, error);
+      });
   };
 
   return (
@@ -109,7 +112,7 @@ export default function Login() {
                 id="password"
                 placeholder="Password"
                 name="password"
-                autoComplete="email"
+                autoComplete="new-password"
                 autoFocus
                 type={showPassword ? "text" : "password"}
                 endAdornment={
@@ -148,7 +151,7 @@ export default function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signUp" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
