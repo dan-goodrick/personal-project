@@ -6,8 +6,6 @@ import Select from "./../Widgets/Select";
 import Checkbox from "./../Widgets/Checkbox";
 import Button from "@mui/material/Button";
 
-// setAddPerson and updateDB are required props.  
-// setPeopleArr and peopleArr are needed if updateDb=false
 const AddPerson = ( {handleAddPerson, setAddPerson} ) => {
   return (
     <>

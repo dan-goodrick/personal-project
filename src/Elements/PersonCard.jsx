@@ -1,12 +1,7 @@
 import CardContent from "@mui/material/CardContent";
 import { useState } from "react";
-
 import EditPerson from "./EditPerson";
 import ShowPerson from "./ShowPerson";
-import { useEffect } from "react";
-import axios from "axios";
-
-
 
 export default function PersonCard({ person, i}) {
   const [editPerson, setEditPerson] = useState(false);
