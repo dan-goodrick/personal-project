@@ -29,7 +29,6 @@ const handleLogout = () => {
       .catch(err => console.log(err))
 }
 
-// TODO Login/Letter SVG with dropdown to logout 
   return (
     <div>
         <NavLink to="/">BoH</NavLink>
@@ -39,10 +38,11 @@ const handleLogout = () => {
         {userId? 
         <>
         <NavLink to="/admin">Admin</NavLink>
-        <NavLink><button onClick={handleLogout}>Logout</button></NavLink>
+        <NavLink><button onClick={handleLogout}>Sign Out</button></NavLink>
         </>:
         <>
-        <NavLink to="/login">Log in/Register</NavLink>
+        <NavLink to="/login">Sign In</NavLink>
+        <NavLink to="/signUp">Volunteer Signup</NavLink>
         </>
         }
     </div>
