@@ -128,12 +128,14 @@ export default function SignUp() {
                   </InputAdornment>
                 }
               />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
+              <FormControlLabel
+                control={<Checkbox value="adminAccount" color="primary" justify='left'/>}
+                label="Request Admin Account (requires approval)"
+              />
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary"  justify='left'/>}
+                label="Join our (infrequent) mailing list"
+              />
               </Grid>
             </Grid>
             <Button
