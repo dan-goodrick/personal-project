@@ -28,9 +28,10 @@ function App() {
           index
           element={<Home />}
           loader={async () => {
-            const res = await axios.get(`/api/phase/3`);
+            const projects = await axios.get(`/api/phase/3`);
+            const images = await axios.get(`/api/projectImages`);
             // console.log("res.data", res.data);
-            return { projects: res.data };
+            return { projects: projects.data, images: images.data};
           }}
         />
         <Route path="/login" element={userId? <Navigate to='/admin'/> : <Login />} />

@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Person, Phase } from "./../server/model.js";
+import { Candidate, User, Image, Person, Phase, ProjectImage } from "./../server/model.js";
 import connectToDB from "./../server/db.js";
 import bcrypt from 'bcryptjs'
 
@@ -326,6 +326,20 @@ const userData = [
     lastName: "goodrick",
   }
 ]
+const projectImages = [
+  {
+    original: "https://picsum.photos/id/1018/1000/600/",
+    thumbnail: "https://picsum.photos/id/1018/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1015/1000/600/",
+    thumbnail: "https://picsum.photos/id/1015/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1019/1000/600/",
+    thumbnail: "https://picsum.photos/id/1019/250/150/",
+  },
+]
 
 const phaseData = [
   {phaseName: "Application Pending"},
@@ -340,6 +354,7 @@ await db.sync({ force: true }).then(async () => {
   await Candidate.bulkCreate(candidateData);
   await Image.bulkCreate(imageData);
   await Person.bulkCreate(personData);
+  await ProjectImage.bulkCreate(projectImages);
   console.log('db reset and seeded')
 })
 

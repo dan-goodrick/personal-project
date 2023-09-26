@@ -11,7 +11,6 @@ const Header = () => {
 
   const dispatch = useDispatch()
   const userId = useSelector(state => state.userId)  
-  console.log("User: ", userId);
   useEffect(() => {
     axios
         .get("/api/user")

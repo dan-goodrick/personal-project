@@ -33,6 +33,7 @@ app.post('/api/candidate/', ctrl.addCandidate)
 app.delete('/api/candidate/:id', ctrl.deleteCandidate)
 app.delete('/api/person/:id', ctrl.deletePerson)
 app.get('/api/person/:id', ctrl.getPerson)
+app.get('/api/projectImages', ctrl.getProjectImages)
 app.get('/api/candidate/:id', ctrl.getCandidate)
 app.get('/api/candidate/:id', ctrl.getCandidate)
 app.get('/api/candidates/',  ctrl.getAllCandidates) // ,

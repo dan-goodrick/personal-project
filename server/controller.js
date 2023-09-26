@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Phase, Person } from "./model.js";
+import { Candidate, User, Image, Phase, Person, ProjectImage } from "./model.js";
 
 // import {v2 as cloudinary} from 'cloudinary';
 // cloudinary.config({ 
@@ -21,6 +21,7 @@ const serverFunctions = {
     }
     req.session.userId = user.userId;
     res.json({ success: true });
+    
   },
   logout: async (req, res) => {
     console.log("logout with session", req.session);
@@ -240,6 +241,16 @@ const serverFunctions = {
       })
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);
+      });
+  },
+  getProjectImages: (req, res) => {
+    console.log(req.params);
+    ProjectImage.findAll()
+      .then((images) => {
+          res.json(images)
+      })
+      .catch((error) => {
+        console.error("Error finding project images:", error);
       });
   },
 };

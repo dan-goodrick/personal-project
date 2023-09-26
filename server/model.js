@@ -166,6 +166,27 @@ Image.init(
     sequelize: db,
   }
 );
+export class ProjectImage extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+ProjectImage.init(
+  {
+    imageId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    original: DataTypes.STRING(500),
+    thumbnail: DataTypes.STRING(500),  // could this be calculated from the imageURl?
+  },
+  {
+    modelName: "projectImage",
+    sequelize: db,
+  }
+);
 
 Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete:"CASCADE"});
 Person.belongsTo(Candidate, { foreignKey: "candidateId" });
