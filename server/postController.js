@@ -1,12 +1,10 @@
 import {
   Candidate,
-  User,
   Image,
-  Phase,
   Person,
   ProjectImage,
 } from "./model.js";
-
+import imageThumbnail from 'image-thumbnail'
 // import {v2 as cloudinary} from 'cloudinary';
 // cloudinary.config({
 //   cloud_name: 'dyozbgxgo',
@@ -57,6 +55,7 @@ const serverFunctions = {
           });
       } else {
         // add images that don't
+        // create a thumbnail image
         ProjectImage.create(req.body)
           .then((val) => {
             console.log("New image URL added:", val);

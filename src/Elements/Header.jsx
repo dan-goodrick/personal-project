@@ -24,7 +24,7 @@ const Header = () => {
 const handleLogout = () => {
   axios
       .delete("/api/logout")
-      .then(res => dispatch({ type: "LOGOUT" }))
+      .then(() => dispatch({ type: "LOGOUT" }))
       .catch(err => console.log(err))
 }
 

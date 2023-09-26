@@ -45,18 +45,18 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Button
         size="small"
         color="primary"
-        variant="outlined"
-        onClick={() => setDelete(true)}
-      >
-        Delete Candidate
-      </Button>
-      <Button
-        size="small"
-        color="primary"
         variant="contained"
         onClick={() => setEditCandidate(true)}
       >
         Edit Candidate Data
+      </Button>
+      <Button
+        size="small"
+        color="primary"
+        variant="outlined"
+        onClick={() => setDelete(true)}
+      >
+        Delete Candidate
       </Button>
 
       {del && (

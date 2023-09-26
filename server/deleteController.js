@@ -1,10 +1,6 @@
 import {
   Candidate,
-  User,
-  Image,
-  Phase,
   Person,
-  ProjectImage,
 } from "./model.js";
 
 // import {v2 as cloudinary} from 'cloudinary';

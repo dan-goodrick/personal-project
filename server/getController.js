@@ -1,6 +1,5 @@
 import {
   Candidate,
-  User,
   Image,
   Phase,
   Person,
