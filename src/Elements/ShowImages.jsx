@@ -1,9 +1,6 @@
 
 import Checkbox from "../Widgets/Checkbox";
 
-// const cld = new Cloudinary({cloud: {cloudName: 'dyozbgxgo'}});
-//https://formik.org/docs/tutorial
-// And now we can use these
 const ShowImages = ({ imgArr, setImgArr}) => {
   const makePrimary = (i) => {
     let thisArr = [...imgArr]
