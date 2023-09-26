@@ -15,7 +15,6 @@
     "initdb": "npm run createdb && npm run seedModels && npm run seedData"
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.8",
