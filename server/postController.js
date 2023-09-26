@@ -4,7 +4,7 @@ import {
   Person,
   ProjectImage,
 } from "./model.js";
-import imageThumbnail from 'image-thumbnail'
+
 // import {v2 as cloudinary} from 'cloudinary';
 // cloudinary.config({
 //   cloud_name: 'dyozbgxgo',
@@ -41,7 +41,7 @@ const serverFunctions = {
         console.error(`Unable to add image ${req.body}`, error);
       });
   },
-  projectImages: (req) => {
+  projectImages: async (req) => {
     console.log("update photos", req.body);
     req.body.map((image) => {
       if (image.imageId) {
@@ -55,8 +55,7 @@ const serverFunctions = {
           });
       } else {
         // add images that don't
-        // create a thumbnail image
-        ProjectImage.create(req.body)
+        ProjectImage.create(image)
           .then((val) => {
             console.log("New image URL added:", val);
           })

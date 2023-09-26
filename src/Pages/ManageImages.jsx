@@ -1,12 +1,9 @@
-import AddCandidate from "../Elements/AddCandidate";
-import AddPerson from "../Elements/AddPerson";
 import AddImage from "../Elements/AddImage";
 import ShowImages from "../Elements/ShowImages";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ShowPeople from "../Elements/ShowPeople";
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -24,11 +21,12 @@ export default function NewRecord() {
     axios
       .post(`/api/projectImages`, imgArr)
       .then((res) => {
-        navigate("/admin");
+        console.log("Project Images: ", res);
       })
       .catch((error) => {
         console.error(`Error in handleUpdateImages`, error);
       });
+    navigate("/admin");
   };
   return (
     <>

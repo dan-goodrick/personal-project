@@ -5,7 +5,7 @@ import {
   Person,
   ProjectImage,
 } from "./model.js";
-
+import thumbnail from 'image-thumbnail'
 // import {v2 as cloudinary} from 'cloudinary';
 // cloudinary.config({
 //   cloud_name: 'dyozbgxgo',
@@ -116,9 +116,13 @@ const serverFunctions = {
       });
   },
 
-  projectImages: (req, res) => {
+  projectImages:  (req, res) => {
     ProjectImage.findAll()
       .then((images) => {
+        images.map( async (image) => { 
+          // thumbnails created here, not uploaded or downloaded 
+          image.thumbnail = await thumbnail({ uri: image.original });
+         })
         res.json(images);
       })
       .catch((error) => {

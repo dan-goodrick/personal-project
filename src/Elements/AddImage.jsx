@@ -6,7 +6,6 @@ import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-
 // setAddImage and updateDB are required props.  
 // setImgArr and imgArr are needed if updateDb=false
 const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
@@ -26,11 +25,14 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
           if (updateDb){
             // console.log("values sent to db", values)
             axios.post(`/api/image/`, values)
-            .then((res) => {console.log("added Image:", res)})
+            .then((res) => {
+              console.log("added Image:", res)
+              })
             .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
           } else {
             // console.log("update imgArr", [...imgArr, values])
             setImgArr([...imgArr, values])
+
           }
           setAddImage(false)
         }}
