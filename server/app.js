@@ -2,7 +2,10 @@ import express from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
 import ViteExpress from 'vite-express';
-import ctrl from './controller.js'
+import get from './getController.js'
+import del from './deleteController.js'
+import add from './postController.js'
+import put from './putController.js'
 import auth from './authController.js'
 const app = express();
 const port = 8000;
@@ -21,24 +24,21 @@ app.use(session({
   }
 }))
 
-// app.get('/api/candidates', loginRequired, ctrl.showAll)
-// app.get(`/api/candidates/:id`, ctrl.getOne)
-// app.get('/api/ratings', loginRequired, ctrl.ratings)
-app.put('/api/person/:id', ctrl.putPerson)
-app.put('/api/candidate/:id', ctrl.putCandidate)
-app.put('/api/phase/:id', ctrl.putPhase)
-app.post('/api/image/', ctrl.addImage)
-app.post('/api/person/', ctrl.addPerson)
-app.post('/api/candidate/', ctrl.addCandidate)
-app.delete('/api/candidate/:id', ctrl.deleteCandidate)
-app.delete('/api/person/:id', ctrl.deletePerson)
-app.get('/api/person/:id', ctrl.getPerson)
-app.get('/api/projectImages', ctrl.getProjectImages)
-app.get('/api/candidate/:id', ctrl.getCandidate)
-app.get('/api/candidate/:id', ctrl.getCandidate)
-app.get('/api/candidates/',  ctrl.getAllCandidates) // ,
-app.get('/api/phase/:id', ctrl.getByPhase)
-app.get('/api/phase/:id', ctrl.getByPhase)
+
+app.put('/api/person/:id', put.person)
+app.put('/api/candidate/:id', put.candidate)
+app.put('/api/phase/:id', put.phase)
+app.post('/api/image/', add.image)
+app.post('/api/person/', add.person)
+app.post('/api/projectImages', add.projectImages)
+app.post('/api/candidate/', add.candidate)
+app.delete('/api/candidate/:id', del.candidate)
+app.delete('/api/person/:id', del.person)
+app.get('/api/person/:id', get.person)
+app.get('/api/projectImages', get.projectImages)
+app.get('/api/candidate/:id', get.candidate)
+app.get('/api/candidates/',  get.candidates) 
+app.get('/api/phase/:id', get.byPhase)
 
 //authentication routes
 app.delete('/api/logout', auth.logout)

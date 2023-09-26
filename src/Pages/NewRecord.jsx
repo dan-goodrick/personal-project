@@ -23,7 +23,7 @@ export default function NewRecord() {
   const handleNewCandidate = (candidate) => {
 
     const imgArrVar = !imgArr.length? [{
-      imageUrl: "/noImage.jpeg",
+      original: "/noImage.jpeg",
       primary: true,
     }] : imgArr
     

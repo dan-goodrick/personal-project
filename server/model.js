@@ -155,7 +155,7 @@ Image.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    imageUrl: DataTypes.STRING(500),
+    original: DataTypes.STRING(500),
     primary: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -181,6 +181,10 @@ ProjectImage.init(
     },
     original: DataTypes.STRING(500),
     thumbnail: DataTypes.STRING(500),  // could this be calculated from the imageURl?
+    primary: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     modelName: "projectImage",

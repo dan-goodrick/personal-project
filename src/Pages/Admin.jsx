@@ -3,11 +3,14 @@ import IterateCandidates from "../Elements/IterateCandidates";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import AddProjectImage from "../Elements/AddProjectImage";
 
 export default function Admin() {
   
   const { candidates } = useLoaderData();
   const [moving, setMoving] = useState(false);
+  const [showAddImage, setShowAddImage] = useState(false);
+  const [imgArr, setImgArr] = useState([]);
   const navigate = useNavigate();
     
   const incomplete = 1;
@@ -65,6 +68,15 @@ export default function Admin() {
       >
         Add Candidate
       </Button>
+      <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        style={{ display: moving ? "none" : "block" }}
+        onClick={() => navigate("/manageImages")}
+      >
+        Add Project Images
+      </Button>      
       <h2>Incomplete Build Applications</h2>
       <div>{<IterateCandidates cards={incompleteApplications} moving={moving} />}</div>
       <h2>Completed Build Applications</h2>

@@ -5,11 +5,12 @@ import Text from "../Widgets/Text";
 import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import ShowImages from "./ShowImages";
 
 
 // setAddImage and updateDB are required props.  
 // setImgArr and imgArr are needed if updateDb=false
-const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
+const AddProjectImage = ({ setAddImage, setImgArr, imgArr}) => {
   return (
     <>
       <Formik
@@ -21,20 +22,17 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
           original: Yup.string().max(150, "Must be 150 characters or less"),
           primary: Yup.bool()
         })}
-        onSubmit={ (values) => {
-          
-          if (updateDb){
-            // console.log("values sent to db", values)
-            axios.post(`/api/image/`, values)
+        onSubmit={ (values) => {          
+          // console.log("values sent to db", values)
+          axios.post(`/api/image/`, values)
             .then((res) => {console.log("added Image:", res)})
             .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
-          } else {
-            // console.log("update imgArr", [...imgArr, values])
-            setImgArr([...imgArr, values])
-          }
+          // console.log("update imgArr", [...imgArr, values])
+          setImgArr([...imgArr, values])
           setAddImage(false)
         }}
       >
+      <ShowImages imgArr={imgArr} setImgArr={setImgArr}/>
         <Form>
           <Text
             label="Image URL"
@@ -68,4 +66,4 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
   );
 };
 
-export default AddImage;
+export default AddProjectImage;

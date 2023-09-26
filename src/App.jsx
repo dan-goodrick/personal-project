@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import PlannedProjects from "./Pages/PlannedProjects";
 import NewRecord from "./Pages/NewRecord";
+import ManageImages from "./Pages/ManageImages";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import PastProjects from "./Pages/PastProjects";
@@ -63,6 +64,7 @@ function App() {
           }}
         />
         <Route path="/newRecord/" element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
+        <Route path="/manageImages/" element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route
           path="/admin/"
           element={userId? <Admin /> : <Navigate to='/login'/>}

@@ -11,13 +11,13 @@ const AddPerson = ( {handleAddPerson, setAddPerson} ) => {
     <>
       <Formik
         initialValues={{
-          // lastName: "",     //  text
-          // firstName: "",    //  text
-          // dob: null,        //  Date
-          // whatsApp: "",     //  text
-          // email: "",        //  text
+          lastName: "",     //  text
+          firstName: "",    //  text
+          dob: "01/01/1900",        //  Date
+          whatsApp: "",     //  text
+          email: "",        //  text
           gender: "other",     //  select
-          // headOfHousehold: false, // checkbox
+          headOfHousehold: false, // checkbox
         }}
         validationSchema={Yup.object({
           firstName: Yup.string().max(15, "Must be 15 characters or less"),

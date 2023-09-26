@@ -21,12 +21,12 @@ const ShowImages = ({ imgArr, setImgArr}) => {
     // console.log("imgArrAfter", thisArr);
     setImgArr(thisArr)
    }
-
+   console.log("imgArr", imgArr)
   return (
     <>
       {imgArr.map((img, i) => (
         <p key={i} >
-        {img.imageUrl} 
+        {img.original} 
         {img.primary ? 
         <>&#x2713;</> : 
         <button id="promote" onClick={()=>makePrimary(i)}>&#x2013;</button>}
