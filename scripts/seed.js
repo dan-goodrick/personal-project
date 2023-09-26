@@ -329,7 +329,7 @@ const userData = [
 const projectImages = [
   {
     original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/250/150/",
+    thumbnail: "https://picsum.photos/id/1018/1000/600/",
     primary:true,
   },
   {
@@ -340,7 +340,7 @@ const projectImages = [
   {
     original: "https://picsum.photos/id/1019/1000/600/",
     thumbnail: "https://picsum.photos/id/1019/250/150/",
-    primary:false,
+    primary:false
   },
 ]
 

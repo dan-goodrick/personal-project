@@ -111,10 +111,13 @@ const serverFunctions = {
   projectImages:  (req, res) => {
     ProjectImage.findAll()
       .then((images) => {
-        images.map( async (image) => { 
-          // thumbnails created here, not uploaded or downloaded 
-          image.thumbnail = await thumbnail({ uri: image.original });
-         })
+        // images.map((image) => { 
+        //   // thumbnails created here, not uploaded or downloaded 
+        //   image.thumbnail = thumbnail({ uri: image.original });
+        //   console.log("image.thumbnail", image.thumbnail);
+        //   return image
+        // })
+        // console.log("thumbnail", images);
         res.json(images);
       })
       .catch((error) => {

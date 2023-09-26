@@ -46,6 +46,7 @@ const serverFunctions = {
           });
       } else {
         // add images that don't
+        image.thumbnail = image.original
         ProjectImage.create(image)
           .then((val) => {
             console.log("New image URL added:", val);
