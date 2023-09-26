@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Person, Phase } from "./../server/model.js";
+import { Candidate, User, Image, Person, Phase, ProjectImage } from "./../server/model.js";
 import connectToDB from "./../server/db.js";
 import bcrypt from 'bcryptjs'
 
@@ -7,47 +7,47 @@ const salt = bcrypt.genSaltSync(10)
 
 const imageData = [
   {
-    imageUrl:
+    original:
       "https://images.theconversation.com/files/227904/original/file-20180716-44094-neg6b1.JPG?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip",
     candidateId: 1,
     primary: true,
   },
   {
-    imageUrl:
+    original:
       "https://med.stanford.edu/content/dam/sm-news/images/2014/06/mexican-family.jpg",
     candidateId: 2,
     primary: true,
   },
   {
-    imageUrl: "https://i.ytimg.com/vi/wS6J8Fz_m-I/maxresdefault.jpg",
+    original: "https://i.ytimg.com/vi/wS6J8Fz_m-I/maxresdefault.jpg",
     candidateId: 3,
     primary: true,
   },
   {
-    imageUrl: "https://www.brattonlawgroup.com/wp-content/uploads/2020/02/big-family.jpg",
+    original: "https://www.brattonlawgroup.com/wp-content/uploads/2020/02/big-family.jpg",
     candidateId: 3,
     primary: false,
   },
   {
-    imageUrl:
+    original:
       "https://cf.ltkcdn.net/family/images/std/280568-800x533-happy-family.webp",
     candidateId: 4,
     primary: true,
   },
   {
-    imageUrl:
+    original:
       "https://media.istockphoto.com/id/1066913572/photo/hispanic-family-in-the-park.jpg?s=612x612&w=0&k=20&c=SLiJ4tled4Ig-uTHk2q3x7t_P93jXSoByHHhtUCsrQQ=",
     candidateId: 5,
     primary: true,
   },
   {
-    imageUrl:
+    original:
       "https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/3419/2018/07/11155222/family-ideal.jpg",
     candidateId: 6,
     primary: true,
   },
   {
-    imageUrl:
+    original:
       "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-07/family-quotes-2x1-bn-220712-8a4afd.jpg",
     candidateId: 7,
     primary: true,
@@ -326,6 +326,23 @@ const userData = [
     lastName: "goodrick",
   }
 ]
+const projectImages = [
+  {
+    original: "https://picsum.photos/id/1018/1000/600/",
+    thumbnail: "https://picsum.photos/id/1018/1000/600/",
+    primary:true,
+  },
+  {
+    original: "https://picsum.photos/id/1015/1000/600/",
+    thumbnail: "https://picsum.photos/id/1015/250/150/",
+    primary: false,
+  },
+  {
+    original: "https://picsum.photos/id/1019/1000/600/",
+    thumbnail: "https://picsum.photos/id/1019/250/150/",
+    primary:false
+  },
+]
 
 const phaseData = [
   {phaseName: "Application Pending"},
@@ -340,6 +357,7 @@ await db.sync({ force: true }).then(async () => {
   await Candidate.bulkCreate(candidateData);
   await Image.bulkCreate(imageData);
   await Person.bulkCreate(personData);
+  await ProjectImage.bulkCreate(projectImages);
   console.log('db reset and seeded')
 })
 

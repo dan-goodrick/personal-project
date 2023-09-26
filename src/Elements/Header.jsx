@@ -11,7 +11,6 @@ const Header = () => {
 
   const dispatch = useDispatch()
   const userId = useSelector(state => state.userId)  
-  console.log("User: ", userId);
   useEffect(() => {
     axios
         .get("/api/user")
@@ -25,7 +24,7 @@ const Header = () => {
 const handleLogout = () => {
   axios
       .delete("/api/logout")
-      .then(res => dispatch({ type: "LOGOUT" }))
+      .then(() => dispatch({ type: "LOGOUT" }))
       .catch(err => console.log(err))
 }
 

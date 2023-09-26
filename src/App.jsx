@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import PlannedProjects from "./Pages/PlannedProjects";
 import NewRecord from "./Pages/NewRecord";
+import ManageImages from "./Pages/ManageImages";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import PastProjects from "./Pages/PastProjects";
@@ -28,9 +29,10 @@ function App() {
           index
           element={<Home />}
           loader={async () => {
-            const res = await axios.get(`/api/phase/3`);
+            const projects = await axios.get(`/api/phase/3`);
+            const images = await axios.get(`/api/projectImages`);
             // console.log("res.data", res.data);
-            return { projects: res.data };
+            return { projects: projects.data, images: images.data};
           }}
         />
         <Route path="/login" element={userId? <Navigate to='/admin'/> : <Login />} />
@@ -62,6 +64,7 @@ function App() {
           }}
         />
         <Route path="/newRecord/" element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
+        <Route path="/manageImages/" element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route
           path="/admin/"
           element={userId? <Admin /> : <Navigate to='/login'/>}

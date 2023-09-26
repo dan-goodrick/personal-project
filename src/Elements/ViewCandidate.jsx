@@ -23,7 +23,7 @@ export default function ViewCandidate({ candidate }) {
       <CardMedia
         component="img"
         height="140"
-        image={candidate.images[0].imageUrl}
+        image={candidate.images[0].original}
         alt={candidate.lastName}
       />
       <CardContent>

@@ -29,7 +29,7 @@ User.init(
     },
     password: {
       type: DataTypes.STRING(500),
-      allowNull: false
+      allowNull: false,
     },
   },
   {
@@ -94,11 +94,11 @@ Candidate.init(
     },
     videoUrl: DataTypes.STRING,
     fundsRaised: {
-      type: DataTypes.DECIMAL(13,2),
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     fundRequirement: {
-      type: DataTypes.DECIMAL(13,2),
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 10000,
     },
     loanDuration: {
@@ -155,7 +155,7 @@ Image.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    imageUrl: DataTypes.STRING(500),
+    original: DataTypes.STRING(500),
     primary: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -166,14 +166,43 @@ Image.init(
     sequelize: db,
   }
 );
+export class ProjectImage extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
 
-Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete:"CASCADE"});
+ProjectImage.init(
+  {
+    imageId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    original: DataTypes.STRING(500),
+    thumbnail: {
+      type: DataTypes.STRING(500),
+      defaultValue:
+        "https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png",
+    }, 
+    primary: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
+    modelName: "projectImage",
+    sequelize: db,
+  }
+);
+
+Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete: "CASCADE" });
 Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-Candidate.hasMany(Image, { foreignKey: "candidateId", onDelete:"CASCADE" });
+Candidate.hasMany(Image, { foreignKey: "candidateId", onDelete: "CASCADE" });
 Image.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-Phase.hasMany(Candidate, { foreignKey: "phaseId" , onDelete:"RESTRICT"});
+Phase.hasMany(Candidate, { foreignKey: "phaseId", onDelete: "RESTRICT" });
 Candidate.belongsTo(Phase, { foreignKey: "phaseId" });
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
