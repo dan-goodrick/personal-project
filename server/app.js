@@ -28,17 +28,24 @@ app.use(session({
 app.put('/api/person/:id', put.person)
 app.put('/api/candidate/:id', put.candidate)
 app.put('/api/phase/:id', put.phase)
+app.put('/api/volunteer/:id', put.volunteer)
+
 app.post('/api/image/', add.image)
 app.post('/api/person/', add.person)
 app.post('/api/projectImages', add.projectImages)
 app.post('/api/candidate/', add.candidate)
+app.post('/api/volunteer/', add.volunteer)
+
 app.delete('/api/candidate/:id', del.candidate)
 app.delete('/api/person/:id', del.person)
+app.delete('/api/volunteer/:id', del.volunteer)
+
 app.get('/api/person/:id', get.person)
 app.get('/api/projectImages', get.projectImages)
 app.get('/api/candidate/:id', get.candidate)
 app.get('/api/candidates/',  get.candidates) 
 app.get('/api/phase/:id', get.byPhase)
+app.get('/api/volunteer/:id', get.volunteer)
 
 //authentication routes
 app.delete('/api/logout', auth.logout)

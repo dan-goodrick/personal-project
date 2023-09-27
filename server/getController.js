@@ -3,7 +3,7 @@ import {
   Image,
   Phase,
   Person,
-  ProjectImage,
+  Volunteer,
 } from "./model.js";
 import thumbnail from 'image-thumbnail'
 
@@ -63,6 +63,32 @@ const serverFunctions = {
         console.error("Error finding candidates:", error);
       });
   },
+  
+  volunteers: (req, res) => {
+    console.log(req.params);
+    Volunteer.findAll({
+      include: [
+        { model: Image, attributes: ["original"] },
+        { model: Person },
+      ],
+      order: [
+        [Person, "headOfHousehold", "DESC"],
+        [Person, "dob", "ASC"],
+      ],
+    })
+      .then((volunteers) => {
+        if (volunteers) {
+          console.log("Found volunteers:", volunteers);
+          res.json(volunteers);
+        } else {
+          console.log(`volunteers ${req.params} not found.`);
+          res.json({ success: false });
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding volunteers:", error);
+      });
+  },
 
   candidate: (req, res) => {
     console.log(req.params);
@@ -90,6 +116,31 @@ const serverFunctions = {
         console.error("Error finding candidate:", error);
       });
   },
+  volunteer: (req, res) => {
+    console.log(req.params);
+    Volunteer.findByPk(req.params.id, {
+      include: [
+        { model: Image, attributes: ["original"] },
+        { model: Person },
+      ],
+      order: [
+        [Person, "headOfHousehold", "DESC"],
+        [Person, "dob", "ASC"],
+      ],
+    })
+      .then((volunteer) => {
+        if (volunteer) {
+          console.log("Found volunteer:", volunteer);
+          res.json(volunteer);
+        } else {
+          console.log(`volunteer ${req.params} not found.`);
+          res.json({ success: false });
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding volunteer:", error);
+      });
+  },
 
   person: (req, res) => {
     console.log(req.params);
@@ -108,16 +159,9 @@ const serverFunctions = {
       });
   },
 
-  projectImages:  (req, res) => {
-    ProjectImage.findAll()
+  carousel:  (req, res) => {
+    Image.findAll({where: { tag: 'carousel' }})
       .then((images) => {
-        // images.map((image) => { 
-        //   // thumbnails created here, not uploaded or downloaded 
-        //   image.thumbnail = thumbnail({ uri: image.original });
-        //   console.log("image.thumbnail", image.thumbnail);
-        //   return image
-        // })
-        // console.log("thumbnail", images);
         res.json(images);
       })
       .catch((error) => {

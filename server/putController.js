@@ -2,6 +2,7 @@ import {
   Candidate,
   Phase,
   Person,
+  Volunteer,
 } from "./model.js";
 
 
@@ -16,7 +17,7 @@ const serverFunctions = {
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to Add Candidate ${req.body}`, error);
+        console.error(`Unable to update person ${req.body}`, error);
       });
   },
 
@@ -28,7 +29,19 @@ const serverFunctions = {
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to Add Candidate ${req.body}`, error);
+        console.error(`Unable to update Candidate ${req.body}`, error);
+      });
+  },
+
+  volunteer: (req, res) => {
+    console.log("put volunteer", req.body, "volunteerId", req.params.id);
+    Volunteer.update(req.body, { where: { volunteerId: req.params.id } })
+      .then((val) => {
+        console.log("updated volunteer:", val);
+        res.json({ success: true });
+      })
+      .catch((error) => {
+        console.error(`Unable to update volunteer ${req.body}`, error);
       });
   },
 
@@ -40,7 +53,7 @@ const serverFunctions = {
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to Add phase ${req.body}`, error);
+        console.error(`Unable to update phase ${req.body}`, error);
       });
   },
 };
