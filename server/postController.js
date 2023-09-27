@@ -2,7 +2,6 @@ import {
   Candidate,
   Image,
   Person,
-  ProjectImage,
   Volunteer,
 } from "./model.js";
 
@@ -59,7 +58,7 @@ const serverFunctions = {
     req.body.map((image) => {
       if (image.imageId) {
         // put images that have primary keys
-        ProjectImage.update(image, { where: { imageId: image.imageId } })
+        Image.update(image, { where: { imageId: image.imageId } })
           .then((val) => {
             console.log("updated image:", val);
           })
@@ -69,7 +68,7 @@ const serverFunctions = {
       } else {
         // add images that don't
         image.thumbnail = image.original
-        ProjectImage.create(image)
+        Image.create(image)
           .then((val) => {
             console.log("New image URL added:", val);
           })

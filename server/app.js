@@ -41,7 +41,7 @@ app.delete('/api/person/:id', del.person)
 app.delete('/api/volunteer/:id', del.volunteer)
 
 app.get('/api/person/:id', get.person)
-app.get('/api/projectImages', get.projectImages)
+app.get('/api/projectImages', get.carousel)
 app.get('/api/candidate/:id', get.candidate)
 app.get('/api/candidates/',  get.candidates) 
 app.get('/api/phase/:id', get.byPhase)
