@@ -72,7 +72,7 @@ Candidate.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    lastName: {
+    lastName: {  // could this be connected to my 
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -84,6 +84,7 @@ Candidate.init(
     country: DataTypes.STRING,
     zip: DataTypes.INTEGER,
     lat: DataTypes.FLOAT,
+    about: DataTypes.TEXT,
     lon: DataTypes.FLOAT,
     googleMaps: DataTypes.STRING,
     landTitle: DataTypes.STRING,
@@ -108,6 +109,32 @@ Candidate.init(
   },
   {
     modelName: "candidate",
+    sequelize: db,
+  }
+);
+export class Volunteer extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Volunteer.init(
+  {
+    volunteerId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    lastName: {  
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    about: DataTypes.TEXT,
+    city: DataTypes.TEXT,
+    state: DataTypes.TEXT,
+    country: DataTypes.TEXT,
+  },
+  {
+    modelName: "volunteer",
     sequelize: db,
   }
 );
@@ -156,6 +183,8 @@ Image.init(
       primaryKey: true,
     },
     original: DataTypes.STRING(500),
+    thumbnail: DataTypes.STRING(500),
+    tag: DataTypes.STRING,
     primary: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -166,44 +195,31 @@ Image.init(
     sequelize: db,
   }
 );
-export class ProjectImage extends Model {
-  [util.inspect.custom]() {
-    return this.toJSON();
-  }
-}
 
-ProjectImage.init(
-  {
-    imageId: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    original: DataTypes.STRING(500),
-    thumbnail: {
-      type: DataTypes.STRING(500),
-      defaultValue:
-        "https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png",
-    }, 
-    primary: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-  },
-  {
-    modelName: "projectImage",
-    sequelize: db,
-  }
-);
-
+// candidates have people and people are associated with a candidate
+// so each person has a candidateId column
 Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete: "CASCADE" });
 Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-Candidate.hasMany(Image, { foreignKey: "candidateId", onDelete: "CASCADE" });
-Image.belongsTo(Candidate, { foreignKey: "candidateId" });
+// candidates have people and people are associated with a candidate
+// so each person has a candidateId column
+Volunteer.hasMany(Person, { foreignKey: "volunteerId" });
+Person.belongsTo(Volunteer, { foreignKey: "volunteerId" });
 
+// Volunteers have a single image for their profile
+Volunteer.hasOne(Image, { foreignKey: "volunteerId", onDelete: "CASCADE" });
+Image.belongsTo(Candidate, { foreignKey: "volunteerId", allowNull: true });
+
+// each candidate can have many images, but only one primary. 
+// Image has a candidateId column but candidate does not have an Image column
+Candidate.hasMany(Image, { foreignKey: "candidateId", onDelete: "CASCADE" });
+Image.belongsTo(Candidate, { foreignKey: "candidateId", allowNull: true });
+
+// phases can have many candidates but a candidate can only be in one phase
+// candidate has a phaseId column
 Phase.hasMany(Candidate, { foreignKey: "phaseId", onDelete: "RESTRICT" });
 Candidate.belongsTo(Phase, { foreignKey: "phaseId" });
+
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
   console.log("Syncing database...");
