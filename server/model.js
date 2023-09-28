@@ -220,7 +220,7 @@ Image.belongsTo(Candidate, { foreignKey: "candidateId", allowNull: true });
 Phase.hasMany(Candidate, { foreignKey: "phaseId", onDelete: "RESTRICT" });
 Candidate.belongsTo(Phase, { foreignKey: "phaseId" });
 
-
+import process from "process";
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
   console.log("Syncing database...");
   await db.sync();

@@ -4,10 +4,14 @@ import {
   Person,
   Member,
 } from "./model.js";
-
+import process from "process";
+import dotenv from 'dotenv'
+dotenv.config()
+console.log(process.env.VITE_STRIPE_SECRET);
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.VITE_STRIPE_SECRET);
 
 const serverFunctions = {
-  
 
   person: (req, res) => {
     console.log("add person", req.body);
@@ -20,6 +24,7 @@ const serverFunctions = {
         console.error(`Unable to Add Person ${req.body}`, error);
       });
   },
+
   carousel: (req, res) => {
     console.log("add carousel picture", req.body);
     Image.create(req.body)
@@ -31,6 +36,7 @@ const serverFunctions = {
         console.error(`Unable to Add carousel image ${req.body}`, error);
       });
   },
+
   image: (req, res) => {
     console.log("add photo", req.body);
     Image.create(req.body)
@@ -42,6 +48,7 @@ const serverFunctions = {
         console.error(`Unable to add image ${req.body}`, error);
       });
   },
+
   projectImages: async (req) => {
     console.log("update photos", req.body);
     req.body.map((image) => {
@@ -134,6 +141,20 @@ const serverFunctions = {
         console.error(`Unable to Add member ${req.body}`, error);
       });
   },
+  paymentIntent: async (req, res) => {
+    console.log("paymentIntent", req.body);
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: req.body.body.donation,
+      currency: "usd",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  },
 };
 
 export default serverFunctions;
+
