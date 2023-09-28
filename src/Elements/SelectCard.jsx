@@ -1,6 +1,6 @@
 import Card from "@mui/material/Card";
 import { CardActionArea } from "@mui/material";
-import ViewCandidate from "./ViewCandidate";
+import ViewCard from "./ViewCard";
 
 
 
@@ -11,7 +11,7 @@ export default function SelectCard({ candidate }) {
   return (
     <Card sx={{ maxWidth: 345 }} >
       <CardActionArea >
-      <ViewCandidate candidate={candidate}/>
+      <ViewCard family={candidate}/>
       </CardActionArea>
     </Card>
   );

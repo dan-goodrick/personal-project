@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import ViewCandidate from "../Elements/ViewCandidate";
+import ViewCard from "../Elements/ViewCard";
 
 
 export default function PlannedProjects() {
@@ -8,8 +8,8 @@ export default function PlannedProjects() {
   return (
     <>
       <h1>Upcoming Projects</h1>
-      {planned.map((candidate) => (
-        <ViewCandidate key={candidate.candidateId} candidate={candidate} />
+      {planned.map((candidate, i) => (
+        <ViewCard key={i} family={candidate} />
         ))}
     </>
   );
