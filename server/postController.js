@@ -142,7 +142,7 @@ const serverFunctions = {
       });
   },
   paymentIntent: async (req, res) => {
-    console.log("paymentIntent", req.body.body.donation);
+    console.log("paymentIntent", req.body);
     const paymentIntent = await stripe.paymentIntents.create({
       amount: req.body.body.donation,
       currency: "usd",
@@ -158,4 +158,3 @@ const serverFunctions = {
 
 export default serverFunctions;
 
-"pmc_1NvPcADsgTnXCdvnSEJD5s2b"
