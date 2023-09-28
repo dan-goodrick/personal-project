@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Input } from "@mui/material";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -52,6 +53,7 @@ export default function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit}>
       <p className="text-black mb-4">Complete your payment here!</p>
+      <Input
       <PaymentElement />
       <button className='bg-black rounded-xl text-white p-2 mt-6 mb-2' disabled={isLoading || !stripe || !elements}>
         {isLoading ? "Loading..." : "Pay now"}
