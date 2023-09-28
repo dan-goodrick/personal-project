@@ -2,7 +2,7 @@ import {
   Candidate,
   Phase,
   Person,
-  Volunteer,
+  Member,
 } from "./model.js";
 
 
@@ -33,15 +33,15 @@ const serverFunctions = {
       });
   },
 
-  volunteer: (req, res) => {
-    console.log("put volunteer", req.body, "volunteerId", req.params.id);
-    Volunteer.update(req.body, { where: { volunteerId: req.params.id } })
+  member: (req, res) => {
+    console.log("put member", req.body, "memberId", req.params.id);
+    Member.update(req.body, { where: { memberId: req.params.id } })
       .then((val) => {
-        console.log("updated volunteer:", val);
+        console.log("updated member:", val);
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to update volunteer ${req.body}`, error);
+        console.error(`Unable to update member ${req.body}`, error);
       });
   },
 

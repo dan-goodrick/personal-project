@@ -2,7 +2,7 @@ import {
   Candidate,
   Image,
   Person,
-  Volunteer,
+  Member,
 } from "./model.js";
 
 
@@ -101,17 +101,17 @@ const serverFunctions = {
         console.error(`Unable to Add Candidate ${req.body}`, error);
       });
   },
-  volunteer: (req, res) => {
-    const { volunteer, peopleArr, imgArrVar } = req.body;
+  member: (req, res) => {
+    const { member, peopleArr, imgArrVar } = req.body;
     console.log("req.body", req.body);
-    Volunteer.create(volunteer)
+    Member.create(member)
       .then((val) => {
-        console.log("New volunteer created:", val);
+        console.log("New member created:", val);
         peopleArr.map((person) => {
-          person.volunteerId = val.volunteerId;
+          person.memberId = val.memberId;
           Person.create(person)
             .then((val) => {
-              console.log("New Person created with volunteer:", val);
+              console.log("New Person created with member:", val);
             })
             .catch((error) => {
               console.error(`Unable to Add Person ${val}`, error);
@@ -119,7 +119,7 @@ const serverFunctions = {
         });
         console.log("imgArr", imgArrVar);
         imgArrVar.map((image) => {
-          image.volunteerId = val.volunteerId;
+          image.memberId = val.memberId;
           Image.create(image)
             .then((res) => {
               console.log("New Image:", res, " created from:", image);
@@ -131,7 +131,7 @@ const serverFunctions = {
         res.json(val);
       })
       .catch((error) => {
-        console.error(`Unable to Add volunteer ${req.body}`, error);
+        console.error(`Unable to Add member ${req.body}`, error);
       });
   },
 };

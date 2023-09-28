@@ -112,14 +112,14 @@ Candidate.init(
     sequelize: db,
   }
 );
-export class Volunteer extends Model {
+export class Member extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-Volunteer.init(
+Member.init(
   {
-    volunteerId: {
+    memberId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -134,7 +134,7 @@ Volunteer.init(
     country: DataTypes.TEXT,
   },
   {
-    modelName: "volunteer",
+    modelName: "member",
     sequelize: db,
   }
 );
@@ -203,12 +203,12 @@ Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
 // candidates have people and people are associated with a candidate
 // so each person has a candidateId column
-Volunteer.hasMany(Person, { foreignKey: "volunteerId" });
-Person.belongsTo(Volunteer, { foreignKey: "volunteerId" });
+Member.hasMany(Person, { foreignKey: "memberId" });
+Person.belongsTo(Member, { foreignKey: "memberId" });
 
-// Volunteers have a single image for their profile
-Volunteer.hasOne(Image, { foreignKey: "volunteerId", onDelete: "CASCADE" });
-Image.belongsTo(Candidate, { foreignKey: "volunteerId", allowNull: true });
+// members have a single image for their profile
+Member.hasOne(Image, { foreignKey: "memberId", onDelete: "CASCADE" });
+Image.belongsTo(Candidate, { foreignKey: "memberId", allowNull: true });
 
 // each candidate can have many images, but only one primary. 
 // Image has a candidateId column but candidate does not have an Image column

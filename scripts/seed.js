@@ -1,4 +1,4 @@
-import { Candidate, User, Image, Person, Phase, Volunteer } from "./../server/model.js";
+import { Candidate, User, Image, Person, Phase, Member } from "./../server/model.js";
 import connectToDB from "./../server/db.js";
 import bcrypt from 'bcryptjs'
 
@@ -55,32 +55,32 @@ const imageData = [
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/goodrick.jpeg",
-    volunteerId: 7,
+    memberId: 7,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/perry.jpeg",
-    volunteerId: 6,
+    memberId: 6,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/lambertsen.jpeg",
-    volunteerId: 5,
+    memberId: 5,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/weber.jpeg",
-    volunteerId: 3,
+    memberId: 3,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/collings.jpeg",
-    volunteerId: 2,
+    memberId: 2,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/krueger.jpeg",
-    volunteerId: 1,
+    memberId: 1,
     primary: true,
   },
   {
@@ -145,7 +145,7 @@ const imageData = [
   },
 ];
 
-const volunteerData = [
+const memberData = [
   {
     lastName: "Krueger",
     imgUrl: 1,
@@ -406,7 +406,7 @@ const personData = [
     whatsApp: "801 822 8677",
     email: "dannyjeee@yahoo.com",
     gender: "male",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     lastName: "Goodrick",
@@ -415,35 +415,35 @@ const personData = [
     whatsApp: "801 822 9519",
     email: "k_kartchner@yahoo.com",
     gender: "female",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     lastName: "Goodrick",
     dob: new Date(Date.parse("2007-08-30")),
     firstName: "Allison",
     gender: "female",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     lastName: "Goodrick",
     dob: new Date(Date.parse("2007-08-30")),
     firstName: "Brianna",
     gender: "female",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     lastName: "Goodrick",
     dob: new Date(Date.parse("2009-12-07")),
     firstName: "Talmage",
     gender: "male",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     lastName: "Goodrick",
     dob: new Date(Date.parse("2011-07-29")),
     firstName: "Spencer",
     gender: "male",
-    volunteerId: 7,
+    memberId: 7,
   },
   {
     firstName: "Mosiah",
@@ -482,7 +482,7 @@ await db.sync({ force: true }).then(async () => {
   await User.bulkCreate(userData);
   await Phase.bulkCreate(phaseData);
   await Candidate.bulkCreate(candidateData);
-  await Volunteer.bulkCreate(volunteerData);
+  await Member.bulkCreate(memberData);
   await Image.bulkCreate(imageData);
   await Person.bulkCreate(personData);
   console.log('db reset and seeded')
