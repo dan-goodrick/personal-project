@@ -48,12 +48,6 @@ const imageData = [
     primary: true,
   },
   {
-    original:
-      "https://buildersofhope.s3.us-west-2.amazonaws.com/olade.jpg",
-    candidateId: 5,
-    primary: true,
-  },
-  {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/goodrick.jpeg",
     memberId: 7,
     primary: true,
@@ -148,7 +142,6 @@ const imageData = [
 const memberData = [
   {
     lastName: "Krueger",
-    imgUrl: 1,
     city: "Exeter",
     state: "California",
     country: "USA",
@@ -156,7 +149,6 @@ const memberData = [
   },
   {
     lastName: "Collings",
-    imgUrl: 1,
     city: "Torrevieja",
     state: "Valencia",
     country: "Spain",
@@ -164,7 +156,6 @@ const memberData = [
   },
   {
     lastName: "Weber",
-    imgUrl: 1,
     city: "Orem",
     state: "Utah",
     country: "USA",
@@ -172,7 +163,6 @@ const memberData = [
   },
   {
     lastName: "Lambertsen",
-    imgUrl: 1,
     city: "Champaign",
     state: "Illinois",
     country: "USA",
@@ -180,21 +170,18 @@ const memberData = [
   },
   {
     lastName: "Williams",
-    imgUrl: 1,
     city: "Idaho Falls",
     state: "Idaho",
     country: "USA"
   },
   {
     lastName: "Perry",
-    imgUrl: 1,
     city: "Orem",
     state: "Utah",
     country: "USA"
   },
   {
     lastName: "Goodrick",
-    imgUrl: 1,
     city: "Saratoga Springs",
     state: "Utah",
     country: "USA"
@@ -402,6 +389,7 @@ const personData = [
   {
     lastName: "Goodrick",
     firstName: "Dan",
+    headOfHousehold: true,
     dob: new Date(Date.parse("1978-11-12")),
     whatsApp: "801 822 8677",
     email: "dannyjeee@yahoo.com",

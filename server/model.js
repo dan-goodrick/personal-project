@@ -201,13 +201,13 @@ Image.init(
 Candidate.hasMany(Person, { foreignKey: "candidateId", onDelete: "CASCADE" });
 Person.belongsTo(Candidate, { foreignKey: "candidateId" });
 
-// candidates have people and people are associated with a candidate
-// so each person has a candidateId column
+// board members have people and people are associated with a board member
+// so each person has a memberId column
 Member.hasMany(Person, { foreignKey: "memberId" });
 Person.belongsTo(Member, { foreignKey: "memberId" });
 
-// members have a single image for their profile
-Member.hasOne(Image, { foreignKey: "memberId", onDelete: "CASCADE" });
+// members have a single image for their profile but use hasMany to make the components reusable (image is an array)
+Member.hasMany(Image, { foreignKey: "memberId", onDelete: "CASCADE" });
 Image.belongsTo(Candidate, { foreignKey: "memberId", allowNull: true });
 
 // each candidate can have many images, but only one primary. 

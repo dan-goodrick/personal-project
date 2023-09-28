@@ -68,7 +68,7 @@ const serverFunctions = {
     console.log(req.params);
     Member.findAll({
       include: [
-        { model: Image, attributes: ["original"] },
+        { model: Image, where: { primary: true }, attributes: ["original"] },
         { model: Person },
       ],
       order: [
