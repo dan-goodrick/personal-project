@@ -3,26 +3,27 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import axios from "axios";
-const CLIENT_STRIPE_KEY = import.meta.env.VITE_CLIENT_STRIPE_KEY
+const CLIENT_STRIPE_KEY = import.meta.env.VITE_CLIENT_STRIPE_KEY;
 const stripePromise = loadStripe(CLIENT_STRIPE_KEY);
 
-export default function StripeCheckout() {
+export default function StripeCheckout({amount}) {
   const [clientSecret, setClientSecret] = useState("");
-console.log("public key", CLIENT_STRIPE_KEY);
+  console.log("public key", CLIENT_STRIPE_KEY);
   useEffect(() => {
-    axios.post("/api/create-payment-intent", {
-      headers: { "Content-Type": "application/json" },
-      body: { donation: 300 },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
+    axios
+      .post("/api/create-payment-intent", {
+        headers: { "Content-Type": "application/json" },
+        body: { donation: amount*100 },
       })
-      .then((data) => setClientSecret(data.clientSecret))
+      .then((res) => {
+        console.log('response', res.data.clientSecret);
+        if (res.statusText==='OK') {
+         return setClientSecret(res.data.clientSecret)
+        }
+        throw new Error(`Network response was not ok`);
+      })
       .catch((error) => {
-        console.log(error);
+        console.log("Error in checkout:", error);
       });
   }, []);
 
