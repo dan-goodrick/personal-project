@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import ViewCard from "../Elements/ViewCard";
+import Checkout from "../Elements/Checkout";
 
 export default function Fundraising() {
   const { fundraising } = useLoaderData();
@@ -10,6 +11,7 @@ export default function Fundraising() {
       {fundraising.map((candidate, i) => (
         <ViewCard key={i} family={candidate} />
         ))}
+        <Checkout/>
     </>
   );
 }

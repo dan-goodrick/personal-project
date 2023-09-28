@@ -7,6 +7,8 @@ import del from './deleteController.js'
 import add from './postController.js'
 import put from './putController.js'
 import auth from './authController.js'
+import cors from 'cors'
+
 const app = express();
 const port = 8000;
 const mSecPerDay = 1000 * 60 * 60 * 24
@@ -24,12 +26,19 @@ app.use(session({
   }
 }))
 
+app.use(cors());
+// app.use(bodyParser.json());
+
+
+
+  
 
 app.put('/api/person/:id', put.person)
 app.put('/api/candidate/:id', put.candidate)
 app.put('/api/phase/:id', put.phase)
 app.put('/api/member/:id', put.member)
 
+app.post("/api/create-payment-intent", add.paymentIntent)
 app.post('/api/image/', add.image)
 app.post('/api/person/', add.person)
 app.post('/api/projectImages', add.projectImages)

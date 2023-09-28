@@ -59,7 +59,7 @@ const imageData = [
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/lambertsen.jpeg",
-    memberId: 5,
+    memberId: 4,
     primary: true,
   },
   {
