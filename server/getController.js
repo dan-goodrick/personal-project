@@ -3,7 +3,7 @@ import {
   Image,
   Phase,
   Person,
-  Volunteer,
+  Member,
 } from "./model.js";
 import thumbnail from 'image-thumbnail'
 
@@ -64,11 +64,11 @@ const serverFunctions = {
       });
   },
   
-  volunteers: (req, res) => {
+  members: (req, res) => {
     console.log(req.params);
-    Volunteer.findAll({
+    Member.findAll({
       include: [
-        { model: Image, attributes: ["original"] },
+        { model: Image, where: { primary: true }, attributes: ["original"] },
         { model: Person },
       ],
       order: [
@@ -76,17 +76,17 @@ const serverFunctions = {
         [Person, "dob", "ASC"],
       ],
     })
-      .then((volunteers) => {
-        if (volunteers) {
-          console.log("Found volunteers:", volunteers);
-          res.json(volunteers);
+      .then((members) => {
+        if (members) {
+          console.log("Found members:", members);
+          res.json(members);
         } else {
-          console.log(`volunteers ${req.params} not found.`);
+          console.log(`members ${req.params} not found.`);
           res.json({ success: false });
         }
       })
       .catch((error) => {
-        console.error("Error finding volunteers:", error);
+        console.error("Error finding members:", error);
       });
   },
 
@@ -116,9 +116,9 @@ const serverFunctions = {
         console.error("Error finding candidate:", error);
       });
   },
-  volunteer: (req, res) => {
+  member: (req, res) => {
     console.log(req.params);
-    Volunteer.findByPk(req.params.id, {
+    Member.findByPk(req.params.id, {
       include: [
         { model: Image, attributes: ["original"] },
         { model: Person },
@@ -128,17 +128,17 @@ const serverFunctions = {
         [Person, "dob", "ASC"],
       ],
     })
-      .then((volunteer) => {
-        if (volunteer) {
-          console.log("Found volunteer:", volunteer);
-          res.json(volunteer);
+      .then((member) => {
+        if (member) {
+          console.log("Found member:", member);
+          res.json(member);
         } else {
-          console.log(`volunteer ${req.params} not found.`);
+          console.log(`member ${req.params} not found.`);
           res.json({ success: false });
         }
       })
       .catch((error) => {
-        console.error("Error finding volunteer:", error);
+        console.error("Error finding member:", error);
       });
   },
 

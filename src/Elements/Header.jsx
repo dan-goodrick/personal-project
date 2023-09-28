@@ -32,9 +32,10 @@ const handleLogout = () => {
   return (
     <div>
         <NavLink to="/">BoH</NavLink>
-        <NavLink to="/pastProjects">Previous Builds</NavLink>
-        <NavLink to="/plannedBuilds">Upcoming Projects</NavLink>
         <NavLink to="/fundraising">Current Fundraiser</NavLink>
+        <NavLink to="/plannedBuilds">Upcoming Projects</NavLink>
+        <NavLink to="/pastProjects">Previous Builds</NavLink>
+        <NavLink to="/aboutUs">About Us</NavLink>
         {userId? 
         <>
         <NavLink to="/admin">Admin</NavLink>

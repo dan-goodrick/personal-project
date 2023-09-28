@@ -1,7 +1,8 @@
 import {
   Candidate,
+  Image,
   Person,
-  Volunteer,
+  Member,
 } from "./model.js";
 
 
@@ -28,24 +29,24 @@ const serverFunctions = {
         console.error(`Unable to remove Record ${req.params.id}`, error);
       });
   },
-  volunteer: (req, res) => {
-    Volunteer.destroy({ where: { volunteerId: req.params.id } })
+  member: (req, res) => {
+    Member.destroy({ where: { memberId: req.params.id } })
       .then((val) => {
-        console.log("deleted volunteer:", val);
+        console.log("deleted member:", val);
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to remove volunteer ${req.params.id}`, error);
+        console.error(`Unable to remove member ${req.params.id}`, error);
       });
   },
   photo: (req, res) => {
-    Person.destroy({ where: { personId: req.params.id } })
+    Image.destroy({ where: { imageId: req.params.id } })
       .then((val) => {
-        console.log("deleted person:", val);
+        console.log("deleted image:", val);
         res.json({ success: true });
       })
       .catch((error) => {
-        console.error(`Unable to remove Record ${req.params.id}`, error);
+        console.error(`Unable to remove image ${req.params.id}`, error);
       });
   },
 

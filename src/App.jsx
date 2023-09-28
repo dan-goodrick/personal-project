@@ -18,6 +18,7 @@ import ErrorPage from "./Pages/Error";
 import Admin from "./Pages/Admin";
 import Fundraising from "./Pages/Fundraising";
 import Layout from "./Elements/Layout";
+import AboutUs from "./Pages/AboutUs";
 
 function App() {
   const userId = useSelector(state => state.userId)
@@ -31,7 +32,7 @@ function App() {
           loader={async () => {
             const projects = await axios.get(`/api/phase/3`);
             const images = await axios.get(`/api/projectImages`);
-            // console.log("res.data", res.data);
+            console.log("res.data", projects.data, images.data);
             return { projects: projects.data, images: images.data};
           }}
         />
@@ -41,7 +42,7 @@ function App() {
           element={<PastProjects />}
           loader={async () => {
             const res = await axios.get(`/api/phase/5`);
-            // console.log("res.data", res.data);
+            console.log("res.data", res.data);
             return { projects: res.data };
           }}
         />
@@ -50,8 +51,17 @@ function App() {
           element={<PlannedProjects />}
           loader={async () => {
             const res = await axios.get(`/api/phase/4`);
-            // console.log("res.data", res.data);
+            console.log("res.data", res.data);
             return { planned: res.data };
+          }}
+        />
+        <Route
+          path="/aboutUs/"
+          element={<AboutUs />}
+          loader={async () => {
+            const res = await axios.get(`/api/members`);
+            console.log("res.data", res.data);
+            return { boardMembers: res.data };
           }}
         />
         <Route
@@ -59,7 +69,7 @@ function App() {
           element={<Fundraising />}
           loader={async () => {
             const res = await axios.get(`/api/phase/3`);
-            // console.log("res.data", res.data);
+            console.log("res.data", res.data);
             return { fundraising: res.data };
           }}
         />

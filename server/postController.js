@@ -2,7 +2,7 @@ import {
   Candidate,
   Image,
   Person,
-  Volunteer,
+  Member,
 } from "./model.js";
 
 
@@ -18,17 +18,6 @@ const serverFunctions = {
       })
       .catch((error) => {
         console.error(`Unable to Add Person ${req.body}`, error);
-      });
-  },
-  volunteer: (req, res) => {
-    console.log("add person", req.body);
-    Volunteer.create(req.body)
-      .then((val) => {
-        console.log("New volunteer created:", val);
-        res.json(val);
-      })
-      .catch((error) => {
-        console.error(`Unable to Add volunteer ${req.body}`, error);
       });
   },
   carousel: (req, res) => {
@@ -110,6 +99,39 @@ const serverFunctions = {
       })
       .catch((error) => {
         console.error(`Unable to Add Candidate ${req.body}`, error);
+      });
+  },
+  member: (req, res) => {
+    const { member, peopleArr, imgArrVar } = req.body;
+    console.log("req.body", req.body);
+    Member.create(member)
+      .then((val) => {
+        console.log("New member created:", val);
+        peopleArr.map((person) => {
+          person.memberId = val.memberId;
+          Person.create(person)
+            .then((val) => {
+              console.log("New Person created with member:", val);
+            })
+            .catch((error) => {
+              console.error(`Unable to Add Person ${val}`, error);
+            });
+        });
+        console.log("imgArr", imgArrVar);
+        imgArrVar.map((image) => {
+          image.memberId = val.memberId;
+          Image.create(image)
+            .then((res) => {
+              console.log("New Image:", res, " created from:", image);
+            })
+            .catch((error) => {
+              console.log(`Unable to Add Image ${val}`, error);
+            });
+        });
+        res.json(val);
+      })
+      .catch((error) => {
+        console.error(`Unable to Add member ${req.body}`, error);
       });
   },
 };

@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import ViewCandidate from "../Elements/ViewCandidate";
+import ViewCard from "../Elements/ViewCard";
 
 export default function Fundraising() {
   const { fundraising } = useLoaderData();
@@ -7,8 +7,8 @@ export default function Fundraising() {
   return (
     <>
       <h1>Current Fundraisers</h1>
-      {fundraising.map((candidate) => (
-        <ViewCandidate key={candidate.candidateId} candidate={candidate} />
+      {fundraising.map((candidate, i) => (
+        <ViewCard key={i} family={candidate} />
         ))}
     </>
   );
