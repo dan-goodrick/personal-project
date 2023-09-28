@@ -107,6 +107,42 @@ const imageData = [
     original:"https://buildersofhope.s3.us-west-2.amazonaws.com/larry.jpg",
     tag: 'carousel',
   },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/anna1.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/chad-wiring.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/zack.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/painting.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/construction-site.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/larry1.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/phil.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/san-diego.jpg",
+    tag: 'carousel',
+  },
 ];
 
 const volunteerData = [
