@@ -22,17 +22,19 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:
         <Link href={candidate.googleMaps}>
-          {candidate.lat? candidate.lat.toFixed(5):null}, {candidate.lon? candidate.lon.toFixed(5):null}
+          {candidate.lat? candidate.lat.toFixed(5):null}, 
+          {candidate.lon? candidate.lon.toFixed(5):null}
         </Link>
       </Typography>
       <Typography variant="body2" color="text.secondary">
         Title: {candidate.landTitle}
       </Typography>
-      {candidate.landTitle === "mortgage" ? (
+      {/* Not a very useful metric - needs constant updating */}
+      {/* {candidate.landTitle === "mortgage" && (
         <Typography variant="body2" color="text.secondary">
-          Loan Status: {candidate.currOnLoan}
+        Loan Status: {candidate.currOnLoan.toString()}
         </Typography>
-      ) : null}
+        )} */}
       <Typography variant="body1" color="text.primary">
         Admin Data
       </Typography>
