@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Input, TextField } from "@mui/material";
 
-export default function CheckoutForm() {
+export default function CheckoutForm( {amount, lastName}) {
   const stripe = useStripe();
   const elements = useElements();
-
-  const [donation, setDonation] = useState("$");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,7 +37,7 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:8000/fundraising",
+        return_url: "http://localhost:8000/fundraising", // should go to a confirmation page
       }
     });
 
@@ -53,18 +50,7 @@ export default function CheckoutForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p className="text-black mb-4">Complete your payment here!</p>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        prefix="$"
-        decimalScale={0}
-        id="donation"
-        label="Donation Amount"
-        autoFocus
-        onChange={(e)=>setDonation(e.target.value)}
-      />
+      <p className="text-black mb-4">Donate ${amount} to build a home for the {lastName} family. </p>
       <PaymentElement />
       <button className='bg-black rounded-xl text-white p-2 mt-6 mb-2' disabled={isLoading || !stripe || !elements}>
         {isLoading ? "Loading..." : "Pay now"}

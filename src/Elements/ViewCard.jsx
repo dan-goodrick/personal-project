@@ -1,10 +1,13 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import getAge from "../functions/getAge";
+import { useState } from "react";
+import Donate from "./Donate";
 
 export default function ViewCard({ family }) {
+  const [open, setOpen] = useState(false);
   console.log("family", family);
   return (
     <Grid
@@ -38,6 +41,18 @@ export default function ViewCard({ family }) {
             ))}
           <Typography>{family.about}</Typography>
         </CardContent>
+        {(family.phaseId===3) && 
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          type="submit"
+          onClick={() => setOpen(true)}
+        >
+          Contribute
+        </Button>
+        }
+        <Donate open={open} lastName={family.lastName} />
       </Card>
     </Grid>
   );

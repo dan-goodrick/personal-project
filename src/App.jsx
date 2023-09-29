@@ -36,9 +36,11 @@ function App() {
             return { projects: projects.data, images: images.data};
           }}
         />
-        <Route path="/login" element={userId? <Navigate to='/admin'/> : <Login />} />
+        <Route 
+          path="/login" 
+          element={userId? <Navigate to='/admin'/> : <Login />} />
         <Route
-          path="/pastProjects/"
+          path="/pastProjects"
           element={<PastProjects />}
           loader={async () => {
             const res = await axios.get(`/api/phase/5`);
@@ -47,7 +49,7 @@ function App() {
           }}
         />
         <Route
-          path="/plannedBuilds/"
+          path="/plannedBuilds"
           element={<PlannedProjects />}
           loader={async () => {
             const res = await axios.get(`/api/phase/4`);
@@ -56,7 +58,7 @@ function App() {
           }}
         />
         <Route
-          path="/aboutUs/"
+          path="/aboutUs"
           element={<AboutUs />}
           loader={async () => {
             const res = await axios.get(`/api/members`);
@@ -65,7 +67,7 @@ function App() {
           }}
         />
         <Route
-          path="/fundraising/"
+          path="/fundraising"
           element={<Fundraising />}
           loader={async () => {
             const res = await axios.get(`/api/phase/3`);
@@ -73,11 +75,15 @@ function App() {
             return { fundraising: res.data };
           }}
         />
-        <Route path="/newRecord/" element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
-        <Route path="/manageImages/" element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
+        <Route 
+          path="/newRecord" 
+          element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
+        <Route 
+          path="/manageImages" 
+          element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route
-          path="/admin/"
-          element={userId? <Admin /> : <Navigate to='/login'/>}
+          path="/admin"
+          element={userId? <Admin /> : <Navigate to='/'/>}
           loader={async () => {
             const res = await axios.get(`/api/candidates`);
             return { candidates: res.data };
