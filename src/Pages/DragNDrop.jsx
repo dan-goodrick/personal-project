@@ -1,7 +1,7 @@
 // https://codesandbox.io/s/react-dnd-example-try06
 
-import { useRef, useState } from "react";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { useState } from "react";
+import { DndProvider} from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { COLUMN_NAMES } from "./constants";
 import { tasks } from "./tasks";
