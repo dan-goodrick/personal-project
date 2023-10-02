@@ -10,17 +10,17 @@ const MovableItem = ({
   moveCardHandler,
   setItems,
 }) => {
-  console.log("Moveable", lastName, index, url, currentColumnName);
+  // console.log("Moveable", lastName, index, url, currentColumnName);
   const changeItemColumn = (currentItem, columnName) => {
     setItems((prevState) => {
       return prevState.map((e) => {
-        console.log(
-          "change",
-          e.lastName,
-          currentItem.lastName,
-          columnName,
-          e.phaseName
-        );
+        // console.log(
+        //   "change",
+        //   e.lastName,
+        //   currentItem.lastName,
+        //   columnName,
+        //   e.phaseName
+        // );
         return {
           ...e,
           phaseName: e.lastName === currentItem.name ? columnName : e.phaseName,
@@ -78,7 +78,7 @@ const MovableItem = ({
     item: { index, lastName, currentColumnName, url, type: "Our first type" },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
-
+      console.log("dropResult", dropResult, dropResult.name);
       if (dropResult) {
         const { name } = dropResult;
         console.log("name", name, item);
@@ -111,7 +111,7 @@ const MovableItem = ({
   const opacity = isDragging ? 0.4 : 1;
 
   drag(drop(ref));
-  console.log("moveableMaster ", lastName, PHASES);
+  // console.log("moveableMaster ", lastName, PHASES);
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
       <img
