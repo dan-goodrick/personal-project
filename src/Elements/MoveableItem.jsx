@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import {PHASES} from "./../constants"
+import { PHASES } from "./../constants";
 
 const MovableItem = ({
   name,
@@ -39,7 +39,8 @@ const MovableItem = ({
       // Determine rectangle on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       // Get vertical middle
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
       // Get pixels to the top
@@ -105,10 +106,19 @@ const MovableItem = ({
 
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
-    <img src={url} width="100" height="100"/>
-      {name}
+
+        <img src={url}   style={{
+    maxWidth: '100%',
+    minWidth: 30,
+    maxHeight: '100%',
+    minHeight: 30,
+  }}/>
+
+       {name}
+
+
     </div>
   );
 };
 
-export default MovableItem
+export default MovableItem;
