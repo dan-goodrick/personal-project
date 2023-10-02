@@ -1,15 +1,7 @@
-import {
-  Candidate,
-  Image,
-  Phase,
-  Person,
-  Member,
-} from "./model.js";
-import thumbnail from 'image-thumbnail'
-
+import { PHASES } from "../src/constants.js";
+import { Candidate, Image, Phase, Person, Member } from "./model.js";
 
 const serverFunctions = {
-
   byPhase: (req, res) => {
     console.log(req.params);
     Candidate.findAll({
@@ -39,16 +31,29 @@ const serverFunctions = {
   phases: (req, res) => {
     console.log(req.params);
     Candidate.findAll({
+      raw: true,
       include: [
-        { model: Image, where: { primary: true }, attributes: ["original", "thumbnail"] },
+        {
+          model: Image,
+          where: { primary: true },
+          attributes: ["original", "thumbnail"],
+        },
       ],
-      attributes: ["candidateId", "lastName"],
+      attributes: ["candidateId", "lastName", "phaseId"],
       order: ["phaseId"],
     })
       .then((candidates) => {
         if (candidates) {
-          console.log(`${candidates.length} candidates found.`, candidates);
-          res.json(candidates);
+          const c_copy = [...candidates];
+          c_copy.forEach(
+            (el) =>
+              (el.image = el['images.thumbnail']
+                ? el['images.thumbnail']
+                : el['images.original'],
+                el.phaseName = PHASES[el.phaseId])
+          );
+          console.log(`${c_copy.length} candidates found.`, c_copy);
+          res.json(c_copy);
         } else {
           console.log(`candidates ${req.params} not found.`);
           res.json({ success: false });
@@ -85,7 +90,7 @@ const serverFunctions = {
         console.error("Error finding candidates:", error);
       });
   },
-  
+
   members: (req, res) => {
     console.log(req.params);
     Member.findAll({
@@ -141,10 +146,7 @@ const serverFunctions = {
   member: (req, res) => {
     console.log(req.params);
     Member.findByPk(req.params.id, {
-      include: [
-        { model: Image, attributes: ["original"] },
-        { model: Person },
-      ],
+      include: [{ model: Image, attributes: ["original"] }, { model: Person }],
       order: [
         [Person, "headOfHousehold", "DESC"],
         [Person, "dob", "ASC"],
@@ -181,8 +183,8 @@ const serverFunctions = {
       });
   },
 
-  carousel:  (req, res) => {
-    Image.findAll({where: { tag: 'carousel' }})
+  carousel: (req, res) => {
+    Image.findAll({ where: { tag: "carousel" } })
       .then((images) => {
         res.json(images);
       })
