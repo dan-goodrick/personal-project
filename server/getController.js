@@ -36,6 +36,28 @@ const serverFunctions = {
         console.error("Error finding candidates:", error);
       });
   },
+  phases: (req, res) => {
+    console.log(req.params);
+    Candidate.findAll({
+      include: [
+        { model: Image, where: { primary: true }, attributes: ["original"] },
+
+      ],
+      order: ["phaseId"],
+    })
+      .then((candidates) => {
+        if (candidates) {
+          console.log(`${candidates.length} candidates found.`, candidates);
+          res.json(candidates);
+        } else {
+          console.log(`candidates ${req.params} not found.`);
+          res.json({ success: false });
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding candidates:", error);
+      });
+  },
 
   candidates: (req, res) => {
     console.log(req.params);

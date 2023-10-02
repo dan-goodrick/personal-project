@@ -55,6 +55,7 @@ app.get('/api/candidate/:id', get.candidate)
 app.get('/api/candidates/',  get.candidates) 
 app.get('/api/members/',  get.members) 
 app.get('/api/phase/:id', get.byPhase)
+app.get('/api/phases/', get.phases)
 app.get('/api/member/:id', get.member)
 
 //authentication routes
