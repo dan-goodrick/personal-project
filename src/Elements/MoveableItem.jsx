@@ -3,20 +3,27 @@ import { useDrag, useDrop } from "react-dnd";
 import { PHASES } from "./../constants";
 
 const MovableItem = ({
-  name,
+  lastName,
   index,
   url,
   currentColumnName,
   moveCardHandler,
   setItems,
 }) => {
+  console.log("Moveable", lastName, index, url, currentColumnName);
   const changeItemColumn = (currentItem, columnName) => {
     setItems((prevState) => {
       return prevState.map((e) => {
-        console.log(name, e.lastName, currentItem.name, columnName, e.column);
+        console.log(
+          "change",
+          e.lastName,
+          currentItem.lastName,
+          columnName,
+          e.phaseName
+        );
         return {
           ...e,
-          column: e.lastName === currentItem.name ? columnName : e.column,
+          phaseName: e.lastName === currentItem.name ? columnName : e.phaseName,
         };
       });
     });
@@ -58,6 +65,7 @@ const MovableItem = ({
       }
       // Time to actually perform the action
       moveCardHandler(dragIndex, hoverIndex);
+      console.log("moveCardHandler",dragIndex, hoverIndex);
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
@@ -67,28 +75,28 @@ const MovableItem = ({
   });
 
   const [{ isDragging }, drag] = useDrag({
-    item: { index, name, currentColumnName, type: "Our first type" },
+    item: { index, lastName, currentColumnName, url, type: "Our first type" },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
 
       if (dropResult) {
         const { name } = dropResult;
-        console.log("name", name, PHASES);
+        console.log("name", name, item);
         switch (name) {
-          case PHASES.INCOMPLETE:
-            changeItemColumn(item, PHASES.INCOMPLETE);
+          case PHASES[1]:
+            changeItemColumn(item, PHASES[1]);
             break;
-          case PHASES.ACCEPTED:
-            changeItemColumn(item, PHASES.ACCEPTED);
+          case PHASES[2]:
+            changeItemColumn(item, PHASES[2]);
             break;
-          case PHASES.FUNDRAISING:
-            changeItemColumn(item, PHASES.FUNDRAISING);
+          case PHASES[3]:
+            changeItemColumn(item, PHASES[3]);
             break;
-          case PHASES.PLANNING:
-            changeItemColumn(item, PHASES.PLANNING);
+          case PHASES[4]:
+            changeItemColumn(item, PHASES[4]);
             break;
-          case PHASES.COMPLETED:
-            changeItemColumn(item, PHASES.COMPLETED);
+          case PHASES[5]:
+            changeItemColumn(item, PHASES[5]);
             break;
           default:
             break;
@@ -103,20 +111,19 @@ const MovableItem = ({
   const opacity = isDragging ? 0.4 : 1;
 
   drag(drop(ref));
-
+  console.log("moveableMaster ", lastName, PHASES);
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
-
-        <img src={url}   style={{
-    maxWidth: '100%',
-    minWidth: 30,
-    maxHeight: '100%',
-    minHeight: 30,
-  }}/>
-
-       {name}
-
-
+      <img
+        src={url}
+        style={{
+          maxWidth: "100%",
+          minWidth: 30,
+          maxHeight: "100%",
+          minHeight: 30,
+        }}
+      />
+      {lastName}
     </div>
   );
 };
