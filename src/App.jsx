@@ -83,8 +83,14 @@ function App() {
           path="/manageImages" 
           element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route 
-          path="/dd" 
-          element={<DragNDrop /> } />  
+          path="/update-phase" 
+          element={<DragNDrop /> } 
+          loader={async () => {
+            const res = await axios.get(`/api/phases/`);
+            console.log("res.data", res.data);
+            return { phases: res.data };
+          }}            
+          />  
         <Route
           path="/admin"
           element={userId? <Admin /> : <Navigate to='/'/>}

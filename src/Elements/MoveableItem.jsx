@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import {PHASES} from "./../constants"
+
 const MovableItem = ({
   name,
   index,
+  url,
   currentColumnName,
   moveCardHandler,
   setItems,
@@ -11,9 +13,10 @@ const MovableItem = ({
   const changeItemColumn = (currentItem, columnName) => {
     setItems((prevState) => {
       return prevState.map((e) => {
+        console.log(name, e.lastName, currentItem.name, columnName, e.column);
         return {
           ...e,
-          column: e.name === currentItem.name ? columnName : e.column,
+          column: e.lastName === currentItem.name ? columnName : e.column,
         };
       });
     });
@@ -69,7 +72,7 @@ const MovableItem = ({
 
       if (dropResult) {
         const { name } = dropResult;
-        console.log("name", name);
+        console.log("name", name, PHASES);
         switch (name) {
           case PHASES.INCOMPLETE:
             changeItemColumn(item, PHASES.INCOMPLETE);
@@ -102,6 +105,7 @@ const MovableItem = ({
 
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
+    <img src={url} width="100" height="100"/>
       {name}
     </div>
   );

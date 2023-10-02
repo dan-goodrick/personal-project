@@ -30,13 +30,14 @@ export default function DragNDrop() {
     }
   };
 
-  const returnItemsForColumn = (columnName) => {
+  const returnItemsForColumn = (phaseName) => {
     return items
-      .filter((item) => item.column === columnName)
+      .filter((item) => item.column === phaseName)
       .map((item, index) => (
         <MovableItem
-          key={item.id}
-          name={item.name}
+          key={item.candidateId}
+          name={item.lastName}
+          url={item.image}
           currentColumnName={item.column}
           setItems={setItems}
           index={index}
