@@ -19,6 +19,7 @@ import Admin from "./Pages/Admin";
 import Fundraising from "./Pages/Fundraising";
 import Layout from "./Elements/Layout";
 import AboutUs from "./Pages/AboutUs";
+import DragNDrop from "./Pages/DragNDrop";
 
 function App() {
   const userId = useSelector(state => state.userId)
@@ -81,6 +82,9 @@ function App() {
         <Route 
           path="/manageImages" 
           element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
+        <Route 
+          path="/dd" 
+          element={<DragNDrop /> } />  
         <Route
           path="/admin"
           element={userId? <Admin /> : <Navigate to='/'/>}
