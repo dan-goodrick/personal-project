@@ -19,20 +19,24 @@
   flex-wrap: wrap;
 }
 
-.do-it-column {
+.incomplete {
   background-color: #fff0f0;
 }
 
-.in-progress-column {
+.accepted {
   background-color: #fef2e7;
 }
 
-.awaiting-review-column {
+.fundraising {
   background-color: #fffada;
 }
 
-.done-column {
+.planning {
   background-color: #f5ffe5;
+}
+
+.completed {
+  background-color: #a1f99e;
 }
 
 .movable-item {

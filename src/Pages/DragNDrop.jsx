@@ -47,23 +47,26 @@ export default function DragNDrop() {
   };
 
   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
-
+  console.log(DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE);
   return (
     <div className="container">
       <DndProvider backend={HTML5Backend}>
-        <Column title={DO_IT} className="column do-it-column">
+        <Column title="Incomplete Applications" className="column incomplete">
           {returnItemsForColumn(DO_IT)}
         </Column>
-        <Column title={IN_PROGRESS} className="column in-progress-column">
+        <Column title="Accepted Applications" className="column accepted">
           {returnItemsForColumn(IN_PROGRESS)}
         </Column>
         <Column
-          title={AWAITING_REVIEW}
-          className="column awaiting-review-column"
+          title="Projects in fundraising"
+          className="column fundraising"
         >
           {returnItemsForColumn(AWAITING_REVIEW)}
         </Column>
-        <Column title={DONE} className="column done-column">
+        <Column title="Projects in Planning" className="column planning">
+          {returnItemsForColumn(DONE)}
+        </Column>
+        <Column title="Completed Projects" className="column completed">
           {returnItemsForColumn(DONE)}
         </Column>
       </DndProvider>
