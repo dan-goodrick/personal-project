@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { DndProvider} from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { COLUMN_NAMES } from "./constants";
-import { tasks } from "./tasks";
+import { PHASES, tasks } from "./../constants";
 import "./../css/DragNDrop.css";
 import MovableItem from "../Elements/MoveableItem";
 import Column from "../Elements/Column";
@@ -46,28 +45,28 @@ export default function DragNDrop() {
       ));
   };
 
-  const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
-  console.log(DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE);
+  const { INCOMPLETE, ACCEPTED, FUNDRAISING, PLANNING, COMPLETED } = PHASES;
+
   return (
     <div className="container">
       <DndProvider backend={HTML5Backend}>
-        <Column title="Incomplete Applications" className="column incomplete">
-          {returnItemsForColumn(DO_IT)}
+        <Column title={INCOMPLETE} className="column incomplete">
+          {returnItemsForColumn(INCOMPLETE)}
         </Column>
-        <Column title="Accepted Applications" className="column accepted">
-          {returnItemsForColumn(IN_PROGRESS)}
+        <Column title={ACCEPTED} className="column accepted">
+          {returnItemsForColumn(ACCEPTED)}
         </Column>
         <Column
-          title="Projects in fundraising"
+          title={FUNDRAISING}
           className="column fundraising"
         >
-          {returnItemsForColumn(AWAITING_REVIEW)}
+          {returnItemsForColumn(FUNDRAISING)}
         </Column>
-        <Column title="Projects in Planning" className="column planning">
-          {returnItemsForColumn(DONE)}
+        <Column title={PLANNING} className="column planning">
+          {returnItemsForColumn(PLANNING)}
         </Column>
-        <Column title="Completed Projects" className="column completed">
-          {returnItemsForColumn(DONE)}
+        <Column title={COMPLETED} className="column completed">
+          {returnItemsForColumn(COMPLETED)}
         </Column>
       </DndProvider>
     </div>

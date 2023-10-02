@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-
+import {PHASES} from "./../constants"
 const MovableItem = ({
   name,
   index,
@@ -69,24 +69,22 @@ const MovableItem = ({
 
       if (dropResult) {
         const { name } = dropResult;
-        const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = {
-          DO_IT: 'Do it',
-          IN_PROGRESS: 'In Progress',
-          AWAITING_REVIEW: 'Awaiting review',
-          DONE: 'Done',
-        };
+        console.log("name", name);
         switch (name) {
-          case IN_PROGRESS:
-            changeItemColumn(item, IN_PROGRESS);
+          case PHASES.INCOMPLETE:
+            changeItemColumn(item, PHASES.INCOMPLETE);
             break;
-          case AWAITING_REVIEW:
-            changeItemColumn(item, AWAITING_REVIEW);
+          case PHASES.ACCEPTED:
+            changeItemColumn(item, PHASES.ACCEPTED);
             break;
-          case DONE:
-            changeItemColumn(item, DONE);
+          case PHASES.FUNDRAISING:
+            changeItemColumn(item, PHASES.FUNDRAISING);
             break;
-          case DO_IT:
-            changeItemColumn(item, DO_IT);
+          case PHASES.PLANNING:
+            changeItemColumn(item, PHASES.PLANNING);
+            break;
+          case PHASES.COMPLETED:
+            changeItemColumn(item, PHASES.COMPLETED);
             break;
           default:
             break;
