@@ -11,12 +11,12 @@ import { useLoaderData } from "react-router-dom";
 
 
 export default function DragNDrop() {
-  const { phases } = useLoaderData();
+  const { phases } = useLoaderData()
   const [items, setItems] = useState(phases);
-  console.log("items state:", items);
+  console.log("items", items);
   const moveCardHandler = (dragIndex, hoverIndex) => {
     const dragItem = items[dragIndex];
-    console.log("MoveCardHandler",dragIndex, hoverIndex);
+
     if (dragItem) {
       setItems((prevState) => {
         const copiedStateArray = [...prevState];
@@ -33,15 +33,15 @@ export default function DragNDrop() {
   };
 
   const returnItemsForColumn = (phaseName) => {
-    console.log("returnItems", phaseName, items);
+    console.log("returnItemsForColumn", items);
     return items
-      .filter((candidate) => candidate.phaseName === phaseName)
-      .map((candidate, index) => (
+      .filter((item) => item.column === phaseName)
+      .map((item, index) => (
         <MovableItem
-          key={candidate.candidateId}
-          lastName={candidate.lastName}
-          url={candidate.image}
-          currentColumnName={candidate.phaseName}
+          key={item.candidateId}
+          lastName={item.lastName}
+          url={item.image}
+          currentColumnName={item.column}
           setItems={setItems}
           index={index}
           moveCardHandler={moveCardHandler}
@@ -49,27 +49,26 @@ export default function DragNDrop() {
       ));
   };
 
-
   return (
     <div className="container">
       <DndProvider backend={HTML5Backend}>
-        <Column title={PHASES[1]} className="column incomplete">
-          {returnItemsForColumn(PHASES[1])}
+        <Column title={PHASES.INCOMPLETE} className="column incomplete">
+          {returnItemsForColumn(PHASES.INCOMPLETE)}
         </Column>
-        <Column title={PHASES[2]} className="column accepted">
-          {returnItemsForColumn(PHASES[2])}
+        <Column title={PHASES.ACCEPTED} className="column accepted">
+          {returnItemsForColumn(PHASES.ACCEPTED)}
         </Column>
         <Column
-          title={PHASES[3]}
+          title={PHASES.FUNDRAISING}
           className="column fundraising"
         >
-          {returnItemsForColumn(PHASES[3])}
+          {returnItemsForColumn(PHASES.FUNDRAISING)}
         </Column>
-        <Column title={PHASES[4]} className="column planning">
-          {returnItemsForColumn(PHASES[4])}
+        <Column title={PHASES.PLANNING} className="column planning">
+          {returnItemsForColumn(PHASES.PLANNING)}
         </Column>
-        <Column title={PHASES[5]} className="column completed">
-          {returnItemsForColumn(PHASES[5])}
+        <Column title={PHASES.COMPLETED} className="column completed">
+          {returnItemsForColumn(PHASES.COMPLETED)}
         </Column>
       </DndProvider>
     </div>

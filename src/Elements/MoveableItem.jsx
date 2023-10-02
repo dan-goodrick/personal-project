@@ -10,20 +10,13 @@ const MovableItem = ({
   moveCardHandler,
   setItems,
 }) => {
-  // console.log("Moveable", lastName, index, url, currentColumnName);
   const changeItemColumn = (currentItem, columnName) => {
     setItems((prevState) => {
       return prevState.map((e) => {
-        // console.log(
-        //   "change",
-        //   e.lastName,
-        //   currentItem.lastName,
-        //   columnName,
-        //   e.phaseName
-        // );
+        console.log(lastName, e.lastName, currentItem.lastName, columnName, e.column);
         return {
           ...e,
-          phaseName: e.lastName === currentItem.name ? columnName : e.phaseName,
+          column: e.lastName === currentItem.lastName ? columnName : e.column,
         };
       });
     });
@@ -65,7 +58,6 @@ const MovableItem = ({
       }
       // Time to actually perform the action
       moveCardHandler(dragIndex, hoverIndex);
-      console.log("moveCardHandler",dragIndex, hoverIndex);
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
@@ -75,28 +67,28 @@ const MovableItem = ({
   });
 
   const [{ isDragging }, drag] = useDrag({
-    item: { index, lastName, currentColumnName, url, type: "Our first type" },
+    item: { index, lastName, currentColumnName, type: "Our first type" },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
-      console.log("dropResult", dropResult, dropResult.name);
+      // dropResult returns the name of the container that got the drop and the drop function
       if (dropResult) {
         const { name } = dropResult;
-        console.log("name", name, item);
+        console.log("dropResult", dropResult, item);
         switch (name) {
-          case PHASES[1]:
-            changeItemColumn(item, PHASES[1]);
+          case PHASES.INCOMPLETE:
+            changeItemColumn(item, PHASES.INCOMPLETE);
             break;
-          case PHASES[2]:
-            changeItemColumn(item, PHASES[2]);
+          case PHASES.ACCEPTED:
+            changeItemColumn(item, PHASES.ACCEPTED);
             break;
-          case PHASES[3]:
-            changeItemColumn(item, PHASES[3]);
+          case PHASES.FUNDRAISING:
+            changeItemColumn(item, PHASES.FUNDRAISING);
             break;
-          case PHASES[4]:
-            changeItemColumn(item, PHASES[4]);
+          case PHASES.PLANNING:
+            changeItemColumn(item, PHASES.PLANNING);
             break;
-          case PHASES[5]:
-            changeItemColumn(item, PHASES[5]);
+          case PHASES.COMPLETED:
+            changeItemColumn(item, PHASES.COMPLETED);
             break;
           default:
             break;
@@ -111,19 +103,20 @@ const MovableItem = ({
   const opacity = isDragging ? 0.4 : 1;
 
   drag(drop(ref));
-  // console.log("moveableMaster ", lastName, PHASES);
+
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
-      <img
-        src={url}
-        style={{
-          maxWidth: "100%",
-          minWidth: 30,
-          maxHeight: "100%",
-          minHeight: 30,
-        }}
-      />
-      {lastName}
+
+        <img src={url}   style={{
+    maxWidth: '100%',
+    minWidth: 30,
+    maxHeight: '100%',
+    minHeight: 30,
+  }}/>
+
+       {lastName}
+
+
     </div>
   );
 };

@@ -1,9 +1,14 @@
+export const PHASE_ARR = [
+  "Incomplete Applications",
+  "Accepted Applications",
+  "Projects in fundraising",
+  "Projects in Planning",
+  "Completed Projects",
+];
 export const PHASES = {
-  1: "Incomplete Applications",
-  2: "Accepted Applications",
-  3: "Projects in fundraising",
-  4: "Projects in Planning",
-  5: "Completed Projects",
+  INCOMPLETE: PHASE_ARR[1],
+  ACCEPTED: PHASE_ARR[2],
+  FUNDRAISING: PHASE_ARR[3],
+  PLANNING: PHASE_ARR[4],
+  COMPLETED: PHASE_ARR[5],
 };
-
-
