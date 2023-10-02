@@ -69,7 +69,12 @@ const MovableItem = ({
 
       if (dropResult) {
         const { name } = dropResult;
-        const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
+        const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = {
+          DO_IT: 'Do it',
+          IN_PROGRESS: 'In Progress',
+          AWAITING_REVIEW: 'Awaiting review',
+          DONE: 'Done',
+        };
         switch (name) {
           case IN_PROGRESS:
             changeItemColumn(item, IN_PROGRESS);
