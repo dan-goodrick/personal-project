@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 
-const Column = ({ children, className, title }) => {
+const Phase = ({ children, className, title }) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: "Our first type",
     drop: () => ({ name: title }),
@@ -34,4 +34,4 @@ const Column = ({ children, className, title }) => {
   );
 };
 
-export default Column
+export default Phase

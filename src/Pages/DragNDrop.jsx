@@ -6,7 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { PHASES } from "./../constants";
 import "./../css/DragNDrop.css";
 import MovableItem from "../Elements/MoveableItem";
-import Column from "../Elements/Column";
+import Phase from "../Elements/Phase";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -88,24 +88,24 @@ export default function DragNDrop() {
               onClick={() => navigate("/admin")}
             >Cancel</Button>
       <DndProvider backend={HTML5Backend}>
-        <Column title={PHASES[1]} className="column incomplete">
+        <Phase title={PHASES[1]} className="column incomplete">
           {returnItemsForColumn(PHASES[1])}
-        </Column>
-        <Column title={PHASES[2]} className="column accepted">
+        </Phase>
+        <Phase title={PHASES[2]} className="column accepted">
           {returnItemsForColumn(PHASES[2])}
-        </Column>
-        <Column
+        </Phase>
+        <Phase
           title={PHASES[3]}
           className="column fundraising"
         >
           {returnItemsForColumn(PHASES[3])}
-        </Column>
-        <Column title={PHASES[4]} className="column planning">
+        </Phase>
+        <Phase title={PHASES[4]} className="column planning">
           {returnItemsForColumn(PHASES[4])}
-        </Column>
-        <Column title={PHASES[5]} className="column completed">
+        </Phase>
+        <Phase title={PHASES[5]} className="column completed">
           {returnItemsForColumn(PHASES[5])}
-        </Column>
+        </Phase>
       </DndProvider>
     </div>
   );
