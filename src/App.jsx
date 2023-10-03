@@ -84,7 +84,7 @@ function App() {
           element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route 
           path="/update-phase" 
-          element={<DragNDrop /> } 
+          element={userId? <DragNDrop /> : <Navigate to='/login'/>}
           loader={async () => {
             const res = await axios.get(`/api/phases/`);
             console.log("res.data", res.data);
