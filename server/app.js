@@ -36,6 +36,7 @@ app.use(cors());
 app.put('/api/person/:id', put.person)
 app.put('/api/candidate/:id', put.candidate)
 app.put('/api/phase/:id', put.phase)
+app.put('/api/phases/', put.phases)
 app.put('/api/member/:id', put.member)
 
 app.post("/api/create-payment-intent", add.paymentIntent)

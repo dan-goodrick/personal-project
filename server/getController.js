@@ -1,4 +1,4 @@
-import { PHASE_ARR } from "../src/constants.js";
+import { PHASES } from "../src/constants.js";
 import { Candidate, Image, Phase, Person, Member } from "./model.js";
 
 const serverFunctions = {
@@ -46,7 +46,7 @@ const serverFunctions = {
         if (candidates) {
           const c_copy = [...candidates];
           c_copy.forEach((el) => (el.image = el['images.thumbnail'] ? el['images.thumbnail']: el['images.original'],
-                el.column = PHASE_ARR[el.phaseId-1])
+                el.column = PHASES[el.phaseId])
           );
           console.log(`${c_copy.length} candidates found.`, c_copy);
           res.json(c_copy);

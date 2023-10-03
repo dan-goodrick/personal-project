@@ -56,6 +56,19 @@ const serverFunctions = {
         console.error(`Unable to update phase ${req.body}`, error);
       });
   },
-};
+  phases: (req, res) => {
+    console.log("put phaseMap", req.body);
+    for (let [cand, phase] of Object.entries(req.body)){
+      Candidate.update({ phaseId: phase }, {where: {candidateId: cand}})
+      .then((val) => {
+          console.log("updated phase:", val);
+          res.json({ success: true });
+        })
+        .catch((error) => {
+          console.error(`Unable to update phase ${req.body}`, error);
+        });
+      }
+    }
+  }
 
 export default serverFunctions;

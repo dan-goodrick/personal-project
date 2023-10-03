@@ -14,9 +14,16 @@ const MovableItem = ({
     setItems((prevState) => {
       return prevState.map((e) => {
         console.log(lastName, e.lastName, currentItem.lastName, columnName, e.column);
+        let column = e.column
+        let newPhaseId = PHASES[e.column]
+        if (e.lastName === currentItem.lastName){
+           column = columnName
+           newPhaseId = PHASES[columnName]
+        }
         return {
           ...e,
-          column: e.lastName === currentItem.lastName ? columnName : e.column,
+          column: column,
+          newPhaseId: newPhaseId
         };
       });
     });
@@ -75,20 +82,20 @@ const MovableItem = ({
         const { name } = dropResult;
         console.log("dropResult", dropResult, item);
         switch (name) {
-          case PHASES.INCOMPLETE:
-            changeItemColumn(item, PHASES.INCOMPLETE);
+          case PHASES[1]:
+            changeItemColumn(item, PHASES[1]);
             break;
-          case PHASES.ACCEPTED:
-            changeItemColumn(item, PHASES.ACCEPTED);
+          case PHASES[2]:
+            changeItemColumn(item, PHASES[2]);
             break;
-          case PHASES.FUNDRAISING:
-            changeItemColumn(item, PHASES.FUNDRAISING);
+          case PHASES[3]:
+            changeItemColumn(item, PHASES[3]);
             break;
-          case PHASES.PLANNING:
-            changeItemColumn(item, PHASES.PLANNING);
+          case PHASES[4]:
+            changeItemColumn(item, PHASES[4]);
             break;
-          case PHASES.COMPLETED:
-            changeItemColumn(item, PHASES.COMPLETED);
+          case PHASES[5]:
+            changeItemColumn(item, PHASES[5]);
             break;
           default:
             break;

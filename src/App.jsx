@@ -78,13 +78,13 @@ function App() {
         />
         <Route 
           path="/newRecord" 
-          element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
+          element={userId? <NewRecord /> : <Navigate to='/admin'/>} />  
         <Route 
           path="/manageImages" 
-          element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
+          element={userId? <ManageImages /> : <Navigate to='/admin'/>} />  
         <Route 
           path="/update-phase" 
-          element={userId? <DragNDrop /> : <Navigate to='/login'/>}
+          element={userId? <DragNDrop /> : <Navigate to='/admin'/>}
           loader={async () => {
             const res = await axios.get(`/api/phases/`);
             console.log("res.data", res.data);

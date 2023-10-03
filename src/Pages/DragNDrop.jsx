@@ -7,11 +7,14 @@ import { PHASES } from "./../constants";
 import "./../css/DragNDrop.css";
 import MovableItem from "../Elements/MoveableItem";
 import Column from "../Elements/Column";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Button from "@mui/material/Button";
 
 
 export default function DragNDrop() {
   const { phases } = useLoaderData()
+  const navigate = useNavigate();
   const [items, setItems] = useState(phases);
   console.log("items", items);
   const moveCardHandler = (dragIndex, hoverIndex) => {
@@ -49,26 +52,58 @@ export default function DragNDrop() {
       ));
   };
 
+  const handleSubmit = (() => { 
+    let map = {};
+    for (let i in items){
+      if (items[i].phaseId !== items[i].newPhaseId) {
+        map[items[i].candidateId] = items[i].newPhaseId
+      }
+    }
+    console.log("items", items, "map", map);
+    axios
+      .put(`/api/phases/`, map)
+      .then(() => {
+        console.log("updated phases", map);
+        navigate("/admin")
+      })
+      .catch((error) => {
+        console.error(`Unable to update phases`, error);
+      });
+   })
   return (
     <div className="container">
+         <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Save
+      </Button> 
+      {/* <Button
+              size="small"
+              color="primary"
+              variant="outlined"
+              onClick={() => navigate("/admin")}
+            >Cancel</Button> */}
       <DndProvider backend={HTML5Backend}>
-        <Column title={PHASES.INCOMPLETE} className="column incomplete">
-          {returnItemsForColumn(PHASES.INCOMPLETE)}
+        <Column title={PHASES[1]} className="column incomplete">
+          {returnItemsForColumn(PHASES[1])}
         </Column>
-        <Column title={PHASES.ACCEPTED} className="column accepted">
-          {returnItemsForColumn(PHASES.ACCEPTED)}
+        <Column title={PHASES[2]} className="column accepted">
+          {returnItemsForColumn(PHASES[2])}
         </Column>
         <Column
-          title={PHASES.FUNDRAISING}
+          title={PHASES[3]}
           className="column fundraising"
         >
-          {returnItemsForColumn(PHASES.FUNDRAISING)}
+          {returnItemsForColumn(PHASES[3])}
         </Column>
-        <Column title={PHASES.PLANNING} className="column planning">
-          {returnItemsForColumn(PHASES.PLANNING)}
+        <Column title={PHASES[4]} className="column planning">
+          {returnItemsForColumn(PHASES[4])}
         </Column>
-        <Column title={PHASES.COMPLETED} className="column completed">
-          {returnItemsForColumn(PHASES.COMPLETED)}
+        <Column title={PHASES[5]} className="column completed">
+          {returnItemsForColumn(PHASES[5])}
         </Column>
       </DndProvider>
     </div>

@@ -7,7 +7,6 @@ import ShowFullData from "../Elements/ShowFullData";
 export default function Admin() {
 
   const { candidates } = useLoaderData();
-  const [moving, setMoving] = useState(false);
   const navigate = useNavigate();
 
   // if there isn't a user in the store, navigate to login screen
@@ -19,7 +18,6 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        style={{ display: moving ? "none" : "block" }}
         onClick={() => navigate("/update-phase")}
       >
         Move Candidates
@@ -28,16 +26,6 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        style={{ display: moving ? "block" : "none" }}
-        onClick={() => setMoving(false)}
-      >
-        Edit Candidates
-      </Button>
-      <Button
-        size="small"
-        color="primary"
-        variant="contained"
-        style={{ display: moving ? "none" : "block" }}
         onClick={() => navigate("/newRecord")}
       >
         Add Candidate
@@ -46,7 +34,6 @@ export default function Admin() {
         size="small"
         color="primary"
         variant="contained"
-        style={{ display: moving ? "none" : "block" }}
         onClick={() => navigate("/manageImages")}
       >
         Add Project Images
