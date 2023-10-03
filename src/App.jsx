@@ -20,6 +20,7 @@ import Fundraising from "./Pages/Fundraising";
 import Layout from "./Elements/Layout";
 import AboutUs from "./Pages/AboutUs";
 import DragNDrop from "./Pages/DragNDrop";
+import OrderSuccess from "./Pages/OrderSuccess";
 
 function App() {
   const userId = useSelector(state => state.userId)
@@ -79,6 +80,9 @@ function App() {
         <Route 
           path="/newRecord" 
           element={userId? <NewRecord /> : <Navigate to='/admin'/>} />  
+        <Route 
+          path="/checkout/success" 
+          element={ <OrderSuccess />} />  
         <Route 
           path="/manageImages" 
           element={userId? <ManageImages /> : <Navigate to='/admin'/>} />  

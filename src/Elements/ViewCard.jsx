@@ -52,7 +52,7 @@ export default function ViewCard({ family }) {
           Contribute
         </Button>
         }
-        <Donate open={open} lastName={family.lastName} />
+        <Donate open={open} setOpen={setOpen} lastName={family.lastName} />
       </Card>
     </Grid>
   );
