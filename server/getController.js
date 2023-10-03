@@ -46,7 +46,7 @@ const serverFunctions = {
         if (candidates) {
           const c_copy = [...candidates];
           c_copy.forEach((el) => (el.image = el['images.thumbnail'] ? el['images.thumbnail']: el['images.original'],
-                el.column = PHASE_ARR[el.phaseId])
+                el.column = PHASE_ARR[el.phaseId-1])
           );
           console.log(`${c_copy.length} candidates found.`, c_copy);
           res.json(c_copy);

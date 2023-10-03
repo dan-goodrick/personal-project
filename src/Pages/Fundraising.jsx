@@ -24,12 +24,10 @@ export default function Fundraising() {
     <>
       <h1>Current Fundraisers</h1>
       {fundraising.map((candidate, i) => (
-        <>
           <ViewCard
             key={i}
             family={candidate}
           />
-        </>
       ))}
     </>
   );
