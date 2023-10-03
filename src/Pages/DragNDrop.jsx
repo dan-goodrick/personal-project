@@ -64,11 +64,12 @@ export default function DragNDrop() {
       .put(`/api/phases/`, map)
       .then(() => {
         console.log("updated phases", map);
-        navigate("/admin")
+        
       })
       .catch((error) => {
         console.error(`Unable to update phases`, error);
       });
+      navigate("/admin")
    })
   return (
     <div className="container">
@@ -80,12 +81,12 @@ export default function DragNDrop() {
       >
         Save
       </Button> 
-      {/* <Button
+      <Button
               size="small"
               color="primary"
               variant="outlined"
               onClick={() => navigate("/admin")}
-            >Cancel</Button> */}
+            >Cancel</Button>
       <DndProvider backend={HTML5Backend}>
         <Column title={PHASES[1]} className="column incomplete">
           {returnItemsForColumn(PHASES[1])}

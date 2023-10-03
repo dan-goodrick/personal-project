@@ -1,7 +1,6 @@
-import { useLoaderData } from "react-router-dom";import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import DragNDrop from "./DragNDrop";
 import ShowFullData from "../Elements/ShowFullData";
 
 export default function Admin() {

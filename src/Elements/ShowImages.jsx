@@ -1,5 +1,4 @@
 
-import Checkbox from "../Widgets/Checkbox";
 
 const ShowImages = ({ imgArr, setImgArr}) => {
   const makePrimary = (i) => {
