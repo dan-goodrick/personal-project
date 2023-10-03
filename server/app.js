@@ -36,6 +36,7 @@ app.use(cors());
 app.put('/api/person/:id', put.person)
 app.put('/api/candidate/:id', put.candidate)
 app.put('/api/phase/:id', put.phase)
+app.put('/api/phases/', put.phases)
 app.put('/api/member/:id', put.member)
 
 app.post("/api/create-payment-intent", add.paymentIntent)
@@ -55,6 +56,7 @@ app.get('/api/candidate/:id', get.candidate)
 app.get('/api/candidates/',  get.candidates) 
 app.get('/api/members/',  get.members) 
 app.get('/api/phase/:id', get.byPhase)
+app.get('/api/phases/', get.phases)
 app.get('/api/member/:id', get.member)
 
 //authentication routes

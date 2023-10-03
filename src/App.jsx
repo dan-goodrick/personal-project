@@ -19,6 +19,7 @@ import Admin from "./Pages/Admin";
 import Fundraising from "./Pages/Fundraising";
 import Layout from "./Elements/Layout";
 import AboutUs from "./Pages/AboutUs";
+import DragNDrop from "./Pages/DragNDrop";
 
 function App() {
   const userId = useSelector(state => state.userId)
@@ -77,10 +78,19 @@ function App() {
         />
         <Route 
           path="/newRecord" 
-          element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
+          element={userId? <NewRecord /> : <Navigate to='/admin'/>} />  
         <Route 
           path="/manageImages" 
-          element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
+          element={userId? <ManageImages /> : <Navigate to='/admin'/>} />  
+        <Route 
+          path="/update-phase" 
+          element={userId? <DragNDrop /> : <Navigate to='/admin'/>}
+          loader={async () => {
+            const res = await axios.get(`/api/phases/`);
+            console.log("res.data", res.data);
+            return { phases: res.data };
+          }}            
+          />  
         <Route
           path="/admin"
           element={userId? <Admin /> : <Navigate to='/'/>}
