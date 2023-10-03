@@ -21,6 +21,7 @@ export default function Delete({ uri, id, name, setDelete }) {
     await axios.delete(uri + id);
     setDelete(false);
     navigate("/admin")
+    window.location.reload()
   };
 
   const handleClose = () => {
