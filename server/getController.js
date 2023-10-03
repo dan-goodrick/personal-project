@@ -64,11 +64,12 @@ const serverFunctions = {
     console.log(req.params);
     Candidate.findAll({
       include: [
-        { model: Image, where: { primary: true }, attributes: ["original"] },
+        { model: Image, where: { primary: true }, attributes: ["original", "thumbnail"] },
         { model: Phase },
         { model: Person },
       ],
       order: [
+        ["phaseId"],
         [Person, "headOfHousehold", "DESC"],
         [Person, "dob", "ASC"],
       ],
