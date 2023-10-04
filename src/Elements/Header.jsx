@@ -1,5 +1,5 @@
 // import { useEffect } from "react"
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import {
@@ -62,7 +62,7 @@ const Header = () => {
 
   return (
     <AppBar position="sticky" color="default">
-      <Container maxWidth="md">
+      <Container disableGutters>
         <Toolbar disableGutters>
           <Avatar src={"/logo.webp"} href="/" className={styles.avatar} />
           <Hidden smDown>
@@ -156,44 +156,44 @@ const Header = () => {
               </Link>
             </ListItem>
           ))}
-            {userId ? (
-              <>
-                <ListItem>
-                  <Link
-                    className={styles.link}
-                    color="textPrimary"
-                    variant="button"
-                    underline="none"
-                    href="/admin"
-                  >
-                    Admin
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Link
-                    className={styles.link}
-                    color="textPrimary"
-                    variant="button"
-                    underline="none"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Link>
-                </ListItem>
-              </>
-            ) : (
+          {userId ? (
+            <>
               <ListItem>
                 <Link
                   className={styles.link}
                   color="textPrimary"
                   variant="button"
                   underline="none"
-                  href="/login"
+                  href="/admin"
                 >
-                  Log in
+                  Admin
                 </Link>
               </ListItem>
-            )}
+              <ListItem>
+                <Link
+                  className={styles.link}
+                  color="textPrimary"
+                  variant="button"
+                  underline="none"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
+              </ListItem>
+            </>
+          ) : (
+            <ListItem>
+              <Link
+                className={styles.link}
+                color="textPrimary"
+                variant="button"
+                underline="none"
+                href="/login"
+              >
+                Log in
+              </Link>
+            </ListItem>
+          )}
         </List>
       </SwipeableDrawer>
     </AppBar>

@@ -2,8 +2,6 @@ import { Form } from "react-router-dom";
 import StripeCheckout from "../Elements/StripeCheckout";
 import { useState } from "react";
 import { Button, TextField, Modal } from "@mui/material";
-import { Toaster, toast } from "sonner";
-
 import Box from "@mui/material/Box";
 
 const style = {

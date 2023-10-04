@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import ViewCard from "../Elements/ViewCard";
+// import { LinearProgress } from "@mui/material";
 
 
 export default function Fundraising() {
@@ -9,10 +10,13 @@ export default function Fundraising() {
     <>
       <h1>Current Fundraisers</h1>
       {fundraising.map((candidate, i) => (
+          <>
           <ViewCard
             key={i}
             family={candidate}
           />
+          {/* <LinearProgress variant="determinate" value={candidate.fundsRaised} color="red" maxValue={10000}/> */}
+          </>
       ))}
     </>
   );
