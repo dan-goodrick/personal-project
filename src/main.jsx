@@ -4,33 +4,52 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { blue, deepOrange, yellow } from "@mui/material/colors";
+
+// https://mui.com/material-ui/customization/default-theme/
 
 const theme = createTheme({
   palette: {
-    primary: {
-      light: "#7bc8f6",
-      main: "#146899",
-    },
-    secondary: {
-      light: "#fff580",
-      main: "#ded400",
-      dark: "#998300",
-    },
-    error: {
-      main: "#ff5b3d",
-    },
-    black: {
-      main: "#251f1b",
-    },
+    // mode: "dark",
+    mode: "light",
+    // primary: {
+    // }
   },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
-      xxl: 1860,
+  typography: {
+    fontFamily: 'Helvetica, sans-serif', 
+    fontWeightRegular: 400, 
+    fontWeightBold: 700,
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        size: "small",
+        color: "primary",
+        variant: "contained",
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 3,
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: 'inherit', 
+          textDecoration: 'none', 
+          justifyContent: "center"
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          justifyContent: 'center', 
+          alignItems: 'center',
+        },
+      },
     },
   },
 });

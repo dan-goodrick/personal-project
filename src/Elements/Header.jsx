@@ -5,6 +5,7 @@ import { useState } from "react";
 import {
   AppBar,
   Avatar,
+  Button,
   Container,
   Divider,
   Hidden,
@@ -14,8 +15,8 @@ import {
   ListItem,
   SwipeableDrawer,
   Toolbar,
+  Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { ChevronRight, Menu } from "@mui/icons-material";
 
@@ -30,23 +31,9 @@ const navLinks = [
   { name: "About Us", shortName: "About", route: "/aboutUs" },
 ];
 
-const useStyles = makeStyles(() => ({
-  link: {
-    marginRight: 20,
-  },
-  avatar: {
-    marginRight: "auto",
-    backgroundColor: "black",
-    borderRadius: 0,
-    height: 30,
-    border: "2px solid black",
-  },
-}));
-
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const styles = useStyles();
   const [open, setOpen] = useState(false);
   const userId = useSelector((state) => state.userId);
 
@@ -61,66 +48,48 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="sticky" color="default">
+    <AppBar position="fixed" component="nav" color="default" >
       <Container disableGutters>
-        <Toolbar disableGutters>
-          <Avatar src={"/logo.webp"} href="/" className={styles.avatar} />
+        <Toolbar
+          disableGutters
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Link href="/">
+            <Avatar sx={{ mx: 2 }} src={"/logo.webp"} />
+          </Link>
           <Hidden smDown>
             {navLinks.map((item) => (
               <ListItem key={item.name}>
-                <Link
-                  className={styles.link}
-                  color="textPrimary"
-                  variant="button"
-                  underline="none"
-                  href={item.route}
-                >
-                  {item.name}
+                <Link href={item.route}>
+                  <Typography>{item.name}</Typography>
                 </Link>
               </ListItem>
             ))}
             {userId ? (
               <>
                 <ListItem>
-                  <Link
-                    className={styles.link}
-                    color="textPrimary"
-                    variant="button"
-                    underline="none"
-                    href="/admin"
-                  >
-                    Admin
-                  </Link>
+                  <Link href="/admin"><Typography>Admin</Typography></Link>
                 </ListItem>
                 <ListItem>
-                  <Link
-                    className={styles.link}
-                    color="textPrimary"
-                    variant="button"
-                    underline="none"
+                  <Button
+                    sx={{ mx: 4, textTransform: 'none'  }}
+                    variant="text"
+                    color="inherit"
                     onClick={handleLogout}
                   >
-                    Logout
-                  </Link>
+                    <Typography>Logout</Typography>
+                  </Button>
                 </ListItem>
               </>
             ) : (
               <ListItem>
-                <Link
-                  className={styles.link}
-                  color="textPrimary"
-                  variant="button"
-                  underline="none"
-                  href="/login"
-                >
-                  Log in
-                </Link>
+                <Link href="/login"><Typography>Login</Typography></Link>
               </ListItem>
             )}
           </Hidden>
           <Hidden smUp>
             <IconButton onClick={() => setOpen(true)}>
-              <Menu />
+              <Menu sx={{ mx: 2 }}/>
             </IconButton>
           </Hidden>
         </Toolbar>
@@ -145,53 +114,25 @@ const Header = () => {
         <List>
           {navLinks.map((item) => (
             <ListItem key={item.name}>
-              <Link
-                className={styles.link}
-                color="textPrimary"
-                variant="button"
-                underline="none"
-                href={item.route}
-              >
-                {item.shortName}
+              <Link href={item.route}>
+                <Typography>{item.shortName}</Typography>
               </Link>
             </ListItem>
           ))}
           {userId ? (
             <>
               <ListItem>
-                <Link
-                  className={styles.link}
-                  color="textPrimary"
-                  variant="button"
-                  underline="none"
-                  href="/admin"
-                >
-                  Admin
+                <Link href="/admin">
+                  <Typography>Admin</Typography>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link
-                  className={styles.link}
-                  color="textPrimary"
-                  variant="button"
-                  underline="none"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Link>
+                <Link onClick={handleLogout}><Typography>Logout</Typography></Link>
               </ListItem>
             </>
           ) : (
             <ListItem>
-              <Link
-                className={styles.link}
-                color="textPrimary"
-                variant="button"
-                underline="none"
-                href="/login"
-              >
-                Log in
-              </Link>
+              <Link href="/login"><Typography>Login</Typography></Link>
             </ListItem>
           )}
         </List>
