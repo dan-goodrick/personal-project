@@ -43,9 +43,6 @@ export default function ViewCard({ family }) {
         </CardContent>
         {(family.phaseId===3) && 
         <Button
-          size="small"
-          color="primary"
-          variant="contained"
           type="submit"
           onClick={() => setOpen(true)}
         >

@@ -24,16 +24,13 @@ export default function ShowPerson({ person, setEditPerson, i }) {
         </Typography>
       </div>
       <Button
-        size="small"
-        color="primary"
-        variant="contained"
+
         onClick={() => setEditPerson(true)}
       >
         Edit
       </Button>
       <Button
-        size="small"
-        color="primary"
+
         variant="outlined"
         onClick={() => setDelete(true)}
       >

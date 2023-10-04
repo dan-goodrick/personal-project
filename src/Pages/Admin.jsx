@@ -17,25 +17,19 @@ export default function Admin() {
       <h1>Admin Page</h1>
     <Grid>
       <Button
-        size="small"
-        color="primary"
-        variant="contained"
+
         onClick={() => navigate("/update-phase")}
       >
         Move Candidates
       </Button>
       <Button
-        size="small"
-        color="primary"
-        variant="contained"
+
         onClick={() => navigate("/newRecord")}
       >
         Add Candidate
       </Button>
       <Button
-        size="small"
-        color="primary"
-        variant="contained"
+
         onClick={() => navigate("/manageImages")}
       >
         Add Project Images

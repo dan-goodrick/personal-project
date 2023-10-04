@@ -44,17 +44,13 @@ const AddProjectImage = ({ setAddImage, setImgArr, imgArr}) => {
 
           <div>
             <Button
-              size="small"
-              color="primary"
               variant="outlined"
               onClick={() => setAddImage(false)}
             >
               Cancel
             </Button>
             <Button
-              size="small"
-              color="primary"
-              variant="contained"
+
               type="submit"
             >
               Save
