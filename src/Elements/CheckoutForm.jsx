@@ -11,10 +11,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { useEffect, useId, useState } from "react";
 import { Toaster, toast } from "sonner";
+import axios from "axios";
 
 // Docs: https://stripe.com/docs/payments/quickstart
 
-export default function CheckoutForm({ amount, lastName }) {
+export default function CheckoutForm({ amount, candidate }) {
   const id = useId();
   const stripe = useStripe();
   const elements = useElements();
@@ -23,8 +24,7 @@ export default function CheckoutForm({ amount, lastName }) {
   const [isLoading, setIsLoading] = useState(false);
   const URL = import.meta.env.VITE_URL;
   const successUrl = `${URL}checkout/success`;
-  console.log(successUrl);
-
+  console.log("donation amount", amount, candidate.fundsRaised);
   useEffect(() => {
     if (!stripe) return;
 
@@ -64,14 +64,26 @@ export default function CheckoutForm({ amount, lastName }) {
     setIsLoading(true);
     setMessage(null);
 
-    const { error } = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
-      elements,
-      confirmParams: {
-        return_url: successUrl,
-        receipt_email: email,
-      },
-    });
+    const { error } = stripe
+      .confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+          return_url: successUrl,
+          receipt_email: email,
+        },
+      })
+      .then(
+        axios.put(`/api/record-donation/${candidate.candidateId}`, {
+          amount: +amount + +candidate.fundsRaised,
+        }).then(
+          console.log(`Recorded ${amount} added to ${candidate.fundsRaised} for ${candidate.lastName}`)
+        )
+      )
+      .catch((error) => {
+        toast.error(message)
+        console.error(`Unable to update phases`, error);
+      });
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
@@ -88,14 +100,13 @@ export default function CheckoutForm({ amount, lastName }) {
 
     setIsLoading(false);
   }
-
+  console.log("amount", amount);
   return (
     <form
       id={`${id}-checkout-form`}
       aria-labelledby={`${id}-checkout-form-heading`}
       onSubmit={(...args) => onSubmit(...args)}
     >
-      
       <LinkAuthenticationElement
         id={`${id}-link-authentication-element`}
         onChange={(e) => setEmail(e.value.email)}
@@ -110,6 +121,7 @@ export default function CheckoutForm({ amount, lastName }) {
           layout: "tabs",
         }}
       />
+      <Toaster />
       <Button
         type="submit"
         size="large"
@@ -118,9 +130,8 @@ export default function CheckoutForm({ amount, lastName }) {
         disabled={!stripe || !elements || isLoading}
       >
         {isLoading && <CircularProgress />}
-        Donate ${amount} to build a home for the {lastName} family.
+        Donate ${amount} to build a home for the {candidate.lastName} family.
       </Button>
-      <Toaster />
     </form>
   );
 }

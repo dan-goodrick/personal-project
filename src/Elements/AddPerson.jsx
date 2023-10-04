@@ -46,9 +46,9 @@ const AddPerson = ( {handleAddPerson, setAddPerson} ) => {
           </Select>
           <Checkbox name="headOfHousehold">Head of Household</Checkbox>
           <div>
-            <Button size="small" color="primary" variant="outlined" onClick={() => setAddPerson(false)}
+            <Button  variant="outlined" onClick={() => setAddPerson(false)}
             >Cancel</Button>
-            <Button size="small" color="primary" variant="contained" type="submit"
+            <Button  type="submit"
             >Save</Button>
           </div>
         </Form>

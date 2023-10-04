@@ -1,20 +1,21 @@
 import { useLoaderData } from "react-router-dom";
-import ViewCard from "../Elements/ViewCard";
 import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
-
-//TODO: add top card for each category past, current fundraising
+import Hero from "../Elements/Hero";
+import { Container, Stack } from "@mui/material";
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 export default function Home() {
-  const { projects, images } = useLoaderData();
-
+  const { images } = useLoaderData();
   return (
-    <>
-      <h1>Builders of Hope</h1>
-      <ImageGallery items={images} autoPlay={true} />
-      {projects.map((candidate, i) => (
-        <ViewCard key={i} family={candidate} />
-        ))}
-    </>
+    <Stack spacing={2} sx={{
+      display: "flex",
+      justifyContent: 'center', 
+      alignItems: 'center',
+    }}>
+    <Hero />
+    <Container maxWidth="sm" >
+    <ImageGallery items={images} autoPlay={true} />
+    </Container>
+    </Stack>
   );
 }

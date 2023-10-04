@@ -68,9 +68,7 @@ export default function CandidateCard({ candidate }) {
           />
         ) : (
           <Button
-            size="small"
-            color="primary"
-            variant="contained"
+
             onClick={() => setAddPerson(true)}
           >
             {" "}

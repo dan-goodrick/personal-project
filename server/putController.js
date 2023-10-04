@@ -1,14 +1,6 @@
-import {
-  Candidate,
-  Phase,
-  Person,
-  Member,
-} from "./model.js";
-
-
+import { Candidate, Phase, Person, Member } from "./model.js";
 
 const serverFunctions = {
-  
   person: (req, res) => {
     console.log("put Person", req.body);
     Person.update(req.body, { where: { personId: req.params.id } })
@@ -30,6 +22,20 @@ const serverFunctions = {
       })
       .catch((error) => {
         console.error(`Unable to update Candidate ${req.body}`, error);
+      });
+  },
+  recordDonation: (req, res) => {
+    console.log("put donation", req.body, req.params);
+    Candidate.update(
+      { fundsRaised: req.body.amount },
+      { where: { candidateId: req.params.id } }
+    )
+      .then((val) => {
+        console.log("updated funds Raised:", val);
+        res.json({ success: true });
+      })
+      .catch((error) => {
+        console.error(`Unable to update donation ${req.body}`, error);
       });
   },
 
@@ -58,17 +64,17 @@ const serverFunctions = {
   },
   phases: (req, res) => {
     console.log("put phaseMap", req.body);
-    for (let [cand, phase] of Object.entries(req.body)){
-      Candidate.update({ phaseId: phase }, {where: {candidateId: cand}})
-      .then((val) => {
+    for (let [cand, phase] of Object.entries(req.body)) {
+      Candidate.update({ phaseId: phase }, { where: { candidateId: cand } })
+        .then((val) => {
           console.log("updated phase:", val);
           res.json({ success: true });
         })
         .catch((error) => {
           console.error(`Unable to update phase ${req.body}`, error);
         });
-      }
     }
-  }
+  },
+};
 
 export default serverFunctions;

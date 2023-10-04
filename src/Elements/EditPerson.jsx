@@ -87,17 +87,14 @@ const EditPerson = ({ person, setEditPerson, setNewPerson }) => {
           <Checkbox name="headOfHousehold">Head of Household</Checkbox>
           <div>
             <Button
-              size="small"
-              color="primary"
+
               variant="outlined"
               onClick={() => setEditPerson(false)}
             >
               Cancel
             </Button>
             <Button
-              size="small"
-              color="primary"
-              variant="contained"
+
               type="submit"
             >
               Save

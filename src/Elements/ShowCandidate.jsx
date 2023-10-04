@@ -40,19 +40,16 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
         At phase since: {new Date(candidate.currPhaseDate).toDateString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        Funding: {candidate.fundsRaised}/{candidate.fundingRequirement}
+        Funding: {candidate.fundsRaised}/{candidate.fundRequirement}
       </Typography>
       <Button
-        size="small"
-        color="primary"
-        variant="contained"
+
         onClick={() => setEditCandidate(true)}
       >
         Edit Candidate Data
       </Button>
       <Button
-        size="small"
-        color="primary"
+
         variant="outlined"
         onClick={() => setDelete(true)}
       >

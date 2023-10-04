@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
+import { Grid, Toolbar } from "@mui/material";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ const Layout = () => {
   }, []);
 
   return (
-    <>
+    <Grid >
       <Header />
       <Outlet />
-    </>
+    </Grid>
   );
 };
 

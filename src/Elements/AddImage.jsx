@@ -48,17 +48,11 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
 
           <div>
             <Button
-              size="small"
-              color="primary"
-              variant="outlined"
               onClick={() => setAddImage(false)}
             >
               Cancel
             </Button>
             <Button
-              size="small"
-              color="primary"
-              variant="contained"
               type="submit"
             >
               Save

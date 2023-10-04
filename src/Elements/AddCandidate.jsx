@@ -59,15 +59,10 @@ export default function AddCandidate( {handleNewCandidate}) {
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
           <div>
           <Button
-              size="small"
-              color="primary"
               variant="outlined"
               onClick={() => navigate("/admin")}
             >Cancel</Button>
             <Button
-              size="small"
-              color="primary"
-              variant="contained"
               type="submit"
             >Save Candidate</Button>
           </div>

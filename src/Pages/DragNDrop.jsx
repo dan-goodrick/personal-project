@@ -1,19 +1,21 @@
 // https://codesandbox.io/s/react-dnd-example-try06
 
 import { useState } from "react";
-import { DndProvider} from "react-dnd";
+import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { PHASES } from "./../constants";
-import "./../css/DragNDrop.css";
+import "./../css/style.css";
 import MovableItem from "../Elements/MoveableItem";
 import Phase from "../Elements/Phase";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
-
+import { Grid } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+const defaultTheme = createTheme();
 
 export default function DragNDrop() {
-  const { phases } = useLoaderData()
+  const { phases } = useLoaderData();
   const navigate = useNavigate();
   const [items, setItems] = useState(phases);
   console.log("items", items);
@@ -52,11 +54,11 @@ export default function DragNDrop() {
       ));
   };
 
-  const handleSubmit = (() => { 
+  const handleSubmit = () => {
     let map = {};
-    for (let i in items){
+    for (let i in items) {
       if (items[i].phaseId !== items[i].newPhaseId) {
-        map[items[i].candidateId] = items[i].newPhaseId
+        map[items[i].candidateId] = items[i].newPhaseId;
       }
     }
     console.log("items", items, "map", map);
@@ -64,49 +66,45 @@ export default function DragNDrop() {
       .put(`/api/phases/`, map)
       .then(() => {
         console.log("updated phases", map);
-        
       })
       .catch((error) => {
         console.error(`Unable to update phases`, error);
       });
-      navigate("/admin")
-   })
+    navigate("/admin");
+  };
   return (
-    <div className="container">
-         <Button
+    <>
+      <Grid container spacing={2}>
+        <Button 
         size="small"
         color="primary"
-        variant="contained"
-        onClick={handleSubmit}
-      >
-        Save
-      </Button> 
-      <Button
-              size="small"
-              color="primary"
-              variant="outlined"
-              onClick={() => navigate("/admin")}
-            >Cancel</Button>
-      <DndProvider backend={HTML5Backend}>
-        <Phase title={PHASES[1]} className="column incomplete">
-          {returnItemsForColumn(PHASES[1])}
-        </Phase>
-        <Phase title={PHASES[2]} className="column accepted">
-          {returnItemsForColumn(PHASES[2])}
-        </Phase>
-        <Phase
-          title={PHASES[3]}
-          className="column fundraising"
-        >
-          {returnItemsForColumn(PHASES[3])}
-        </Phase>
-        <Phase title={PHASES[4]} className="column planning">
-          {returnItemsForColumn(PHASES[4])}
-        </Phase>
-        <Phase title={PHASES[5]} className="column completed">
-          {returnItemsForColumn(PHASES[5])}
-        </Phase>
-      </DndProvider>
-    </div>
+        variant="contained" onClick={handleSubmit}>Save</Button>
+        <Button 
+        size="small"
+        color="primary"
+        variant="contained"onClick={() => navigate("/admin")}>Cancel</Button>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={4}>
+          <DndProvider backend={HTML5Backend}>
+            <Phase title={PHASES[1]} className="column incomplete">
+              {returnItemsForColumn(PHASES[1])}
+            </Phase>
+            <Phase title={PHASES[2]} className="column accepted">
+              {returnItemsForColumn(PHASES[2])}
+            </Phase>
+            <Phase title={PHASES[3]} className="column fundraising">
+              {returnItemsForColumn(PHASES[3])}
+            </Phase>
+            <Phase title={PHASES[4]} className="column planning">
+              {returnItemsForColumn(PHASES[4])}
+            </Phase>
+            <Phase title={PHASES[5]} className="column completed">
+              {returnItemsForColumn(PHASES[5])}
+            </Phase>
+          </DndProvider>
+        </Grid>
+      </Grid>
+    </>
   );
 }
