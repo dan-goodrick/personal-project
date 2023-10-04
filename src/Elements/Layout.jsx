@@ -3,7 +3,7 @@ import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
-import { Grid, Stack, Toolbar } from "@mui/material";
+import { Grid, Toolbar } from "@mui/material";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,6 @@ const Layout = () => {
   return (
     <Grid >
       <Header />
-      {/* Empty Toolbar keeps the outlet from sitting behind the header */}
-      <Toolbar />
       <Outlet />
     </Grid>
   );

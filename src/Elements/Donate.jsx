@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function Donate( {open, setOpen, lastName}) {
+export default function Donate( {open, setOpen, candidate}) {
   const [openPayment, setOpenPayment] = useState(false);
   const [amount, setAmount] = useState(0);
   // console.log("Fundraising", fundraising)
@@ -67,7 +67,7 @@ export default function Donate( {open, setOpen, lastName}) {
           <Box sx={style} >
             <div className="font-mono text-white text-opacity-70 font-[700] text-opacity-90 h-screen flex justify-center items-center">
               <div className="bg-white rounded-md p-12 bg-opacity-70">
-                <StripeCheckout amount={amount} lastName={lastName}/>
+                <StripeCheckout amount={amount} candidate={candidate}/>
               </div>
             </div>
           </Box>

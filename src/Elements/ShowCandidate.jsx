@@ -40,7 +40,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
         At phase since: {new Date(candidate.currPhaseDate).toDateString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        Funding: {candidate.fundsRaised}/{candidate.fundingRequirement}
+        Funding: {candidate.fundsRaised}/{candidate.fundRequirement}
       </Typography>
       <Button
 

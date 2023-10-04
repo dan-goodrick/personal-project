@@ -6,9 +6,9 @@ import axios from "axios";
 const CLIENT_STRIPE_KEY = import.meta.env.VITE_CLIENT_STRIPE_KEY;
 const stripePromise = loadStripe(CLIENT_STRIPE_KEY);
 
-export default function StripeCheckout( {amount, lastName}) {
+export default function StripeCheckout( {amount, candidate}) {
   const [clientSecret, setClientSecret] = useState("");
-  console.log("public key", CLIENT_STRIPE_KEY);
+  console.log("public key", CLIENT_STRIPE_KEY, amount, typeof amount);
   useEffect(() => {
     axios
       .post("/api/create-payment-intent", {
@@ -35,7 +35,7 @@ export default function StripeCheckout( {amount, lastName}) {
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm amount={amount} lastName={lastName}/>
+          <CheckoutForm amount={amount} candidate={candidate}/>
         </Elements>
       )}
     </div>

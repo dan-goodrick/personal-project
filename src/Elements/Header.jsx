@@ -48,8 +48,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" component="nav" color="default" >
-      <Container disableGutters>
+    <AppBar position="sticky" color="default" >
         <Toolbar
           disableGutters
           sx={{ display: "flex", justifyContent: "space-between" }}
@@ -93,7 +92,6 @@ const Header = () => {
             </IconButton>
           </Hidden>
         </Toolbar>
-      </Container>
       <SwipeableDrawer
         anchor="right"
         open={open}

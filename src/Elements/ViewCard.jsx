@@ -7,7 +7,7 @@ import { useState } from "react";
 import Donate from "./Donate";
 
 export default function ViewCard({ family }) {
-  const [open, setOpen] = useState(false);
+  
   console.log("family", family);
   return (
     <Grid
@@ -17,10 +17,9 @@ export default function ViewCard({ family }) {
       justify="flex-start"
       alignItems="flex-start"
     >
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ p:2}}>
         <CardMedia
           component="img"
-          height="340"
           image={family.images[0].original}
           alt={family.lastName}
         />
@@ -41,15 +40,6 @@ export default function ViewCard({ family }) {
             ))}
           <Typography>{family.about}</Typography>
         </CardContent>
-        {(family.phaseId===3) && 
-        <Button
-          type="submit"
-          onClick={() => setOpen(true)}
-        >
-          Contribute
-        </Button>
-        }
-        <Donate open={open} setOpen={setOpen} lastName={family.lastName} />
       </Card>
     </Grid>
   );

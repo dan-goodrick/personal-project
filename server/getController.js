@@ -12,7 +12,7 @@ const serverFunctions = {
       ],
       order: [
         [Person, "headOfHousehold", "DESC"],
-        [Person, "dob", "ASC"],
+        [Person, "dob", "DESC"],
       ],
     })
       .then((candidates) => {
@@ -65,13 +65,11 @@ const serverFunctions = {
     Candidate.findAll({
       include: [
         { model: Image, where: { primary: true }, attributes: ["original", "thumbnail"] },
-        { model: Phase },
         { model: Person },
       ],
       order: [
-        ["phaseId"],
         [Person, "headOfHousehold", "DESC"],
-        [Person, "dob", "ASC"],
+        [Person, "dob", "DESC"],
       ],
     })
       .then((candidates) => {
