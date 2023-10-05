@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 
 
 const ShowImages = ({ imgArr, setImgArr}) => {
@@ -19,9 +20,9 @@ const ShowImages = ({ imgArr, setImgArr}) => {
    }
    console.log("imgArr", imgArr)
   return (
-    <>
+    <Grid  direction="column" spacing={0} ml={5}>
       {imgArr.map((img, i) => (
-        <p key={i} >
+        <p key={i} > {i}.&nbsp;&nbsp;
         {img.original} 
         {img.primary ? 
         <>&#x2713;</> : 
@@ -29,7 +30,7 @@ const ShowImages = ({ imgArr, setImgArr}) => {
         <button id="delete" onClick={()=>handleDelete(i)}>&times;</button>
         </p>
       ))}
-    </>
+    </Grid>
   );
 };
 
