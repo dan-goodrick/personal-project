@@ -36,7 +36,7 @@ export default function Fundraising() {
           justifyContent="center"
         >
           {fundraising.map((candidate, i) => (
-            <Grid key={i} item xs={12} sm={6}>
+            <Grid key={i} item xs={12} sm={5} >
               <ViewCard family={candidate} crop={false} />
               <Stack sx={{ m: 2, p: 2 }}>
                 <Typography variant="h5" align={"center"}>
