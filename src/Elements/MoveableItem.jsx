@@ -13,17 +13,23 @@ const MovableItem = ({
   const changeItemColumn = (currentItem, columnName) => {
     setItems((prevState) => {
       return prevState.map((e) => {
-        console.log(lastName, e.lastName, currentItem.lastName, columnName, e.column);
-        let column = e.column
-        let newPhaseId = PHASES[e.column]
-        if (e.lastName === currentItem.lastName){
-           column = columnName
-           newPhaseId = PHASES[columnName]
+        console.log(
+          lastName,
+          e.lastName,
+          currentItem.lastName,
+          columnName,
+          e.column
+        );
+        let column = e.column;
+        let newPhaseId = PHASES[e.column];
+        if (e.lastName === currentItem.lastName) {
+          column = columnName;
+          newPhaseId = PHASES[columnName];
         }
         return {
           ...e,
           column: column,
-          newPhaseId: newPhaseId
+          newPhaseId: newPhaseId,
         };
       });
     });
@@ -113,17 +119,16 @@ const MovableItem = ({
 
   return (
     <div ref={ref} className="movable-item" style={{ opacity }}>
-
-        <img src={url}   style={{
-    maxWidth: '100%',
-    minWidth: 30,
-    maxHeight: '100%',
-    minHeight: 30,
-  }}/>
-
-       {lastName}
-
-
+      <img
+        src={url}
+        style={{
+          maxWidth: "100%",
+          minWidth: 30,
+          maxHeight: "100%",
+          minHeight: 30,
+        }}
+      />
+      {lastName}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import CandidateData from "./CandidateData";
-import ShowPeople from "./ShowPeople";
-
+import PersonCard from "./PersonCard";
 
 
 export default function EditCandidate({ candidate, setEditCandidate, handleEditCandidate }) {
@@ -8,8 +7,8 @@ export default function EditCandidate({ candidate, setEditCandidate, handleEditC
   // console.log("EditCandidate", candidate);
   return (
     <>
-      <ShowPeople people={candidate.people} />
-      <CandidateData candidate={candidate} setEditCandidate={setEditCandidate} handleEditCandidate={handleEditCandidate} />
+      {candidate.people.map((person, i) => <PersonCard key={i} person={person} i={i} /> )}
+      <CandidateData  candidate={candidate} setEditCandidate={setEditCandidate} handleEditCandidate={handleEditCandidate} />
     </>
   );
 }

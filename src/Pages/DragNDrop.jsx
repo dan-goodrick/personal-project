@@ -77,11 +77,11 @@ export default function DragNDrop() {
       <div className={style.bg} />
     <Grid container direction="column" spacing={3} alignItems="center">
       <Grid item xs={12}>
-        <Typography variant="h3" align={"center"}>
+        <Typography variant="h4" mt={3} align={"center"}>
           Drag/Drop candidates to set build phase then click save
         </Typography>
       </Grid>
-      <Grid container item xs={12} direction="row" sm={6} md={4} lg={2}>
+      <Grid container item xs={12} direction="row" p={2} justifyContent={"space-around"} sm={6} md={4} >
         <DndProvider backend={HTML5Backend}>
           <Phase title={PHASES[1]} className="column incomplete">
             {returnItemsForColumn(PHASES[1])}
@@ -101,8 +101,8 @@ export default function DragNDrop() {
         </DndProvider>
       </Grid>
       <Grid container xs={12} justifyContent={"space-around"}>
-        <Button onClick={handleSubmit}>Save</Button>
-        <Button onClick={() => navigate("/admin")}>Cancel</Button>
+        <Button sx={{minWidth:"30vw"}} onClick={handleSubmit}>Save</Button>
+        <Button color='secondary' sx={{minWidth:"30vw"}} onClick={() => navigate("/admin")}>Cancel</Button>
       </Grid>
     </Grid>
     </div>

@@ -13,15 +13,15 @@ export default function ShowPerson({ person, setEditPerson, i }) {
         <Typography variant={i?"body2":"body1"} color="text.secondary">
           {person.firstName} {person.lastName}: {getAge(person.dob)}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        {person.gender&&<Typography variant="body2" color="text.secondary">
           Gender: {person.gender}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        </Typography>}
+        {person.whatsApp&&<Typography variant="body2" color="text.secondary">
           WhatsApp: {person.whatsApp}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        </Typography>}
+       {person.email&&<Typography variant="body2" color="text.secondary">
           Email: {person.email}
-        </Typography>
+        </Typography>}
       </div>
       <Button
 
