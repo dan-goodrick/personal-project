@@ -37,7 +37,7 @@ const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => 
         }}
         onSubmit={(values) => {handleEditCandidate(values)}}
       >
-        <Form style={{display:"flex", flexDirection:"column", width:width}}>
+        <Form style={{display:"flex", flexDirection:"column"}}>
           <Text name="lastName" type="text" placeholder="Last Name" />
           <Text name="address" type="text" placeholder="Address" />
           <Text name="city" type="text" placeholder="City" />

@@ -75,6 +75,7 @@ export default function CandidateCard({ candidate }) {
             Add Person
           </Button>
         )}
+        <div style={{width:"325px"}}>       
         {editCandidate ? (
           <EditCandidate
             candidate={candidateCopy}
@@ -87,6 +88,7 @@ export default function CandidateCard({ candidate }) {
             setEditCandidate={setEditCandidate}
           />
         )}
+        </div>
       </CardContent>
     </Card>
   );
