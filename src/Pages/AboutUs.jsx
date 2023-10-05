@@ -11,7 +11,7 @@ export default function AboutUs() {
       <div className={style.bg} />
       <Grid container direction="column" spacing={2}>
         <Grid item xs={12} m={4}>
-          <Typography variant="h3" fontWeight={600} color="text.secondary" align={"center"}>
+          <Typography variant="h3" fontWeight={600} color="text" align={"center"}>
             What our volunteers are saying
           </Typography>
         </Grid>
