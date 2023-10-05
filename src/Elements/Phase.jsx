@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
 
 const Phase = ({ children, className, title }) => {
@@ -23,14 +24,17 @@ const Phase = ({ children, className, title }) => {
   };
 
   return (
-    <div
+    <Grid
       ref={drop}
+      align={"center"}
+      direction="column"
       className={className}
+      justifyContent="flex-start" 
       style={{ backgroundColor: getBackgroundColor() }}
     >
-      <p>{title}</p>
+      <Typography variant="h5">{title}</Typography>
       {children}
-    </div>
+    </Grid>
   );
 };
 

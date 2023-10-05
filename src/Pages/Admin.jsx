@@ -19,7 +19,7 @@ export default function Admin() {
           Admin Page
         </Typography>
       </Grid>
-      <Grid container xs={12} justifyContent={"space-around"}>
+      <Grid container justifyContent={"space-around"}>
         <Button onClick={() => navigate("/update-phase")}>Edit Building Phase</Button>
         <Button onClick={() => navigate("/newRecord")}>New Candidate</Button>
         <Button onClick={() => navigate("/manageImages")}>Edit Images</Button>

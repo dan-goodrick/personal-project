@@ -51,6 +51,9 @@ const theme = createTheme({
         },
       },
     },
+    MuiCardContent: {
+      py:0
+    }
   },
 });
 

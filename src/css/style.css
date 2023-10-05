@@ -1,16 +1,8 @@
 
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-
 .column {
   height: max-content;
   min-height: 200px;
-  width: 160px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
@@ -43,8 +35,7 @@
 .movable-item {
   border-radius: 5px;
   background-color: #fafdff;
-  height: 100px;
-  width: 140px;
+  width: 150px;
   margin: 10px auto;
   display: flex;
   flex-direction: column;

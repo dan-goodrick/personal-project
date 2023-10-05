@@ -6,18 +6,18 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ShowPeople from "../Elements/ShowPeople";
 import { styles } from "./Home";
+import PersonCard from "../Elements/PersonCard";
 
 export default function NewRecord() {
   const navigate = useNavigate();
   const [addPerson, setAddPerson] = useState(false);
   const [addImage, setAddImage] = useState(false);
   const [imgArr, setImgArr] = useState([]);
-  const [peopleArr, setPeopleArr] = useState([]);
+  const [people, setPeople] = useState([]);
 
   const handleAddPerson = (values) => {
-    setPeopleArr([...peopleArr, values]);
+    setPeople([...people, values]);
     setAddPerson(false);
   };
 
@@ -28,7 +28,7 @@ export default function NewRecord() {
       primary: true,
     }] : imgArr
     
-    const payload = { candidate, peopleArr, imgArrVar };
+    const payload = { candidate, people, imgArrVar };
     console.log("payload", payload);
     axios
       .post(`/api/candidate/`, payload) // arrays of objects for for images and people
@@ -51,7 +51,7 @@ export default function NewRecord() {
         <Button size="small" color="primary" variant="contained" onClick={() => setAddImage(true)} >Add Image</Button>
       }
       <h1>People</h1>
-      <ShowPeople people={peopleArr} setPeopleArr={setPeopleArr} />
+      {people.map((person, i) => <PersonCard key={i} person={person} i={i} /> )}
       {addPerson ? 
         <AddPerson handleAddPerson={handleAddPerson} setAddPerson={setAddPerson} /> :
         <Button size="small" color="primary" variant="contained" onClick={() => setAddPerson(true)} >Add Person</Button>

@@ -3,7 +3,7 @@ import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
 import Delete from "./Delete";
 import { useState } from "react";
-import ShowPeople from "./ShowPeople";
+import PersonCard from "./PersonCard";
 
 export default function ShowCandidate({ candidate, setEditCandidate }) {
   const [del, setDelete] = useState(false);
@@ -13,7 +13,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Typography gutterBottom variant="h5" component="div">
         {candidate.lastName}
       </Typography>
-      <ShowPeople people={candidate.people} />
+      {candidate.people.map((person, i) => <PersonCard key={i} person={person} i={i} /> )}
       <Typography variant="body2" color="text.secondary">
         Address: {candidate.address} <br />
         {candidate.municipality}, {candidate.city}, {candidate.country},{" "}
@@ -21,8 +21,8 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       </Typography>
       <Typography variant="body2" color="text.secondary">
         Lat/Lon:
-        <Link href={candidate.googleMaps}>
-          {candidate.lat? candidate.lat.toFixed(5):null}, {candidate.lon? candidate.lon.toFixed(5):null}
+        <Link href={candidate.googleMaps} sx={{ color:"blue", textDecoration:"underline" }}>
+          {candidate.lat&&candidate.lat.toFixed(5)}, {candidate.lon&&candidate.lon.toFixed(5)}
         </Link>
       </Typography>
       <Typography variant="body2" color="text.secondary">
@@ -33,7 +33,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
           Loan Status: {candidate.currOnLoan}
         </Typography>
       ) : null}
-      <Typography variant="body1" color="text.primary">
+      <Typography variant="h6" align="center" color="text.primary">
         Admin Data
       </Typography>
       <Typography variant="body2" color="text.secondary">
