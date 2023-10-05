@@ -31,6 +31,7 @@ export default function OrderSuccess() {
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
+
     <Paper className={style.hooray}>
       <Grid
         container

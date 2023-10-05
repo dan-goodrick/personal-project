@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { styles } from "./Home";
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -28,8 +29,10 @@ export default function NewRecord() {
       });
     navigate("/admin");
   };
+  const style = styles();
   return (
-    <>
+    <div>
+      <div className={style.bg} />
       <h1>Images</h1>
       <ShowImages imgArr={imgArr} setImgArr={setImgArr} />
       {addImage ? (
@@ -57,6 +60,6 @@ export default function NewRecord() {
       >
         Done with Images
       </Button>
-    </>
+    </div>
   );
 }

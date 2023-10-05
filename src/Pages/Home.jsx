@@ -5,7 +5,7 @@ import {  Container, Stack } from "@mui/material";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { makeStyles } from "@mui/styles";
  
-const styles = makeStyles(() => ({
+export const styles = makeStyles(() => ({
   bg: {
     backgroundImage: 'url("/hands.jpeg")', // Replace with your image URL
     backgroundSize: 'cover',
@@ -15,10 +15,10 @@ const styles = makeStyles(() => ({
     height: '100vh',
     opacity: 0.5, // Adjust the opacity as needed
     position: 'absolute',
-    top: 100,
     left: 0,
     zIndex: -1,
   }
+
 }));
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
   const style = styles();
   return (
     <div>
-    <div className={style.bg}/>
+    <div className={style.bg} style={{ top: `150px` }}/>
     <Stack
       spacing={2}
       sx={{

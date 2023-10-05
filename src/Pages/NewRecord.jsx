@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ShowPeople from "../Elements/ShowPeople";
+import { styles } from "./Home";
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function NewRecord() {
     console.log("payload", payload);
     axios
       .post(`/api/candidate/`, payload) // arrays of objects for for images and people
-      .then((res) => {
+      .then(() => {
         // console.log("added candidate:", res);
         navigate("/admin");
       })
@@ -39,8 +40,10 @@ export default function NewRecord() {
         console.error(`Unable to add ${candidate.lastName}`, error);
       });
   };
+  const style = styles();
   return (
-    <>
+    <div>
+      <div className={style.bg} />
       <h1>Images</h1>
       <ShowImages imgArr={imgArr} setImgArr={setImgArr} />
       {addImage ? 
@@ -54,6 +57,6 @@ export default function NewRecord() {
         <Button size="small" color="primary" variant="contained" onClick={() => setAddPerson(true)} >Add Person</Button>
       }
       <AddCandidate handleNewCandidate={handleNewCandidate} />
-    </>
+    </div>
   );
 }
