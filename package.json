@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server/app.js -w app.js -w server -w src -e html,css,js,jsx",
+    "dev": "nodemon server/app.js -w app.js -w server ",
     "build": "vite build",
     "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

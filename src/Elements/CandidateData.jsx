@@ -1,9 +1,6 @@
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import "yup-phone-lite";
 import Text from "../Widgets/Text";
 import Select from "../Widgets/Select";
-import Checkbox from "../Widgets/Select";
 import Button from "@mui/material/Button";
 
 //todo: title should be a select box
@@ -35,7 +32,8 @@ const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => 
           loanDuration: candidate.loanDuration,
           videoUrl: candidate.videoUrl,
           fundsRaised: candidate.fundsRaised,
-          fundRequirement: candidate.fundRequirement
+          fundRequirement: candidate.fundRequirement,
+          about:candidate.about
         }}
         onSubmit={(values) => {handleEditCandidate(values)}}
       >
@@ -70,6 +68,8 @@ const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => 
           <br />
           <Text name="paymentCnt" type="text" placeholder="Current Payment #" /> of 
           <Text name="loanDuration" type="text" placeholder="Total Loan Installments" />
+          <br />
+          <Text name="about" type="text" placeholder="About" />
           <br />
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
           <div>

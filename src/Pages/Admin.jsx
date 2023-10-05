@@ -1,42 +1,37 @@
 import { useLoaderData } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import ShowFullData from "../Elements/ShowFullData";
-import "./../css/style.css";
-import { Container, Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import CandidateCard from "../Elements/CandidateCard";
 
 export default function Admin() {
-
   const { candidates } = useLoaderData();
   const navigate = useNavigate();
 
-  // if there isn't a user in the store, navigate to login screen
-
   return (
-    <Container >
-      <h1>Admin Page</h1>
-    <Grid>
-      <Button
-
-        onClick={() => navigate("/update-phase")}
-      >
-        Move Candidates
-      </Button>
-      <Button
-
-        onClick={() => navigate("/newRecord")}
-      >
-        Add Candidate
-      </Button>
-      <Button
-
-        onClick={() => navigate("/manageImages")}
-      >
-        Add Project Images
-      </Button>    
+    <Grid container direction="column" spacing={3} alignItems="center">
+      <Grid item xs={12}>
+        <Typography variant="h3" align={"center"}>
+          Admin Page
+        </Typography>
+      </Grid>
+      <Grid container xs={12} justifyContent={"space-around"}>
+        <Button onClick={() => navigate("/update-phase")}>Edit Building Phase</Button>
+        <Button onClick={() => navigate("/newRecord")}>New Candidate</Button>
+        <Button onClick={() => navigate("/manageImages")}>Edit Images</Button>
+      </Grid>
+      <Grid
+        container
+        item
+        direction="row"
+        spacing={5}
+        justifyContent="center">
+        {candidates.map((candidate) => (
+          <Grid item key={candidate.candidateId} >            
+            <CandidateCard candidate={candidate} />
+          </Grid>
+        ))}
+      </Grid>
     </Grid>
-      <ShowFullData candidates={candidates}/>
-      
-    </Container>
   );
 }

@@ -78,10 +78,6 @@ const imageData = [
     primary: true,
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/boh-hoorah.jpg",
-    tag: 'carousel',
-  },
-  {
     original:"https://buildersofhope.s3.us-west-2.amazonaws.com/martinez-home-plaque.jpg",
     tag: 'carousel',
   },

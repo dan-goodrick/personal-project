@@ -27,9 +27,9 @@ export default function Fundraising() {
   };
   return (
     <Grid container direction="column" spacing={3}>
-      <Grid item xs={12}>
-        <Typography variant="h3" align={"center"}>
-          Current Fundraisers
+      <Grid item xs={12} m={4}>
+        <Typography variant="h4" align={"center"}>
+          Help these families move toward their dream of their own home.  Donate Today!
         </Typography>
       </Grid>
       <Grid container item direction="row" spacing={5} justifyContent="center">
@@ -37,7 +37,7 @@ export default function Fundraising() {
           <Grid key={i} item xs={12} sm={6}>
             <ViewCard family={candidate} crop={false} />
             <Stack sx={{ m: 2, p: 2 }}>
-              <Typography variant="h3" align={"center"}>
+              <Typography variant="h5" align={"center"}>
                 Funding Progress
               </Typography>
               <LinearProgress
