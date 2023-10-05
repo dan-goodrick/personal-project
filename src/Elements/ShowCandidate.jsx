@@ -42,6 +42,9 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
       <Typography variant="body2" color="text.secondary">
         Funding: {candidate.fundsRaised}/{candidate.fundRequirement}
       </Typography>
+      <Typography variant="body2" color="text.secondary">
+        About: {candidate.about}
+      </Typography>
       <Button
 
         onClick={() => setEditCandidate(true)}

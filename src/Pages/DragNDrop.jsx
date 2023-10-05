@@ -10,9 +10,7 @@ import Phase from "../Elements/Phase";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import { Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-const defaultTheme = createTheme();
+import { Grid, Typography } from "@mui/material";
 
 export default function DragNDrop() {
   const { phases } = useLoaderData();
@@ -73,38 +71,35 @@ export default function DragNDrop() {
     navigate("/admin");
   };
   return (
-    <>
-      <Grid container spacing={2}>
-        <Button 
-        size="small"
-        color="primary"
-        variant="contained" onClick={handleSubmit}>Save</Button>
-        <Button 
-        size="small"
-        color="primary"
-        variant="contained"onClick={() => navigate("/admin")}>Cancel</Button>
+    <Grid container direction="column" spacing={3} alignItems="center">
+      <Grid item xs={12}>
+        <Typography variant="h3" align={"center"}>
+          Drag/Drop candidates to set build phase then click save
+        </Typography>
       </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={4}>
-          <DndProvider backend={HTML5Backend}>
-            <Phase title={PHASES[1]} className="column incomplete">
-              {returnItemsForColumn(PHASES[1])}
-            </Phase>
-            <Phase title={PHASES[2]} className="column accepted">
-              {returnItemsForColumn(PHASES[2])}
-            </Phase>
-            <Phase title={PHASES[3]} className="column fundraising">
-              {returnItemsForColumn(PHASES[3])}
-            </Phase>
-            <Phase title={PHASES[4]} className="column planning">
-              {returnItemsForColumn(PHASES[4])}
-            </Phase>
-            <Phase title={PHASES[5]} className="column completed">
-              {returnItemsForColumn(PHASES[5])}
-            </Phase>
-          </DndProvider>
-        </Grid>
+      <Grid container item xs={12} direction="row" sm={6} md={4} lg={2}>
+        <DndProvider backend={HTML5Backend}>
+          <Phase title={PHASES[1]} className="column incomplete">
+            {returnItemsForColumn(PHASES[1])}
+          </Phase>
+          <Phase title={PHASES[2]} className="column accepted">
+            {returnItemsForColumn(PHASES[2])}
+          </Phase>
+          <Phase title={PHASES[3]} className="column fundraising">
+            {returnItemsForColumn(PHASES[3])}
+          </Phase>
+          <Phase title={PHASES[4]} className="column planning">
+            {returnItemsForColumn(PHASES[4])}
+          </Phase>
+          <Phase title={PHASES[5]} className="column completed">
+            {returnItemsForColumn(PHASES[5])}
+          </Phase>
+        </DndProvider>
       </Grid>
-    </>
+      <Grid container xs={12} justifyContent={"space-around"}>
+        <Button onClick={handleSubmit}>Save</Button>
+        <Button onClick={() => navigate("/admin")}>Cancel</Button>
+      </Grid>
+    </Grid>
   );
 }

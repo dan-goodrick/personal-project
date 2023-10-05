@@ -23,7 +23,7 @@ import OrderSuccess from "./Pages/OrderSuccess";
 
 function App() {
   const userId = useSelector(state => state.userId)
-
+  console.log("userId", userId);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
@@ -78,16 +78,16 @@ function App() {
         />
         <Route 
           path="/newRecord" 
-          element={userId? <NewRecord /> : <Navigate to='/admin'/>} />  
+          element={userId? <NewRecord /> : <Navigate to='/login'/>} />  
         <Route 
           path="/checkout/success" 
           element={ <OrderSuccess />} />  
         <Route 
           path="/manageImages" 
-          element={userId? <ManageImages /> : <Navigate to='/admin'/>} />  
+          element={userId? <ManageImages /> : <Navigate to='/login'/>} />  
         <Route 
           path="/update-phase" 
-          element={userId? <DragNDrop /> : <Navigate to='/admin'/>}
+          element={userId? <DragNDrop /> : <Navigate to='/login'/>}
           loader={async () => {
             const res = await axios.get(`/api/phases/`);
             console.log("res.data", res.data);
@@ -96,7 +96,7 @@ function App() {
           />  
         <Route
           path="/admin"
-          element={userId? <Admin /> : <Navigate to='/'/>}
+          element={userId? <Admin /> : <Navigate to='/login'/>}
           loader={async () => {
             const res = await axios.get(`/api/candidates`);
             return { candidates: res.data };
