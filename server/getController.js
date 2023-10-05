@@ -1,6 +1,11 @@
 import { PHASES } from "../src/constants.js";
 import { Candidate, Image, Phase, Person, Member } from "./model.js";
-
+import { S3Client } from '@aws-sdk/client-s3'
+import process from "process";
+import dotenv from 'dotenv'
+dotenv.config()
+const { S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+ S3Client
 const serverFunctions = {
   byPhase: (req, res) => {
     console.log(req.params);
@@ -36,7 +41,7 @@ const serverFunctions = {
         {
           model: Image,
           where: { primary: true },
-          attributes: ["original", "thumbnail"],
+          attributes: ["original"],
         },
       ],
       attributes: ["candidateId", "lastName", "phaseId"],
@@ -45,7 +50,8 @@ const serverFunctions = {
       .then((candidates) => {
         if (candidates) {
           const c_copy = [...candidates];
-          c_copy.forEach((el) => (el.image = el['images.thumbnail'] ? el['images.thumbnail']: el['images.original'],
+          // .image is the same as images.original
+          c_copy.forEach((el) => (el.image =  el['images.original'],
                 el.column = PHASES[el.phaseId])
           );
           console.log(`${c_copy.length} candidates found.`, c_copy);
@@ -64,7 +70,7 @@ const serverFunctions = {
     console.log(req.params);
     Candidate.findAll({
       include: [
-        { model: Image, where: { primary: true }, attributes: ["original", "thumbnail"] },
+        { model: Image, where: { primary: true }, attributes: ["original"] },
         { model: Person },
       ],
       order: [
@@ -187,6 +193,40 @@ const serverFunctions = {
         console.error("Error finding project images:", error);
       });
   },
+  signS3: (req, res) => {
+    aws.config = {
+      region: 'us-west-2',
+      accessKeyId: AWS_ACCESS_KEY_ID,
+      secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    };
+  
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      Expires: 60,
+      ContentType: fileType,
+      ACL: 'public-read',
+    };
+  
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.end();
+      }
+      const returnData = {
+        signedRequest: data,
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+      };
+  
+      return res.send(returnData);
+    });
+  },
+  image: {
+
+  }
 };
 
 export default serverFunctions;

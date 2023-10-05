@@ -7,130 +7,153 @@ const salt = bcrypt.genSaltSync(10)
 
 const imageData = [
   {
-    original:
-      "https://buildersofhope.s3.us-west-2.amazonaws.com/roberta-martina.jpg",
+    original:"roberta-martina",
+    type:"jpg",
     candidateId: 1,
     primary: true,
   },
   {
     original:
-    "https://buildersofhope.s3.us-west-2.amazonaws.com/roberta-martina-close.jpg",
+    "roberta-martina-close",
+    type:"jpg",
     candidateId: 1,
     tag: "carousel",
   },
   {
     original:
-    "https://buildersofhope.s3.us-west-2.amazonaws.com/enrique-family.jpg",
+    "enrique-family",
+    type:"jpg",
     candidateId: 2,
     primary: true,
   },
   {
-    original:
-    "https://buildersofhope.s3.us-west-2.amazonaws.com/enrique-family-nameplate.jpg",
+    original:"enrique-family-nameplate",
+    type:"jpg",
     candidateId: 2,
     tag: "carousel",
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/reynalda.jpg",
+    original: "reynalda",
+    type:"jpg",
     candidateId: 3,
     primary: true,
   },
   {
-    original:
-      "https://buildersofhope.s3.us-west-2.amazonaws.com/Honorina.jpg",
+    original:"Honorina",
+    type:"jpg",
     candidateId: 4,
     primary: true,
   },
   {
-    original:
-      "https://buildersofhope.s3.us-west-2.amazonaws.com/olade.jpg",
+    original:"olade",
+      type:"jpg",
     candidateId: 5,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/goodrick.jpeg",
+    original: "goodrick",
+    type:"jpeg",
     memberId: 7,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/perry.jpeg",
+    original: "perry",
+    type:"jpeg",
     memberId: 6,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/lambertsen.jpeg",
+    original: "lambertsen",
+    type:"jpeg",
     memberId: 4,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/weber.jpeg",
+    original: "weber",
+    type:"jpeg",
     memberId: 3,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/collings.jpeg",
+    original: "collings",
+    type:"jpeg",
     memberId: 2,
     primary: true,
   },
   {
-    original: "https://buildersofhope.s3.us-west-2.amazonaws.com/krueger.jpeg",
+    original: "krueger",
+    type:"jpeg",
     memberId: 1,
     primary: true,
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/martinez-home-plaque.jpg",
+    original:"martinez-home-plaque",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/finished-roberta.jpg",
+    original:"finished-roberta",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/walls.jpg",
+    original:"walls",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
+    original:"voh-family",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/larry.jpg",
+    original:"larry",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/anna1.jpg",
+    original:"anna1",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/chad-wiring.jpg",
+    original:"chad-wiring",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/zack.jpg",
+    original:"zack",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/painting.jpg",
+    original:"painting",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/construction-site.jpg",
+    original:"construction-site",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/larry1.jpg",
+    original:"larry1",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
+    original:"voh-family",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/phil.jpg",
+    original:"phil",
+    type:"jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/san-diego.jpg",
+    original:"san-diego",
+    type:"jpg",
     tag: 'carousel',
   },
 ];

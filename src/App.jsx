@@ -32,7 +32,7 @@ function App() {
           element={<Home />}
           loader={async () => {
             const projects = await axios.get(`/api/phase/3`);
-            const images = await axios.get(`/api/projectImages`);
+            const images = await axios.get(`/api/project-images`);
             console.log("res.data", projects.data, images.data);
             return { projects: projects.data, images: images.data};
           }}

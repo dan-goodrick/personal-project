@@ -183,7 +183,7 @@ Image.init(
       primaryKey: true,
     },
     original: DataTypes.STRING(500),
-    thumbnail: DataTypes.STRING(500),
+    type: DataTypes.STRING(4),
     tag: DataTypes.STRING,
     primary: {
       type: DataTypes.BOOLEAN,

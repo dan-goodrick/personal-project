@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { styles } from "./Home";
+import Aws from "../Elements/Aws";
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -13,14 +14,14 @@ export default function NewRecord() {
 
   useEffect(() => { 
     axios
-    .get("/api/projectImages")
+    .get("/api/project-images")
     .then((res) => setImgArr(res.data))
     .catch((error) => console.error(`Error in getting project images`, error))
    }, [])
   const handleUpdateImages = () => {
     console.log("payload", imgArr);
     axios
-      .post(`/api/projectImages`, imgArr)
+      .post(`/api/project-images`, imgArr)
       .then((res) => {
         console.log("Project Images: ", res);
       })
@@ -60,6 +61,7 @@ export default function NewRecord() {
       >
         Done with Images
       </Button>
+      <Aws/>
     </div>
   );
 }

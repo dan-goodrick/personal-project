@@ -63,7 +63,6 @@ const serverFunctions = {
           });
       } else {
         // add images that don't
-        image.thumbnail = image.original
         Image.create(image)
           .then((val) => {
             console.log("New image URL added:", val);
@@ -153,6 +152,17 @@ const serverFunctions = {
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
+  },
+  images: async (req, res) => {
+    console.log("images", req.body, "params", req.params);
+    // Image.create(req.body)
+    // .then((val) => {
+    //   console.log("New person created:", val);
+    //   res.json(val);
+    // })
+    // .catch((error) => {
+    //   console.error(`Unable to Add Person ${req.body}`, error);
+    // });
   },
 };
 
