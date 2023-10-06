@@ -4,7 +4,6 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { blue, deepOrange, yellow } from "@mui/material/colors";
 
 // https://mui.com/material-ui/customization/default-theme/
 

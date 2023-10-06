@@ -5,12 +5,13 @@ import Text from "../Widgets/Text";
 import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import { Grid } from "@mui/material";
 
 // setAddImage and updateDB are required props.  
 // setImgArr and imgArr are needed if updateDb=false
 const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
   return (
-    <>
+    <Grid container direction='row' ml={10}>
       <Formik
         initialValues={{
           original: "",
@@ -37,6 +38,7 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
           setAddImage(false)
         }}
       >
+      <Grid direction="row">
         <Form>
           <Text
             label="Image URL"
@@ -59,8 +61,9 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
             </Button>
           </div>
         </Form>
+        </Grid>
       </Formik>
-    </>
+    </Grid>
   );
 };
 

@@ -27,7 +27,7 @@ const navLinks = [
   },
   { name: "Upcoming Projects", shortName: "Upcoming", route: "/plannedBuilds" },
   { name: "Completed Builds", shortName: "Completed", route: "/pastProjects" },
-  { name: "About Us", shortName: "About", route: "/aboutUs" },
+  { name: "Volunteers", shortName: "Volunteer", route: "/aboutUs" },
 ];
 
 const Header = () => {

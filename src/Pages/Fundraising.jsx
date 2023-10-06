@@ -21,10 +21,10 @@ export default function Fundraising() {
   return (
     <div>
       <div className={style.bg} />
-      <Grid container direction="column" spacing={3}>
-        <Grid item xs={12} m={4}>
-          <Typography variant="h4" align={"center"}>
-            Help these families move toward their dream of their own home.
+      <Grid container direction="column" spacing={1}>
+        <Grid item xs={12} m={1}>
+          <Typography variant="h5" align={"center"}>
+            We build permanent homes for less than $10,000. <br/>
             Donate Today!
           </Typography>
         </Grid>
@@ -34,18 +34,19 @@ export default function Fundraising() {
           direction="row"
           spacing={5}
           justifyContent="center"
+          ml={-2}
         >
           {fundraising.map((candidate, i) => (
-            <Grid key={i} item xs={12} sm={5} >
+            <Grid key={i} item xs={12} sm={4} >
               <ViewCard family={candidate} crop={false} />
-              <Stack sx={{ m: 2, p: 2 }}>
+              <Stack sx={{ m: 1, p: 1 }}>
                 <Typography variant="h5" align={"center"}>
                   Funding Progress
                 </Typography>
                 <LinearProgress
                   variant="determinate"
                   color="primary"
-                  sx={{ p: 2, mt: 2 }}
+                  sx={{ p: 1, mt: 1 }}
                   value={
                     (candidate.fundsRaised / candidate.fundRequirement) * 100
                   }

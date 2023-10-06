@@ -12,8 +12,8 @@ export default function PlannedProjects() {
     <div>
       <div className={style.bg} />
       <Grid container direction="column" spacing={2}>
-        <Grid item xs={12} m={4}>
-          <Typography variant="h3" align={"center"}>
+        <Grid item xs={12} m={2} md={4}>
+          <Typography variant="h4" align={"center"}>
             Planned Builds (January 2024)
           </Typography>
         </Grid>
@@ -21,11 +21,12 @@ export default function PlannedProjects() {
           container
           item
           direction="row"
-          spacing={5}
+          spacing={3}
           justifyContent="center"
+          ml={-2}
         >
           {planned.map((candidate, i) => (
-            <Grid key={i} item xs={12} sm={5} mx={2}>
+            <Grid key={i} item xs={12} sm={6} md={4}>
               <ViewCard family={candidate} crop={false} />
             </Grid>
           ))}

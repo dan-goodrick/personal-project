@@ -31,7 +31,7 @@ export default function CheckoutForm({ amount, candidate }) {
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
-
+    console.log("useEffect", clientSecret, stripe, elements);
     if (!clientSecret) return;
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
@@ -54,7 +54,8 @@ export default function CheckoutForm({ amount, candidate }) {
 
   async function onSubmit(event) {
     event.preventDefault();
-
+    
+    console.log("stripe", event, stripe, elements);
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -64,38 +65,35 @@ export default function CheckoutForm({ amount, candidate }) {
     setIsLoading(true);
     setMessage(null);
 
-    const { error } = stripe
-      .confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        confirmParams: {
-          return_url: successUrl,
-          receipt_email: email,
-        },
-      })
-      .then(
-        axios.put(`/api/record-donation/${candidate.candidateId}`, {
-          amount: +amount + +candidate.fundsRaised,
-        }).then(
-          console.log(`Recorded ${amount} added to ${candidate.fundsRaised} for ${candidate.lastName}`)
-        )
-      )
-      .catch((error) => {
-        toast.error(message)
-        console.error(`Unable to update phases`, error);
-      });
+    // // send the donation to the DB
+    // axios.put(`/api/record-donation/${candidate.candidateId}`, {
+    //   amount: +amount + +candidate.fundsRaised,
+    // }).then(
+    //   console.log(`Recorded ${amount} added to ${candidate.fundsRaised} for ${candidate.lastName}`)
+    // ).catch((err) => {
+    //   console.error(`Unable to update funding`, err);
+    // });
+
+    // send the money to stripe
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: successUrl, // should go to a confirmation page
+        receipt_email: email,
+      }
+    });
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
+
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message ?? "Something went wrong, please try again.");
     } else {
       setMessage("Something went wrong, please try again.");
     }
-    console.log("message", message, error);
     toast.error(message);
 
     setIsLoading(false);
@@ -111,27 +109,26 @@ export default function CheckoutForm({ amount, candidate }) {
         id={`${id}-link-authentication-element`}
         onChange={(e) => setEmail(e.value.email)}
       />
-      <AddressElement
+      {/* <AddressElement
         id={`${id}-address-element`}
         options={{ mode: "shipping" }}
-      />
+      /> */}
       <PaymentElement
         id={`${id}-payment-element`}
         options={{
           layout: "tabs",
         }}
       />
-      <Toaster />
       <Button
         type="submit"
         size="large"
         aria-label="Donate"
-        variant="secondary"
         disabled={!stripe || !elements || isLoading}
       >
         {isLoading && <CircularProgress />}
         Donate ${amount} to build a home for the {candidate.lastName} family.
       </Button>
+      <Toaster />
     </form>
   );
 }
