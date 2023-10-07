@@ -154,6 +154,36 @@ const serverFunctions = {
       clientSecret: paymentIntent.client_secret,
     });
   },
+  stripeWebhook: (request, response) => {
+    const sig = request.headers['stripe-signature'];
+    console.log("Incoming:", request.rawBody, "header", sig);
+    let event;
+  
+    // try {
+      event = stripe.webhooks.constructEvent(request.body.toString(), sig, "pk_test_Xhn5MHHoCL4SGPfVIBzos33S");
+    // } catch (err) {
+    //   response.status(400).send(`Webhook Error: ${err.message}`);
+    //   return;
+    // }
+    console.log("event", event);
+    // Handle the event
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        // Handle a successful payment event
+        console.log("stripeWebhook", event, event.data);
+        break;
+      case 'payment_intent.payment_failed':
+        // Handle a failed payment event
+        console.log(`Handled event type ${event.type}`);
+        break;
+      // Handle other event types as needed
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+    }
+   
+    // Return a 200 response to acknowledge receipt of the event
+    response.send();
+  }
 };
 
 export default serverFunctions;

@@ -41,6 +41,8 @@ app.put('/api/phases/', put.phases)
 app.put('/api/member/:id', put.member)
 
 app.post("/api/create-payment-intent", add.paymentIntent)
+// app.post("/api/confirm-payment", add.stripeWebhook)
+app.post('/webhook', add.stripeWebhook)
 app.post('/api/image/', add.image)
 app.post('/api/person/', add.person)
 app.post('/api/projectImages', add.projectImages)
