@@ -8,9 +8,10 @@ import add from './postController.js'
 import put from './putController.js'
 import auth from './authController.js'
 import cors from 'cors'
+import process from 'process'
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const mSecPerDay = 1000 * 60 * 60 * 24
 ViteExpress.config({ printViteDevServerHost: true });
 

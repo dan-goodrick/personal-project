@@ -22,8 +22,7 @@ export default function CheckoutForm({ amount, candidate }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const URL = import.meta.env.VITE_URL;
-  const successUrl = `${URL}checkout/success`;
+  const SUCCESS_URL = import.meta.env.ENV === 'production'?'checkout/success': import.meta.env.VITE_BASE_URL+"/checkout/success"
   console.log("donation amount", amount, candidate.fundsRaised);
   useEffect(() => {
     if (!stripe) return;
@@ -78,7 +77,7 @@ export default function CheckoutForm({ amount, candidate }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: successUrl, // should go to a confirmation page
+        return_url: SUCCESS_URL, // should go to a confirmation page
         receipt_email: email,
       }
     });
