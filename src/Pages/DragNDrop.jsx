@@ -11,7 +11,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { Grid, Typography } from "@mui/material";
-import { styles } from "./Home";
+import { Background } from "./Home";
 
 export default function DragNDrop() {
   const { phases } = useLoaderData();
@@ -71,10 +71,9 @@ export default function DragNDrop() {
       });
     navigate("/admin");
   };
-  const style = styles();
   return (
     <div>
-      <div className={style.bg} />
+      <Background />
     <Grid container direction="column" spacing={3} alignItems="center">
       <Grid item xs={12}>
         <Typography variant="h4" mt={3} align={"center"}>

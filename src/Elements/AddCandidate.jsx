@@ -1,6 +1,4 @@
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import "yup-phone-lite";
 import Text from "./../Widgets/Text";
 import Select from "./../Widgets/Select";
 import Checkbox from "./../Widgets/Checkbox";
@@ -24,17 +22,6 @@ export default function AddCandidate( {handleNewCandidate}) {
           loanDuration: 30,
           currOnLoan:false,
         }}
-        validationSchema={Yup.object({
-          address: Yup.string().max(150, "Must be 150 characters or less"),
-          city: Yup.string().max(20, "Must be 20 characters or less"),
-          municipality: Yup.string().max(20, "Must be 20 characters or less"),
-          state: Yup.string().max(20, "Must be 20 characters or less"),
-          country: Yup.string().max(20, "Must be 20 characters or less"),
-          zip: Yup.string().max(20, "Must be 20 characters or less"),
-          landTitle: Yup.string().max(20, "Must be 20 characters or less"),
-          currOnLoan: Yup.bool(),
-          videoUrl: Yup.string().max(200, "Must be 20 characters or less"),
-        })}
         onSubmit={ (values) => {
           handleNewCandidate(values)
         }}

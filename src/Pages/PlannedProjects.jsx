@@ -1,16 +1,15 @@
 import { useLoaderData } from "react-router-dom";
 import ViewCard from "../Elements/ViewCard";
-import { styles } from "./Home";
 import { Grid, Typography } from "@mui/material";
+import { Background } from "./Home";
 
 
 export default function PlannedProjects() {
   const { planned } = useLoaderData();
   // console.log("Planned Projects", planned)
-  const style = styles();
   return (
     <div>
-      <div className={style.bg} />
+      <Background/>
       <Grid container direction="column" spacing={2}>
         <Grid item xs={12} m={2} md={4}>
           <Typography variant="h4" align={"center"}>

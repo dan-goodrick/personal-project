@@ -9,21 +9,19 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
+import { styled } from "@mui/system";
 
-const styles = makeStyles(() => ({
-  hooray: {
-    backgroundImage: `url(https://buildersofhope.s3.us-west-2.amazonaws.com/hoorah.jpg)`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100vw",
-    minHeight: '100vh'
-  },
-}));
 
+const Hooray = styled('div')({
+  backgroundImage: `url(https://buildersofhope.s3.us-west-2.amazonaws.com/hoorah.jpg)`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  width: "100vw",
+  minHeight: '100vh'
+
+});
 export default function OrderSuccess() {
-  const style = styles();
   const [grow, setGrow] = useState(false);
   useEffect(() => setGrow(true), []);
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ export default function OrderSuccess() {
 
   return (
 
-    <Paper className={style.hooray}>
+    <Hooray >
       <Grid
         container
         justifyContent="center"
@@ -61,6 +59,6 @@ export default function OrderSuccess() {
           </Box>
         </Grow>
       </Grid>
-    </Paper>
+    </Hooray>
   );
 }

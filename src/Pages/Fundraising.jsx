@@ -4,7 +4,7 @@ import ViewCard from "../Elements/ViewCard";
 import { LinearProgress, Grid, Typography, Button, Stack } from "@mui/material";
 import Donate from "../Elements/Donate";
 import { useState } from "react";
-import { styles } from "./Home";
+import { Background } from "./Home";
 
 
 
@@ -17,10 +17,9 @@ export default function Fundraising() {
     setOpen(true);
     setTarget(candidate);
   };
-  const style = styles();
   return (
     <div>
-      <div className={style.bg} />
+      <Background/>
       <Grid container direction="column" spacing={1}>
         <Grid item xs={12} m={1}>
           <Typography variant="h5" align={"center"}>

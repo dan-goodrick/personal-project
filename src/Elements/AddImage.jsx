@@ -1,6 +1,4 @@
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import "yup-phone-lite";
 import Text from "../Widgets/Text";
 import Checkbox from "../Widgets/Checkbox";
 import axios from "axios";
@@ -17,10 +15,6 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
           original: "",
           primary: imgArr.length?false:true,
         }}
-        validationSchema={Yup.object({
-          original: Yup.string().max(150, "Must be 150 characters or less"),
-          primary: Yup.bool()
-        })}
         onSubmit={ (values) => {
           
           if (updateDb){

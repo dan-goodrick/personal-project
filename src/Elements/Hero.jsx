@@ -2,16 +2,21 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Grid,
-  Paper,
+Paper,
   Typography,
   Zoom,
   useMediaQuery,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/system';
 import { useEffect, useState } from "react";
 
-const styles = makeStyles((theme) => ({
-  hero: {
+
+export default function Hero() {
+  const [zoom, setZoom] = useState(false);
+  useEffect(() => setZoom(true), []);
+  const theme = useTheme();
+  
+  const HeroImage = styled(Paper)(({ theme }) => ({
     height: "100%",
     backgroundImage: `url(/landscape.jpeg)`,
     backgroundSize: "cover",
@@ -20,17 +25,10 @@ const styles = makeStyles((theme) => ({
     margin: -24,
     padding: 24,
     color: theme.palette.text.primary,
-  }
-}));
-
-export default function Hero() {
-  const [zoom, setZoom] = useState(false);
-  useEffect(() => setZoom(true), []);
-  const style = styles();
-  const theme = useTheme();
+  }));
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
-    <Paper className={style.hero}>
+    <HeroImage>
       <Grid
         container
         justifyContent="center"
@@ -64,6 +62,6 @@ export default function Hero() {
         </Box>
       </Zoom>
       </Grid>
-    </Paper>
+    </HeroImage>
   );
 }

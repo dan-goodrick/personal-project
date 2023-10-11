@@ -1,6 +1,4 @@
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import "yup-phone-lite";
 import Text from "./../Widgets/Text";
 import Select from "./../Widgets/Select";
 import Checkbox from "./../Widgets/Checkbox";
@@ -19,18 +17,6 @@ const AddPerson = ( {handleAddPerson, setAddPerson} ) => {
           gender: "other",     //  select
           headOfHousehold: false, // checkbox
         }}
-        validationSchema={Yup.object({
-          firstName: Yup.string().max(15, "Must be 15 characters or less"),
-          lastName: Yup.string().max(20, "Must be 20 characters or less"),
-          // whatsApp: Yup.string().phone(
-          //   "MX",
-          //   "Please enter a valid phone number"
-          // ),
-          email: Yup.string().email("Invalid email address"),
-          dob: Yup.date("Use 1/1 for unknown day/month"),
-          headOfHousehold: Yup.boolean(),
-          gender: Yup.string().oneOf(["male", "female", "other"]),
-        })}
         onSubmit={ (values) => {handleAddPerson(values)}}
       >
         <Form>

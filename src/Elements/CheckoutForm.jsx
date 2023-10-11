@@ -1,7 +1,6 @@
 // https://github.com/sadmann7/skateshop.git
 
 import {
-  AddressElement,
   LinkAuthenticationElement,
   PaymentElement,
   useElements,
@@ -10,8 +9,7 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { useEffect, useId, useState } from "react";
-import { Toaster, toast } from "sonner";
-import axios from "axios";
+
 
 // Docs: https://stripe.com/docs/payments/quickstart
 
@@ -93,7 +91,7 @@ export default function CheckoutForm({ amount, candidate }) {
     } else {
       setMessage("Something went wrong, please try again.");
     }
-    toast.error(message);
+    // toast.error(message);
 
     setIsLoading(false);
   }
@@ -127,7 +125,7 @@ export default function CheckoutForm({ amount, candidate }) {
         {isLoading && <CircularProgress />}
         Donate ${amount} to build a home for the {candidate.lastName} family.
       </Button>
-      <Toaster />
+      {/* <Toaster /> */}
     </form>
   );
 }

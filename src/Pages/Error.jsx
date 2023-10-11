@@ -1,5 +1,5 @@
 import { Link, useRouteError } from 'react-router-dom';
-import { styles } from './Home';
+import { Background } from './Home';
 
 function ErrorPage() {
   const error = useRouteError();
@@ -17,10 +17,9 @@ function ErrorPage() {
     }
   }
 
-  const style = styles();
   return (
     <div>
-      <div className={style.bg} />
+      <Background/>
       <h1>Uh oh.</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

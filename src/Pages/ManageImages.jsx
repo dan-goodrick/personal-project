@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { styles } from "./Home";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Background } from "./Home";
 
 export default function NewRecord() {
   const navigate = useNavigate();
@@ -32,10 +32,9 @@ export default function NewRecord() {
       });
     navigate("/admin");
   };
-  const style = styles();
   return (
     <div>
-      <div className={style.bg} />
+      <Background/>
       <Typography variant="h4">Images</Typography>
       <ShowImages imgArr={imgArr} setImgArr={setImgArr} />
       {addImage && (
