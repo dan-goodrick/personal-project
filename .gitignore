@@ -5,6 +5,7 @@ logs
 node_modules
 *.local
 dist
+*.pem
 
 # Editor directories and files
 .vscode/*
