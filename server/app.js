@@ -10,8 +10,10 @@ import auth from './authController.js'
 import cors from 'cors'
 import process from 'process'
 
+
+
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 const mSecPerDay = 1000 * 60 * 60 * 24
 ViteExpress.config({ printViteDevServerHost: true });
 
@@ -36,14 +38,11 @@ app.use(cors());
 
 app.put('/api/person/:id', put.person)
 app.put('/api/candidate/:id', put.candidate)
-app.put('/api/record-donation/:id', put.recordDonation)
 app.put('/api/phase/:id', put.phase)
 app.put('/api/phases/', put.phases)
-app.put('/api/member/:id', put.member)
+app.put('/api/member/:id', put.member) 
 
-app.post("/api/create-payment-intent", add.paymentIntent)
-// app.post("/api/confirm-payment", add.stripeWebhook)
-app.post('/webhook', add.stripeWebhook)
+app.post("/api/create-checkout-session/:id", add.donation)
 app.post('/api/image/', add.image)
 app.post('/api/person/', add.person)
 app.post('/api/projectImages', add.projectImages)
@@ -69,4 +68,4 @@ app.post('/api/register', auth.register)
 app.post('/api/login', auth.login)
 app.get('/api/user', auth.checkUser)
 
-ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
+ViteExpress.listen(app, port, () => console.log(`Server is listening on ${process.env.VITE_HOST}`));

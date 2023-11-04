@@ -1,22 +1,22 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import ViewCard from "../Elements/ViewCard";
 
 import { LinearProgress, Grid, Typography, Button, Stack } from "@mui/material";
-import Donate from "../Elements/Donate";
-import { useState } from "react";
+import axios from 'axios'
 import { Background } from "./Home";
-
-
 
 export default function Fundraising() {
   const { fundraising } = useLoaderData();
-  const [open, setOpen] = useState(false);
-  const [target, setTarget] = useState(null);
-  const handleClick = (candidate) => {
-    console.log("candidate", candidate);
-    setOpen(true);
-    setTarget(candidate);
-  };
+  // const navigate = useNavigate();
+  const createCheckoutSession = async (candidate) => {
+    console.log("candidate:", candidate);
+    try {
+      const {data} = await axios.post(`/api/create-checkout-session/${candidate.candidateId}`)
+      location.replace(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <div>
       <Background/>
@@ -57,11 +57,11 @@ export default function Fundraising() {
                 <Button
                   type="submit"
                   size="large"
-                  onClick={() => handleClick(candidate)}
+                  onClick={() => createCheckoutSession(candidate)}
                 >
                   Contribute
                 </Button>
-                <Donate open={open} setOpen={setOpen} candidate={target} />
+                
               </Stack>
             </Grid>
           ))}

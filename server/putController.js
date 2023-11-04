@@ -24,20 +24,6 @@ const serverFunctions = {
         console.error(`Unable to update Candidate ${req.body}`, error);
       });
   },
-  recordDonation: (req, res) => {
-    console.log("put donation", req.body, req.params);
-    Candidate.update(
-      { fundsRaised: req.body.amount },
-      { where: { candidateId: req.params.id } }
-    )
-      .then((val) => {
-        console.log("updated funds Raised:", val);
-        res.json({ success: true });
-      })
-      .catch((error) => {
-        console.error(`Unable to update donation ${req.body}`, error);
-      });
-  },
 
   member: (req, res) => {
     console.log("put member", req.body, "memberId", req.params.id);
