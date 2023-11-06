@@ -1,10 +1,8 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import getAge from "../functions/getAge";
-import { useState } from "react";
-import Donate from "./Donate";
 
 export default function ViewCard({ family }) {
   

@@ -5,11 +5,13 @@ import {
   Member,
 } from "./model.js";
 import process from "process";
+import Stripe from "stripe";
 import dotenv from 'dotenv'
 dotenv.config()
-console.log(process.env.VITE_STRIPE_SECRET);
-import Stripe from 'stripe';
-const stripe = new Stripe(process.env.VITE_STRIPE_SECRET);
+const stripe = new Stripe(process.env.STRIPE_SECRET);
+
+
+
 
 const serverFunctions = {
 
@@ -141,50 +143,30 @@ const serverFunctions = {
         console.error(`Unable to Add member ${req.body}`, error);
       });
   },
-  paymentIntent: async (req, res) => {
-    console.log("paymentIntent", req.body);
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: req.body.body.donation,
-      currency: "usd",
-      automatic_payment_methods: {
-        enabled: true,
-      },
+ 
+  donation: async (req, res) => {
+    console.log('hit', req.body, )
+    try {
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price: "price_1O8ObKDsgTnXCdvni1EHYYgL", 
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `${process.env.VITE_HOST}/checkout/success`,
+      cancel_url: `${process.env.VITE_HOST}/fundraising`,
+      metadata: {
+      id: req.body.id,
+      funds: req.body.funds,
+      }
     });
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
+    // account for donation in DB
+    res.status(200).send(session.url);
+    } catch (error) { console.log("error on stripe donation", error);  }
   },
-  stripeWebhook: (request, response) => {
-    const sig = request.headers['stripe-signature'];
-    console.log("Incoming:", request.rawBody, "header", sig);
-    let event;
-  
-    // try {
-      event = stripe.webhooks.constructEvent(request.body.toString(), sig, "pk_test_Xhn5MHHoCL4SGPfVIBzos33S");
-    // } catch (err) {
-    //   response.status(400).send(`Webhook Error: ${err.message}`);
-    //   return;
-    // }
-    console.log("event", event);
-    // Handle the event
-    switch (event.type) {
-      case 'payment_intent.succeeded':
-        // Handle a successful payment event
-        console.log("stripeWebhook", event, event.data);
-        break;
-      case 'payment_intent.payment_failed':
-        // Handle a failed payment event
-        console.log(`Handled event type ${event.type}`);
-        break;
-      // Handle other event types as needed
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
-    }
-   
-    // Return a 200 response to acknowledge receipt of the event
-    response.send();
-  }
 };
 
 export default serverFunctions;
-
