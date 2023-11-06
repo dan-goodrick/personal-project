@@ -46,7 +46,7 @@ app.put('/api/phase/:id', put.phase)
 app.put('/api/phases', put.phases)
 app.put('/api/member/:id', put.member) 
 
-app.post("/api/create-checkout-session/:data", add.donation)
+app.post("/api/create-checkout-session/", add.donation)
 app.post('/api/image', add.image)
 app.post('/api/person', add.person)
 app.post('/api/projectImages', add.projectImages)

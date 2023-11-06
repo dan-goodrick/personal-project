@@ -29,9 +29,8 @@ const serverFunctions = {
     switch (event.type) {
       case 'checkout.session.completed':
         const session = event.data.object;
-        const candidateId = session.metadata.data.id
-        const previousFunds = session.metadata.data.funds
-        const fundsRaised = previousFunds + session.amount_total/100
+        const candidateId = session.metadata.id
+        const fundsRaised = +session.metadata.funds + session.amount_total/100
         Candidate.update({ fundsRaised }, { where: { candidateId } })
         .then(() => {
           console.log("updated funds Raised:");

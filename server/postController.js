@@ -145,7 +145,7 @@ const serverFunctions = {
   },
  
   donation: async (req, res) => {
-    console.log('hit', req.params, )
+    console.log('hit', req.body, )
     try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -159,7 +159,8 @@ const serverFunctions = {
       success_url: `${process.env.VITE_HOST}/checkout/success`,
       cancel_url: `${process.env.VITE_HOST}/fundraising`,
       metadata: {
-      data: req.params.data,
+      id: req.body.id,
+      funds: req.body.funds,
       }
     });
     // account for donation in DB

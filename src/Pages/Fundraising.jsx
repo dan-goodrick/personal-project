@@ -9,9 +9,8 @@ export default function Fundraising() {
   const { fundraising } = useLoaderData();
   const createCheckoutSession = async (candidate) => {
     console.log("candidate:", candidate);
-    const candidateData = {id:candidate.candidateId, funds:candidate.fundsRaised}
     try {
-      const {data} = await axios.post(`/api/create-checkout-session/${candidateData}`)
+      const {data} = await axios.post(`/api/create-checkout-session/`, {id:candidate.candidateId, funds:candidate.fundsRaised})
       location.replace(data)
     } catch (err) {
       console.log(err)
