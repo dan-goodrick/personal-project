@@ -5,27 +5,13 @@ import {
   Member,
 } from "./model.js";
 import process from "process";
+import Stripe from "stripe";
 import dotenv from 'dotenv'
 dotenv.config()
-import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET);
-//cs_test_a1dQ4ObyoGjGHZEO7rcfI2TA2HDa7yEcktgX8xx3yI6rX3kQwa9V0T8vvl
-const recordDonation = async (sessionId, customerId) => {
-  const session = await stripe.checkout.sessions.retrieve(sessionId)
-  
-  console.log("session", session, "candidate", customerId);
-  Candidate.update(
-    { fundsRaised: session.amount_total },
-    { where: { candidateId: customerId } }
-    )
-    .then(() => {
-      console.log("updated funds Raised:", );
-    })
-    .catch((error) => {
-      console.error(`Unable to update donation ${customerId},${sessionId}`, error);
-    });
 
-}
+
+
 
 const serverFunctions = {
 
@@ -159,7 +145,7 @@ const serverFunctions = {
   },
  
   donation: async (req, res) => {
-    console.log('hit', req.params)
+    console.log('hit', req.params, )
     try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -171,14 +157,15 @@ const serverFunctions = {
       ],
       mode: "payment",
       success_url: `${process.env.VITE_HOST}/checkout/success`,
-      cancel_url: `${process.env.VITE_HOST}/fundraising`
+      cancel_url: `${process.env.VITE_HOST}/fundraising`,
+      metadata: {
+      data: req.params.data,
+      }
     });
     // account for donation in DB
-    await recordDonation(session.id, req.params.id)
-    await res.status(200).send(session.url);
+    res.status(200).send(session.url);
     } catch (error) { console.log("error on stripe donation", error);  }
-  }
+  },
 };
 
 export default serverFunctions;
-

@@ -50,8 +50,8 @@ const serverFunctions = {
   },
   phases: (req, res) => {
     console.log("put phaseMap", req.body);
-    for (let [cand, phase] of Object.entries(req.body)) {
-      Candidate.update({ phaseId: phase }, { where: { candidateId: cand } })
+    for (let [candidateId, phaseId] of Object.entries(req.body)) {
+      Candidate.update({ phaseId }, { where: { candidateId } })
         .then((val) => {
           console.log("updated phase:", val);
           res.json({ success: true });

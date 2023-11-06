@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import ViewCard from "../Elements/ViewCard";
 
 import { LinearProgress, Grid, Typography, Button, Stack } from "@mui/material";
@@ -7,11 +7,11 @@ import { Background } from "./Home";
 
 export default function Fundraising() {
   const { fundraising } = useLoaderData();
-  // const navigate = useNavigate();
   const createCheckoutSession = async (candidate) => {
     console.log("candidate:", candidate);
+    const candidateData = {id:candidate.candidateId, funds:candidate.fundsRaised}
     try {
-      const {data} = await axios.post(`/api/create-checkout-session/${candidate.candidateId}`)
+      const {data} = await axios.post(`/api/create-checkout-session/${candidateData}`)
       location.replace(data)
     } catch (err) {
       console.log(err)
