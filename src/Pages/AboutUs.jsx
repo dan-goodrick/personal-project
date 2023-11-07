@@ -18,10 +18,10 @@ export default function AboutUs() {
           item
           direction="row"
           spacing={1}
-          justifyContent="center"
+          justifyContent="space-around"
         >
           {boardMembers.map((member, i) => (
-            <Grid key={i} item xs={12} sm={3} m={1}>
+            <Grid key={i} item xs={12}  sm={5} lg={4} p={3}>
               <ViewCard family={member} crop={false} />
             </Grid>
           ))}

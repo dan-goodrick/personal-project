@@ -26,7 +26,7 @@ const ShowImages = ({ imgArr, setImgArr }) => {
           item
             component="img"
             sx={{ maxWidth: 200, maxHeight: 200 }}
-            alt="The house from the offer."
+            alt="Image"
             src={img.original}
           />
           <Stack direction='row' justifyContent={"space-evenly"}>

@@ -49,11 +49,16 @@ const imageData = [
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/goodrick.jpeg",
-    memberId: 7,
+    memberId: 5,
     primary: true,
   },
   {
     original: "https://buildersofhope.s3.us-west-2.amazonaws.com/perry.jpeg",
+    memberId: 7,
+    primary: true,
+  },
+  {
+    original: "/noImage.jpeg",
     memberId: 6,
     primary: true,
   },
@@ -78,19 +83,11 @@ const imageData = [
     primary: true,
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/martinez-home-plaque.jpg",
-    tag: 'carousel',
-  },
-  {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/finished-roberta.jpg",
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/construction-site.jpg",
     tag: 'carousel',
   },
   {
     original:"https://buildersofhope.s3.us-west-2.amazonaws.com/walls.jpg",
-    tag: 'carousel',
-  },
-  {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
     tag: 'carousel',
   },
   {
@@ -106,15 +103,7 @@ const imageData = [
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/zack.jpg",
-    tag: 'carousel',
-  },
-  {
     original:"https://buildersofhope.s3.us-west-2.amazonaws.com/painting.jpg",
-    tag: 'carousel',
-  },
-  {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/construction-site.jpg",
     tag: 'carousel',
   },
   {
@@ -122,15 +111,23 @@ const imageData = [
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
-    tag: 'carousel',
-  },
-  {
     original:"https://buildersofhope.s3.us-west-2.amazonaws.com/phil.jpg",
     tag: 'carousel',
   },
   {
-    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/san-diego.jpg",
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/martinez-home-plaque.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/finished-roberta.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/zack.jpg",
+    tag: 'carousel',
+  },
+  {
+    original:"https://buildersofhope.s3.us-west-2.amazonaws.com/voh-family.jpg",
     tag: 'carousel',
   },
 ];
@@ -165,6 +162,13 @@ const memberData = [
     about: "As our family has grown, we have filled our life with “stuff” that doesn’t last. Toys break. Clothes get worn out. Electronics become outdated. But the one thing that we keep forever is our experiences. Our first planned Mexico trip was life-changing! We donated our entire  Christmas budget to go help build houses and serve in Mexico. We packed our car full of gifts to donate at the orphanage and drove 10 hours straight to the California/Mexico border. Unfortunately, the night we arrived we tested positive for Covid and were not able to go. We donated everything and turned around and came home with an empty car. It was the most Christlike gift we could give; we literally gave away everything and got nothing in return. It was one of the most rewarding things our family has ever done."
   },
   {
+    lastName: "Goodrick",
+    city: "Saratoga Springs",
+    state: "Utah",
+    country: "USA",
+    about: "We were introduced to The Village of Hope in 2021 and from the moment we stepped out onto the job site, we knew our family, our aspirations, hopes and dreams would never be the same.  Building homes for families that work hard but will never be able to afford a home on their own is such a rewarding experience.  While the places these families immigrate from are in even worse economic conditions, the economic situation in Baja is still very difficult.  These families are bound by the challenges they face and a permanent home doesn't relieve them of these challenges, but it does help."
+  },
+  {
     lastName: "Williams",
     city: "Idaho Falls",
     state: "Idaho",
@@ -173,12 +177,6 @@ const memberData = [
   {
     lastName: "Perry",
     city: "Orem",
-    state: "Utah",
-    country: "USA"
-  },
-  {
-    lastName: "Goodrick",
-    city: "Saratoga Springs",
     state: "Utah",
     country: "USA"
   },
@@ -381,53 +379,6 @@ const personData = [
     gender: "female",
     headOfHousehold: false,
     candidateId: 5,
-  },
-  {
-    lastName: "Goodrick",
-    firstName: "Dan",
-    headOfHousehold: true,
-    dob: new Date(Date.parse("1978-11-12")),
-    whatsApp: "801 822 8677",
-    email: "dannyjeee@yahoo.com",
-    gender: "male",
-    memberId: 7,
-  },
-  {
-    lastName: "Goodrick",
-    dob: new Date(Date.parse("1978-06-08")),
-    firstName: "Kelli",
-    whatsApp: "801 822 9519",
-    email: "k_kartchner@yahoo.com",
-    gender: "female",
-    memberId: 7,
-  },
-  {
-    lastName: "Goodrick",
-    dob: new Date(Date.parse("2007-08-30")),
-    firstName: "Allison",
-    gender: "female",
-    memberId: 7,
-  },
-  {
-    lastName: "Goodrick",
-    dob: new Date(Date.parse("2007-08-30")),
-    firstName: "Brianna",
-    gender: "female",
-    memberId: 7,
-  },
-  {
-    lastName: "Goodrick",
-    dob: new Date(Date.parse("2009-12-07")),
-    firstName: "Talmage",
-    gender: "male",
-    memberId: 7,
-  },
-  {
-    lastName: "Goodrick",
-    dob: new Date(Date.parse("2011-07-29")),
-    firstName: "Spencer",
-    gender: "male",
-    memberId: 7,
   },
   {
     firstName: "Mosiah",

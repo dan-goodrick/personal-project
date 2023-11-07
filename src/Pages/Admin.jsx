@@ -21,6 +21,7 @@ export default function Admin() {
       <Grid container justifyContent={"space-around"}>
         <Button onClick={() => navigate("/update-phase")}>Edit Building Phase</Button>
         <Button onClick={() => navigate("/newRecord")}>New Candidate</Button>
+        <Button onClick={() => navigate("/editAboutUs")}>Member Profiles</Button>
         <Button onClick={() => navigate("/manageImages")}>Edit Images</Button>
       </Grid>
       <Grid

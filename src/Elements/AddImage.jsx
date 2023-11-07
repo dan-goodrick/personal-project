@@ -16,7 +16,6 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
           primary: imgArr.length?false:true,
         }}
         onSubmit={ (values) => {
-          
           if (updateDb){
             // console.log("values sent to db", values)
             axios.post(`/api/image/`, values)
@@ -25,17 +24,17 @@ const AddImage = ({ setAddImage, setImgArr, imgArr, updateDb}) => {
               })
             .catch((error) => {console.error(`Unable to add ${values.lastName}`, error)});
           } else {
-            // console.log("update imgArr", [...imgArr, values])
+            console.log("update imgArr", [...imgArr, values])
             setImgArr([...imgArr, values])
 
           }
           setAddImage(false)
         }}
       >
-      <Grid direction="row">
+      <Grid container direction="row">
         <Form>
           <Text
-            label="Image URL"
+            label="Image URL:"
             name="original"
             type="text"
             placeholder="https..."

@@ -78,12 +78,11 @@ const serverFunctions = {
   },
 
   candidate: (req, res) => {
-    const { candidate, peopleArr, imgArrVar } = req.body;
-    console.log("req.body", req.body);
+    const { candidate, people, imgArrVar } = req.body;
+    console.log("req.body", req.body, people);
     Candidate.create(candidate)
       .then((val) => {
-        console.log("New candidate created:", val);
-        peopleArr.map((person) => {
+        people.map((person) => {
           person.candidateId = val.candidateId;
           Person.create(person)
             .then((val) => {
