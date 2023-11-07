@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import Text from "../Widgets/Text";
 import Select from "../Widgets/Select";
 import Button from "@mui/material/Button";
+import TextArea from "../Widgets/TextArea";
 
 //todo: title should be a select box
 
@@ -56,7 +57,7 @@ const CandidateData = ({ candidate, setEditCandidate, handleEditCandidate }) => 
           </Select>
           <Text name="paymentCnt" type="text" placeholder="Current Payment #" /> of 
           <Text name="loanDuration" type="text" placeholder="Total Loan Installments" />
-          <Text name="about" type="text" placeholder="About" />
+          <TextArea name="about" type="text" placeholder="About" />
           <Text name="videoUrl" type="text" placeholder="Url of Promo Video" />
           <div>
             <Button
