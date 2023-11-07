@@ -60,7 +60,7 @@ export default function ShowCandidate({ candidate, setEditCandidate }) {
 
       {del && (
         <Delete
-          uri={"/api/candidate"}
+          uri={"/api/candidate/"}
           id={candidate.candidateId}
           name={candidate.lastName}
           setDelete={setDelete}
